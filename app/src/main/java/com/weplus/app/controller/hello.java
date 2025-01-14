@@ -1,17 +1,17 @@
 package com.weplus.app.controller;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@Path("/hello")
-
+@Controller
 public class hello {
 
-    @GET
+    @GetMapping(value = "/hello", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> sayHello() {
 
-    public String sayHello() {
-
-        return "Hello World";
+        return ResponseEntity.ok("Hello World");
 
     }
 
