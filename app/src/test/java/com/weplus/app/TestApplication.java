@@ -17,7 +17,7 @@ public class TestApplication {
     }
 
     // Percorso al database H2 configurato
-    private static final String JDBC_URL = "jdbc:h2:mem:testdb";
+    private static final String JDBC_URL = "jdbc:h2:tcp://localhost/~/test";
     private static final String USERNAME = "sa";
     private static final String PASSWORD = "";
 
