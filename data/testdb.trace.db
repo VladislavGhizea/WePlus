@@ -25,3 +25,6 @@ DROP TABLE if EXISTS table 'person' [42001-232]
 2025-01-14 16:43:53.145529+01:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABLE if EXISTS [*]table ""person"""; expected "identifier"; SQL statement:
 DROP TABLE if EXISTS table "person" [42001-232]
+2025-01-14 17:15:12.529371+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PERSON" already exists; SQL statement:
+CREATE TABLE PERSON ( ID INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(255), AGE INT ) [42101-232]
