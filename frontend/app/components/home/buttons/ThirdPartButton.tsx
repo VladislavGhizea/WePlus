@@ -17,7 +17,7 @@ const ThirdPartButton: React.FC<Props> = ({ text }) => {
       ) : (
         <FcGoogle className="w-[2rem] h-[2rem] mx-2" />
       )}
-      <p className="text-base">continue with {text}</p>
+      <p className="text-base flex-1 text-center">continue with {text}</p>
     </button>
   );
 };

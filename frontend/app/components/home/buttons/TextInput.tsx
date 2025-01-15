@@ -5,17 +5,19 @@ import React, { useState } from "react";
 interface Props {
   text: string;
   type: string;
+  classNameContainer?: string;
 }
 
-const TextInput: React.FC<Props> = ({ text, type }) => {
+const TextInput: React.FC<Props> = ({ text, type, classNameContainer }) => {
   const [showPassword, setShowPassword] = useState(false);
+  classNameContainer = classNameContainer || "";
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   return (
-    <div className="relative w-[21.5rem]">
+    <div className={"relative " + classNameContainer}>
       <input
         className="w-full h-[4.5rem] rounded-2xl text-2xl px-[1rem] pr-[3rem]"
         placeholder={text}
@@ -27,9 +29,9 @@ const TextInput: React.FC<Props> = ({ text, type }) => {
           onClick={togglePasswordVisibility}
         >
           {showPassword ? (
-            <AiOutlineEyeInvisible className="w-[1.5rem] h-[1.5rem]" />
-          ) : (
             <AiOutlineEye className="w-[1.5rem] h-[1.5rem]" />
+          ) : (
+            <AiOutlineEyeInvisible className="w-[1.5rem] h-[1.5rem]" />
           )}
         </div>
       )}
