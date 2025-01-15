@@ -9,6 +9,7 @@
   --button-blue: #74A9F1;
   --button-grey: #EDEEF1;
   --text-blue: #335C67;
+  overflow: hidden;
 }
 
 /* @media (prefers-color-scheme: dark) {
