@@ -31,7 +31,7 @@ const SelectionButton: React.FC<Props> = ({ text, children, description }) => {
           <p className="text-3xl flex-1 justify-center">{text}</p>
         </>
       ) : (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center w-full">
           <div className="absolute -top-1/4 h-[8rem] w-[8rem]">{children}</div>
           <p className="text-3xl flex-1 justify-center">{text}</p>
           <p className="text-xl flex-1 justify-center mt-7">{description}</p>
