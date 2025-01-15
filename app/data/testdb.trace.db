@@ -49,3 +49,9 @@ SELECT COUNT(*) AS row_count FROM PERSON [42104-232]
 2025-01-14 17:24:46.955617+01:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PERSON" not found (this database is empty); SQL statement:
 SELECT NAME, AGE FROM PERSON WHERE NAME = 'Mario Rossi' [42104-232]
+2025-01-15 17:33:38.661503+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PERSON" not found; SQL statement:
+DROP TABLE person [42102-232]
+2025-01-15 17:34:17.708702+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PERSON" not found; SQL statement:
+DROP TABLE person [42102-232]
