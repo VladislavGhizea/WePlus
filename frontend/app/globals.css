@@ -7,6 +7,8 @@
   --foreground: #171717;
   --container-grey: #EDEEF1;
   --button-blue: #74A9F1;
+  --button-grey: #EDEEF1;
+  --text-blue: #335C67;
 }
 
 /* @media (prefers-color-scheme: dark) {

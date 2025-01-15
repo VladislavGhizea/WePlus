@@ -4,12 +4,17 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
 interface Props {
   backTo?: string;
+  onClick?: () => void;
 }
-const BackButton: React.FC<Props> = ({ backTo }) => {
+const BackButton: React.FC<Props> = ({ backTo, onClick }) => {
   const router = useRouter();
   const onButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    router.push(backTo || "/");
+    if (onClick) {
+      onClick();
+    } else {
+      router.push(backTo || "/");
+    }
   };
   return (
     <button onClick={onButtonClick}>

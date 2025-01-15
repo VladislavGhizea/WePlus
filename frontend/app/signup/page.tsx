@@ -1,21 +1,44 @@
-import React from "react";
-import { ActionButton, TextInput } from "../components/home/buttons";
-import { BackButton } from "../components/signup/buttons";
-const page = () => {
+"use client";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Signup, Selection } from "@/app/signup/pages";
+
+const Page = () => {
+  const [step, setStep] = useState(1);
+
+  const handleNext = () => {
+    setStep(step + 1);
+  };
+  const handleBack = () => {
+    setStep(step - 1);
+  };
+
   return (
-    <div className="flex justify-center items-center h-screen w-screen">
-      <div className="h-[34.5rem] w-[26rem] bg-containerGrey grid grid-rows-5 gap-8 p-8 rounded-3xl shadow-xl">
-        <TextInput text="Username" type="text" />
-        <TextInput text="Email" type="email" />
-        <TextInput text="Password" type="password" />
-        <TextInput text="Conferma password" type="password" />
-        <div className="flex justify-between">
-          <BackButton />
-          <ActionButton text="Registrati" bgColor=" bg-buttonBlue" />
-        </div>
-      </div>
-    </div>
+    <AnimatePresence mode="wait">
+      {step === 1 && (
+        <motion.div
+          key="signup"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Signup onNext={handleNext} />
+        </motion.div>
+      )}
+      {step === 2 && (
+        <motion.div
+          key="selection"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Selection onBack={handleBack} />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
-export default page;
+export default Page;
