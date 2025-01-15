@@ -5,7 +5,7 @@ DROP TABLE EntitaIndividuali;
 DROP TABLE Documenti;
 DROP TABLE Hobby;
 DROP TABLE IndiceHobby;
-DROP TABLE Indirizzi_Fisica;
+DROP TABLE IndirizziFisica;
 DROP TABLE Sedi;
 DROP TABLE NumeriTelefono;
 DROP TABLE Ambiti;
@@ -24,7 +24,7 @@ CREATE TABLE PersoneFisiche (
   datadiN DATE NOT NULL,
   indirizzo_id INT NOT NULL,
   FOREIGN KEY (generale_id) REFERENCES UtentiGenerali(id_generale),
-  FOREIGN KEY (indirizzo_id) REFERENCES Indirizzi_Fisica(id_indirizzo)
+  FOREIGN KEY (indirizzo_id) REFERENCES IndirizziFisica(id_indirizzo)
 );
 
 CREATE TABLE PersoneGiuridiche (
@@ -54,7 +54,7 @@ CREATE TABLE EntitaIndividuali (
   indirizzoFisica_id INT NOT NULL,
   indirizzoSede_id INT,
   FOREIGN KEY (generale_id) REFERENCES UtentiGenerali(id_generale),
-  FOREIGN KEY (indirizzoFisica_id) REFERENCES Indirizzi_Fisica(id_indirizzo),
+  FOREIGN KEY (indirizzoFisica_id) REFERENCES IndirizziFisica(id_indirizzo),
   FOREIGN KEY (indirizzoSede_id) REFERENCES Sedi(id_sede)
 );
 
@@ -80,7 +80,7 @@ CREATE TABLE IndiceHobby (
   PRIMARY KEY (id_hobby, id_soggetto)
 );
 
-CREATE TABLE Indirizzi_Fisica (
+CREATE TABLE IndirizziFisica (
   id_indirizzo INT AUTO_INCREMENT PRIMARY KEY,
   indiDomicilio VARCHAR(50) NOT NULL,
   indiResidenza VARCHAR(50) NOT NULL
@@ -107,7 +107,7 @@ CREATE TABLE Ambiti(
 CREATE TABLE IndiceAmbiti(
   id_ambito INT,
   id_soggetto INT,
-  PRIMARY KEY(id_ambito, id-soggetto)
+  PRIMARY KEY(id_ambito, id_soggetto)
 );
 
 CREATE TABLE UtentiGenerali (
