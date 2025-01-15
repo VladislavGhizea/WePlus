@@ -1,6 +1,0 @@
-2025-01-14 17:25:41.986883+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PERSON" not found (this database is empty); SQL statement:
-SELECT COUNT(*) AS row_count FROM PERSON [42104-232]
-2025-01-14 17:25:42.107973+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PERSON" not found (this database is empty); SQL statement:
-SELECT NAME, AGE FROM PERSON WHERE NAME = 'Mario Rossi' [42104-232]
