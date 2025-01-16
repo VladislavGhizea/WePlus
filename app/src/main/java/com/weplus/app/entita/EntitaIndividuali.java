@@ -52,13 +52,23 @@ public class EntitaIndividuali {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer sede_id;
 
-    public EntitaIndividuali() {
-    }
+    public EntitaIndividuali() {}
 
-    public EntitaIndividuali(Integer id_entita, Integer generale_id, String partitaIva,
-                            TipoPersGiur tipo, String ragione_sociale, Integer sede_id) {
+    public EntitaIndividuali(Integer id_entita, Integer generale_id, String nome,
+                             String cognome, String cf, Sesso sesso, Genere genere,
+                             String comuneDiN, String dataDiN, String indirizzo_id,
+                             String partitaIva, TipoPersGiur tipo, String ragione_sociale,
+                             Integer sede_id) {
         this.id_entita = id_entita;
         this.generale_id = generale_id;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.cf = cf;
+        this.sesso = sesso;
+        this.genere = genere;
+        this.comuneDiN = comuneDiN;
+        this.dataDiN = dataDiN;
+        this.indirizzo_id = indirizzo_id;
         this.partitaIva = partitaIva;
         this.tipo = tipo;
         this.ragione_sociale = ragione_sociale;
@@ -81,12 +91,76 @@ public class EntitaIndividuali {
         return partitaIva;
     }
 
+    public String getIndirizzo_id() {
+        return indirizzo_id;
+    }
+
+    public String getDataDiN() {
+        return dataDiN;
+    }
+
+    public String getComuneDiN() {
+        return comuneDiN;
+    }
+
+    public Genere getGenere() {
+        return genere;
+    }
+
+    public Sesso getSesso() {
+        return sesso;
+    }
+
+    public String getCf() {
+        return cf;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
     public Integer getGenerale_id() {
         return generale_id;
     }
 
-    public Integer getId_giuridica() {
+    public Integer getId_entita() {
         return id_entita;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
+
+    public void setCf(String cf) {
+        this.cf = cf;
+    }
+
+    public void setSesso(Sesso sesso) {
+        this.sesso = sesso;
+    }
+
+    public void setGenere(Genere genere) {
+        this.genere = genere;
+    }
+
+    public void setComuneDiN(String comuneDiN) {
+        this.comuneDiN = comuneDiN;
+    }
+
+    public void setDataDiN(String dataDiN) {
+        this.dataDiN = dataDiN;
+    }
+
+    public void setIndirizzo_id(String indirizzo_id) {
+        this.indirizzo_id = indirizzo_id;
     }
 
     public void setPartitaIva(String partitaIva) {
