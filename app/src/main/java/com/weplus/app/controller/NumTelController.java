@@ -2,7 +2,7 @@ package com.weplus.app.controller;
 
 import java.util.List;
 
-public class PersonaFisica implements IController{
+public class NumTelController implements IController{
     @Override
     public Object create(Object entity) {
         return null;

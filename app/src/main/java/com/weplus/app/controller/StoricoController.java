@@ -2,7 +2,7 @@ package com.weplus.app.controller;
 
 import java.util.List;
 
-public class PersonaGiuridica implements IController{
+public class StoricoController implements IController{
     @Override
     public Object create(Object entity) {
         return null;

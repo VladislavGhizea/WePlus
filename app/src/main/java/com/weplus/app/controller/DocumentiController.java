@@ -2,7 +2,7 @@ package com.weplus.app.controller;
 
 import java.util.List;
 
-public class TabellaHobby implements IController{
+public class DocumentiController implements IController{
     @Override
     public Object create(Object entity) {
         return null;
