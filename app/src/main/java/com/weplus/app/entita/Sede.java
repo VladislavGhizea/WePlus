@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Sede {
 
     @Id
-    @OneToMany //controllare con entInidiv e persGiurid
+    @OneToMany //controllare con entInidiv e persGiurid, aggiungere il join
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_sede;
 
@@ -44,5 +44,5 @@ public class Sede {
     public void setPrincipale(boolean principale) {
         this.principale = principale;
     }
-    
+
 }

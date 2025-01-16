@@ -17,7 +17,7 @@ public class PersonaFisica {
     @Column(nullable = false) // Campo obbligatorio
     private String cognome;
 
-    @OneToOne //testare
+    @OneToOne //imlementare il join con idgenrale
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_generale;
 
