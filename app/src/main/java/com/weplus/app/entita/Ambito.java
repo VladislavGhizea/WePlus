@@ -11,7 +11,7 @@ public class Ambito {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_ambito;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length=25) // Campo obbligatorio
     private String nome;
 
     public Ambito() {

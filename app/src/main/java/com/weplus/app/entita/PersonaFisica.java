@@ -11,17 +11,17 @@ public class PersonaFisica {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_fisica;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length=20) // Campo obbligatorio
     private String nome;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length=20) // Campo obbligatorio
     private String cognome;
 
     @OneToOne //imlementare il join con idgenrale
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_generale;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length=16) // Campo obbligatorio
     private String cf;
 
     @Column(nullable = false) // Campo obbligatorio
@@ -30,7 +30,7 @@ public class PersonaFisica {
     @Column(nullable = false) // Campo obbligatorio
     private Genere genere;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length=2) // Campo obbligatorio
     private String comuneDiN;
 
     @Column(nullable = false) // Campo obbligatorio

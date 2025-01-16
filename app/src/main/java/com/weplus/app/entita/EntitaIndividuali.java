@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "PersonaGiuridica")
-public class PersonaGiuridica {
+public class EntitaIndividuali {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
@@ -14,13 +14,13 @@ public class PersonaGiuridica {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer generale_id;
 
-    @Column(nullable = false, length=11) // Campo obbligatorio
+    @Column(nullable = false) // Campo obbligatorio
     private String partitaIva;
 
     @Column(nullable = false) // Campo obbligatorio
     private TipoPersGiur tipo;
 
-    @Column(nullable = false, length=25) // Campo obbligatorio
+    @Column(nullable = false) // Campo obbligatorio
     private String ragione_sociale;
 
     @OneToOne //imlementare il join con id_sede
