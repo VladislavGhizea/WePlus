@@ -2,6 +2,8 @@ package com.weplus.app.entita;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Sede")
 public class Sede {
@@ -10,6 +12,12 @@ public class Sede {
     @OneToMany //controllare con entInidiv e persGiurid, aggiungere il join
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_sede;
+
+    @OneToMany(mappedBy = "sede")
+    private List<PersonaGiuridica> personaGiuridica;
+
+    @OneToMany(mappedBy = "indirizzoSede")
+    private List<EntitaIndividuale> entitaIndividuale;
 
     @Column(nullable = false) // Campo obbligatorio
     private String indirizzo;
@@ -23,6 +31,19 @@ public class Sede {
         this.id_sede = id_sede;
         this.principale = principale;
         this.indirizzo = indirizzo;
+    }
+
+    public Sede(boolean principale, String indirizzo) {
+        this.principale = principale;
+        this.indirizzo = indirizzo;
+    }
+
+    public List<PersonaGiuridica> getPersonaGiuridica() {
+        return personaGiuridica;
+    }
+
+    public List<EntitaIndividuale> getEntitaIndividuale() {
+        return entitaIndividuale;
     }
 
     public Integer getId_sede() {

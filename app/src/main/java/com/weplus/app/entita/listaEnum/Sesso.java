@@ -1,4 +1,4 @@
-package com.weplus.app.entita;
+package com.weplus.app.entita.listaEnum;
 
 public enum Sesso {
     MASCHIO,

@@ -1,4 +1,4 @@
-package com.weplus.app.entita;
+package com.weplus.app.entita.chiaviComposte;
 
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;

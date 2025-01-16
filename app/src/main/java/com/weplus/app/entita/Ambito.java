@@ -2,6 +2,8 @@ package com.weplus.app.entita;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Ambito")
 public class Ambito {
@@ -11,15 +13,27 @@ public class Ambito {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_ambito;
 
+    @OneToMany(mappedBy = "ambito")
+    private List<IndiceAmbito> indiceAmbiti;
+
     @Column(nullable = false, length=25) // Campo obbligatorio
     private String nome;
 
     public Ambito() {
     }
 
-    public Ambito(Integer id_ambito, String nome) {
+    public Ambito(Integer id_ambito, List<IndiceAmbito> indiceAmbiti, String nome) {
         this.id_ambito = id_ambito;
+        this.indiceAmbiti = indiceAmbiti;
         this.nome = nome;
+    }
+
+    public Ambito(String nome) {
+        this.nome = nome;
+    }
+
+    public List<IndiceAmbito> getIndiceAmbiti() {
+        return indiceAmbiti;
     }
 
     public Integer getId_ambito() {

@@ -1,6 +1,8 @@
 package com.weplus.app.entita;
 
 
+import com.weplus.app.entita.listaEnum.Genere;
+import com.weplus.app.entita.listaEnum.Sesso;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,17 +13,17 @@ public class PersonaFisica {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_fisica;
 
-    @Column(nullable = false, length=20) // Campo obbligatorio
+    @Column(nullable = false) // Campo obbligatorio
     private String nome;
 
-    @Column(nullable = false, length=20) // Campo obbligatorio
+    @Column(nullable = false) // Campo obbligatorio
     private String cognome;
 
-    @OneToOne //imlementare il join con idgenrale
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer generale_id;
+    @OneToOne //testare
+    @JoinColumn(name = "generale_id", nullable = false, unique = true) // ID auto-increment
+    private Integer id_generale;
 
-    @Column(nullable = false, length=16) // Campo obbligatorio
+    @Column(nullable = false) // Campo obbligatorio
     private String cf;
 
     @Column(nullable = false) // Campo obbligatorio
@@ -30,36 +32,62 @@ public class PersonaFisica {
     @Column(nullable = false) // Campo obbligatorio
     private Genere genere;
 
-    @Column(nullable = false, length=2) // Campo obbligatorio
+    @Column(nullable = false) // Campo obbligatorio
     private String comuneDiN;
 
     @Column(nullable = false) // Campo obbligatorio
     private String dataDiN;
 
-    @OneToOne //configura anche nella tab indirizzi
-    @Column(nullable = false) // Campo obbligatorio
-    private String indirizzo_id;
+    @OneToOne
+    @JoinColumn(name = "indirizzo_id", nullable = false)
+    private IndirizziFisica indirizzo;
 
     public PersonaFisica() {
     }
 
-    public PersonaFisica(Integer id_fisica, String nome, String cognome, Integer generale_id,
-                         String cf, Sesso sesso, Genere genere, String comuneDiN, String dataDiN,
-                         String indirizzo_id) {
+    //principalmente per test
+
+
+    public PersonaFisica(Integer id_fisica,
+                         String nome,
+                         String cognome,
+                         Integer id_generale,
+                         String cf,
+                         Sesso sesso,
+                         Genere genere,
+                         String comuneDiN,
+                         String dataDiN,
+                         IndirizziFisica indirizzo) {
         this.id_fisica = id_fisica;
         this.nome = nome;
         this.cognome = cognome;
-        this.generale_id = generale_id;
+        this.id_generale = id_generale;
         this.cf = cf;
         this.sesso = sesso;
         this.genere = genere;
         this.comuneDiN = comuneDiN;
         this.dataDiN = dataDiN;
-        this.indirizzo_id = indirizzo_id;
+        this.indirizzo = indirizzo;
     }
 
-    public String getIndirizzo_id() {
-        return indirizzo_id;
+    public PersonaFisica(String nome,
+                         String cognome,
+                         Integer id_generale,
+                         String cf,
+                         Sesso sesso,
+                         Genere genere,
+                         String comuneDiN,
+                         String dataDiN,
+                         IndirizziFisica indirizzo) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.id_generale = id_generale;
+        this.cf = cf;
+        this.sesso = sesso;
+        this.genere = genere;
+        this.comuneDiN = comuneDiN;
+        this.dataDiN = dataDiN;
+        this.indirizzo = indirizzo;
     }
 
     public String getDataDiN() {
@@ -83,7 +111,7 @@ public class PersonaFisica {
     }
 
     public Integer getId_generale() {
-        return generale_id;
+        return id_generale;
     }
 
     public String getCognome() {
@@ -96,10 +124,6 @@ public class PersonaFisica {
 
     public Integer getId_fisica() {
         return id_fisica;
-    }
-
-    public void setIndirizzo_id(String indirizzo_id) {
-        this.indirizzo_id = indirizzo_id;
     }
 
     public void setDataDiN(String dataDiN) {
@@ -129,4 +153,10 @@ public class PersonaFisica {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public IndirizziFisica getIndirizzo() {
+        return indirizzo;
+    }
 }
+
+

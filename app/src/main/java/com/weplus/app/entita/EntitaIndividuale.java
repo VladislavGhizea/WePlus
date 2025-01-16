@@ -1,18 +1,21 @@
 package com.weplus.app.entita;
 
+import com.weplus.app.entita.listaEnum.Genere;
+import com.weplus.app.entita.listaEnum.Sesso;
+import com.weplus.app.entita.listaEnum.TipoPersGiur;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "EntitaIndividuali")
-public class EntitaIndividuali {
+public class EntitaIndividuale {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_entita;
 
-    @OneToOne //imlementare il join con idgenrale
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer generale_id;
+    @OneToOne
+    @JoinColumn(name = "generale_id", nullable = false, unique = true)
+    private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false, length=20) // Campo obbligatorio
     private String nome;
@@ -36,8 +39,8 @@ public class EntitaIndividuali {
     private String dataDiN;
 
     @OneToOne //configura anche nella tab indirizzi
-    @Column(nullable = false) // Campo obbligatorio
-    private String indirizzo_id;
+    @JoinColumn(name = "indirizzoFisica_id", nullable = false) // Campo obbligatorio
+    private IndirizziFisica indirizzoFisica;
 
     @Column(nullable = false, length=11) // Campo obbligatorio
     private String partitaIva;
@@ -48,19 +51,28 @@ public class EntitaIndividuali {
     @Column(nullable = false, length=25) // Campo obbligatorio
     private String ragione_sociale;
 
-    @OneToOne //imlementare il join con id_sede
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer sede_id;
+    @ManyToOne
+    @JoinColumn(name = "indirizzoSede_id")
+    private Sede sede;
 
-    public EntitaIndividuali() {}
+    public EntitaIndividuale() {}
 
-    public EntitaIndividuali(Integer id_entita, Integer generale_id, String nome,
-                             String cognome, String cf, Sesso sesso, Genere genere,
-                             String comuneDiN, String dataDiN, String indirizzo_id,
-                             String partitaIva, TipoPersGiur tipo, String ragione_sociale,
-                             Integer sede_id) {
+    public EntitaIndividuale(Integer id_entita,
+                             UtenteGenerale utenteGenerale,
+                             String nome,
+                             String cognome,
+                             String cf,
+                             Sesso sesso,
+                             Genere genere,
+                             String comuneDiN,
+                             String dataDiN,
+                             IndirizziFisica indirizzoFisica,
+                             String partitaIva,
+                             TipoPersGiur tipo,
+                             String ragione_sociale,
+                             Sede sede) {
         this.id_entita = id_entita;
-        this.generale_id = generale_id;
+        this.utenteGenerale = utenteGenerale;
         this.nome = nome;
         this.cognome = cognome;
         this.cf = cf;
@@ -68,15 +80,39 @@ public class EntitaIndividuali {
         this.genere = genere;
         this.comuneDiN = comuneDiN;
         this.dataDiN = dataDiN;
-        this.indirizzo_id = indirizzo_id;
+        this.indirizzoFisica = indirizzoFisica;
         this.partitaIva = partitaIva;
         this.tipo = tipo;
         this.ragione_sociale = ragione_sociale;
-        this.sede_id = sede_id;
+        this.sede = sede;
     }
 
-    public Integer getSede_id() {
-        return sede_id;
+    public EntitaIndividuale(UtenteGenerale utenteGenerale,
+                             String nome,
+                             String cognome,
+                             String cf,
+                             Sesso sesso,
+                             Genere genere,
+                             String comuneDiN,
+                             String dataDiN,
+                             IndirizziFisica indirizzoFisica,
+                             String partitaIva,
+                             TipoPersGiur tipo,
+                             String ragione_sociale,
+                             Sede sede) {
+        this.utenteGenerale = utenteGenerale;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.cf = cf;
+        this.sesso = sesso;
+        this.genere = genere;
+        this.comuneDiN = comuneDiN;
+        this.dataDiN = dataDiN;
+        this.indirizzoFisica = indirizzoFisica;
+        this.partitaIva = partitaIva;
+        this.tipo = tipo;
+        this.ragione_sociale = ragione_sociale;
+        this.sede = sede;
     }
 
     public String getRagione_sociale() {
@@ -91,8 +127,12 @@ public class EntitaIndividuali {
         return partitaIva;
     }
 
-    public String getIndirizzo_id() {
-        return indirizzo_id;
+    public IndirizziFisica getIndirizzoFisica() {
+        return indirizzoFisica;
+    }
+
+    public Sede getSede() {
+        return sede;
     }
 
     public String getDataDiN() {
@@ -121,10 +161,6 @@ public class EntitaIndividuali {
 
     public String getNome() {
         return nome;
-    }
-
-    public Integer getGenerale_id() {
-        return generale_id;
     }
 
     public Integer getId_entita() {
@@ -159,9 +195,6 @@ public class EntitaIndividuali {
         this.dataDiN = dataDiN;
     }
 
-    public void setIndirizzo_id(String indirizzo_id) {
-        this.indirizzo_id = indirizzo_id;
-    }
 
     public void setPartitaIva(String partitaIva) {
         this.partitaIva = partitaIva;
@@ -173,5 +206,9 @@ public class EntitaIndividuali {
 
     public void setRagione_sociale(String ragione_sociale) {
         this.ragione_sociale = ragione_sociale;
+    }
+
+    public UtenteGenerale getUtenteGenerale() {
+        return utenteGenerale;
     }
 }

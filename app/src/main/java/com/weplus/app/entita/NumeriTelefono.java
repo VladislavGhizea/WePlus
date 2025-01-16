@@ -13,17 +13,22 @@ public class NumeriTelefono {
     @Column(nullable = false) // Campo obbligatorio
     private Integer numero;
 
-    @Id
-    @OneToMany //controllare con soggetto
-    @Column(nullable = false) // Campo obbligatorio
-    private Integer soggetto_id;
+    @ManyToOne
+    @JoinColumn(name = "soggetto_id", nullable = false)
+    private UtenteGenerale soggetto;
 
     public NumeriTelefono() {}
 
-    public NumeriTelefono(Integer numero, Integer soggetto_id, Integer id_numTel) {
-        this.numero = numero;
-        this.soggetto_id = soggetto_id;
+    public NumeriTelefono(Integer id_numTel, Integer numero, UtenteGenerale soggetto) {
         this.id_numTel = id_numTel;
+        this.numero = numero;
+        this.soggetto = soggetto;
+    }
+
+
+    public NumeriTelefono(Integer numero, UtenteGenerale soggetto) {
+        this.numero = numero;
+        this.soggetto = soggetto;
     }
 
     public Integer getId_numTel() {
@@ -34,9 +39,10 @@ public class NumeriTelefono {
         return numero;
     }
 
-    public Integer getSoggetto_id() {
-        return soggetto_id;
+    public UtenteGenerale getSoggetto() {
+        return soggetto;
     }
+
 
     public void setNumero(Integer numero) {
         this.numero = numero;

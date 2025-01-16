@@ -1,5 +1,6 @@
 package com.weplus.app.entita;
 
+import com.weplus.app.entita.listaEnum.TipoPersGiur;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,9 +11,9 @@ public class PersonaGiuridica {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_giuridica;
 
-    @OneToOne //imlementare il join con idgenrale
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer generale_id;
+    @OneToOne
+    @JoinColumn(name = "generale_id", nullable = false, unique = true)
+    private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false, length=11) // Campo obbligatorio
     private String partitaIva;
@@ -23,35 +24,49 @@ public class PersonaGiuridica {
     @Column(nullable = true, length=25) // Campo obbligatorio
     private String ragione_sociale;
 
-    @OneToOne //imlementare il join con id_sede
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
+    @OneToOne
+    @JoinColumn(name = "sede_id", nullable = false) // ID auto-increment
     private Integer indirizzoFisica_id;
 
-    @OneToOne //imlementare il join con id_sede
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer indirizzoSede_id ;
+    @ManyToOne
+    @JoinColumn(name = "sede_id", nullable = false)
+    private Sede sede;
 
     public PersonaGiuridica() {
     }
 
-    public PersonaGiuridica(Integer id_giuridica, Integer indirizzoSede_id, Integer indirizzoFisica_id,
-                            String ragione_sociale, TipoPersGiur tipo, String partitaIva,
-                            Integer generale_id) {
+    public PersonaGiuridica(Integer id_giuridica,
+                            UtenteGenerale utenteGenerale,
+                            String partitaIva,
+                            TipoPersGiur tipo,
+                            String ragione_sociale,
+                            Integer indirizzoFisica_id,
+                            Sede sede) {
         this.id_giuridica = id_giuridica;
-        this.indirizzoSede_id = indirizzoSede_id;
-        this.indirizzoFisica_id = indirizzoFisica_id;
-        this.ragione_sociale = ragione_sociale;
-        this.tipo = tipo;
+        this.utenteGenerale = utenteGenerale;
         this.partitaIva = partitaIva;
-        this.generale_id = generale_id;
+        this.tipo = tipo;
+        this.ragione_sociale = ragione_sociale;
+        this.indirizzoFisica_id = indirizzoFisica_id;
+        this.sede = sede;
+    }
+
+    public PersonaGiuridica(UtenteGenerale utenteGenerale,
+                            String partitaIva,
+                            TipoPersGiur tipo,
+                            String ragione_sociale,
+                            Integer indirizzoFisica_id,
+                            Sede sede) {
+        this.utenteGenerale = utenteGenerale;
+        this.partitaIva = partitaIva;
+        this.tipo = tipo;
+        this.ragione_sociale = ragione_sociale;
+        this.indirizzoFisica_id = indirizzoFisica_id;
+        this.sede = sede;
     }
 
     public Integer getId_giuridica() {
         return id_giuridica;
-    }
-
-    public Integer getGenerale_id() {
-        return generale_id;
     }
 
     public String getPartitaIva() {
@@ -70,8 +85,8 @@ public class PersonaGiuridica {
         return indirizzoFisica_id;
     }
 
-    public Integer getIndirizzoSede_id() {
-        return indirizzoSede_id;
+    public Sede getSede() {
+        return sede;
     }
 
     public void setPartitaIva(String partitaIva) {
@@ -84,5 +99,9 @@ public class PersonaGiuridica {
 
     public void setRagione_sociale(String ragione_sociale) {
         this.ragione_sociale = ragione_sociale;
+    }
+
+    public UtenteGenerale getUtenteGenerale() {
+        return utenteGenerale;
     }
 }

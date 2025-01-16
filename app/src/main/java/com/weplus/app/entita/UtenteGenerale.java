@@ -1,15 +1,26 @@
 package com.weplus.app.entita;
 
+import com.weplus.app.entita.listaEnum.Tipo;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "UtentiGenerali")
 public class UtenteGenerale {
 
     @Id
-    @OneToOne
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_generale;
+
+    @OneToOne(mappedBy = "utenteGenerale", cascade = CascadeType.ALL, orphanRemoval = true)
+    private PersonaFisica personaFisica;
+
+    @OneToOne(mappedBy = "utenteGenerale", cascade = CascadeType.ALL, orphanRemoval = true)
+    private PersonaGiuridica personaGiuridica;
+
+    @OneToOne(mappedBy = "utenteGenerale", cascade = CascadeType.ALL, orphanRemoval = true)
+    private EntitaIndividuale entitaIndividuale;
 
     @Column(nullable = false) // Campo obbligatorio
     private String username;
@@ -25,6 +36,10 @@ public class UtenteGenerale {
 
     @Column(nullable = false) // Campo obbligatorio
     private boolean cancellato=false;
+
+
+    @OneToMany(mappedBy = "soggetto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Documento> documenti;
 
     public UtenteGenerale() {}
 

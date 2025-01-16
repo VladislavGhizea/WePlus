@@ -1,6 +1,6 @@
 package com.weplus.app.controller;
 
-import com.weplus.app.entita.Tipo;
+import com.weplus.app.entita.listaEnum.Tipo;
 import com.weplus.app.entita.UtenteGenerale;
 import com.weplus.app.repository.UtenteGeneraleRepository;
 import org.junit.jupiter.api.BeforeEach;
