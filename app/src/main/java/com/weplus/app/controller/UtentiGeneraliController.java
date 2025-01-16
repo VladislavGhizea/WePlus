@@ -44,7 +44,7 @@ public class UtentiGeneraliController implements IController<UtenteGenerale, Int
         return utenteGeneraleRepository.save(existingUser); // Salva l'oggetto aggiornato
     }
 
-    @Override
+    @Override //cancellato=true
     public void delete(@PathVariable Integer id) {
         utenteGeneraleRepository.deleteById(id);
     }

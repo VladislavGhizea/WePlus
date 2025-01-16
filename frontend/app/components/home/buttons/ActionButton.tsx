@@ -7,6 +7,8 @@ interface Props {
   bgColor?: string;
   linkTo?: string;
   onClick?: () => void;
+  width?: string;
+  height?: string;
 }
 const ActionButton: React.FC<Props> = ({
   text,
@@ -14,7 +16,11 @@ const ActionButton: React.FC<Props> = ({
   bgColor,
   linkTo,
   onClick,
+  width,
+  height,
 }) => {
+  width = width || "9rem";
+  height = height || "3.5rem";
   className = className || "";
   bgColor = bgColor || "bg-white";
   const router = useRouter();
@@ -28,7 +34,10 @@ const ActionButton: React.FC<Props> = ({
   };
   return (
     <button className={className + " relative"} onClick={onButtonClick}>
-      <div className={"w-[9rem] h-[3.5rem] rounded-full " + bgColor}>
+      <div
+        className={`w-[${width}] h-[${height}] rounded-full ${bgColor}`}
+        style={{ width, height }}
+      >
         <div className="flex justify-center items-center h-full text-2xl">
           {text}
         </div>

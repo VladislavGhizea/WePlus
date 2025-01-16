@@ -1,16 +1,28 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "motion/react";
+
 interface Props {
   text: string;
   children: React.ReactNode;
   description: string;
+  width?: string;
+  height?: string;
 }
-const SelectionButton: React.FC<Props> = ({ text, children, description }) => {
+
+const SelectionButton: React.FC<Props> = ({
+  text,
+  children,
+  description,
+  width = "22rem",
+  height = "5rem",
+}) => {
   const [hover, setHover] = useState(false);
+
   return (
     <motion.button
-      className="w-[22rem] h-[5rem] bg-buttonGrey rounded-full hover:rounded-3xl flex flex-row items-center px-6 relative"
+      className={`bg-buttonGrey rounded-full hover:rounded-3xl flex flex-row items-center px-6 relative`}
+      style={{ width: width, height: height }}
       whileHover={{ height: "18rem" }}
       transition={{
         duration: 0.3,
