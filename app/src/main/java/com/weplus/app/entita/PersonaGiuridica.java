@@ -20,48 +20,58 @@ public class PersonaGiuridica {
     @Column(nullable = false) // Campo obbligatorio
     private TipoPersGiur tipo;
 
-    @Column(nullable = false, length=25) // Campo obbligatorio
+    @Column(nullable = true, length=25) // Campo obbligatorio
     private String ragione_sociale;
 
     @OneToOne //imlementare il join con id_sede
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer sede_id;
+    private Integer indirizzoFisica_id;
+
+    @OneToOne //imlementare il join con id_sede
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
+    private Integer indirizzoSede_id ;
 
     public PersonaGiuridica() {
     }
 
-    public PersonaGiuridica(Integer id_giuridica, Integer generale_id, String partitaIva,
-                            TipoPersGiur tipo, String ragione_sociale, Integer sede_id) {
+    public PersonaGiuridica(Integer id_giuridica, Integer indirizzoSede_id, Integer indirizzoFisica_id,
+                            String ragione_sociale, TipoPersGiur tipo, String partitaIva,
+                            Integer generale_id) {
         this.id_giuridica = id_giuridica;
-        this.generale_id = generale_id;
-        this.partitaIva = partitaIva;
-        this.tipo = tipo;
+        this.indirizzoSede_id = indirizzoSede_id;
+        this.indirizzoFisica_id = indirizzoFisica_id;
         this.ragione_sociale = ragione_sociale;
-        this.sede_id = sede_id;
+        this.tipo = tipo;
+        this.partitaIva = partitaIva;
+        this.generale_id = generale_id;
     }
 
-    public Integer getSede_id() {
-        return sede_id;
-    }
-
-    public String getRagione_sociale() {
-        return ragione_sociale;
-    }
-
-    public TipoPersGiur getTipo() {
-        return tipo;
-    }
-
-    public String getPartitaIva() {
-        return partitaIva;
+    public Integer getId_giuridica() {
+        return id_giuridica;
     }
 
     public Integer getGenerale_id() {
         return generale_id;
     }
 
-    public Integer getId_giuridica() {
-        return id_giuridica;
+    public String getPartitaIva() {
+        return partitaIva;
+    }
+
+    public TipoPersGiur getTipo() {
+        return tipo;
+    }
+
+    public String getRagione_sociale() {
+        return ragione_sociale;
+    }
+
+    public Integer getIndirizzoFisica_id() {
+        return indirizzoFisica_id;
+    }
+
+    public Integer getIndirizzoSede_id() {
+        return indirizzoSede_id;
     }
 
     public void setPartitaIva(String partitaIva) {

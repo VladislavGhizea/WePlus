@@ -19,7 +19,7 @@ public class PersonaFisica {
 
     @OneToOne //imlementare il join con idgenrale
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer id_generale;
+    private Integer generale_id;
 
     @Column(nullable = false, length=16) // Campo obbligatorio
     private String cf;
@@ -43,13 +43,13 @@ public class PersonaFisica {
     public PersonaFisica() {
     }
 
-    public PersonaFisica(Integer id_fisica, String nome, String cognome, Integer id_generale,
+    public PersonaFisica(Integer id_fisica, String nome, String cognome, Integer generale_id,
                          String cf, Sesso sesso, Genere genere, String comuneDiN, String dataDiN,
                          String indirizzo_id) {
         this.id_fisica = id_fisica;
         this.nome = nome;
         this.cognome = cognome;
-        this.id_generale = id_generale;
+        this.generale_id = generale_id;
         this.cf = cf;
         this.sesso = sesso;
         this.genere = genere;
@@ -83,7 +83,7 @@ public class PersonaFisica {
     }
 
     public Integer getId_generale() {
-        return id_generale;
+        return generale_id;
     }
 
     public String getCognome() {
