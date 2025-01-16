@@ -55,9 +55,9 @@ public class EntitaIndividuali {
     public EntitaIndividuali() {
     }
 
-    public EntitaIndividuali(Integer id_giuridica, Integer generale_id, String partitaIva,
+    public EntitaIndividuali(Integer id_entita, Integer generale_id, String partitaIva,
                             TipoPersGiur tipo, String ragione_sociale, Integer sede_id) {
-        this.id_giuridica = id_giuridica;
+        this.id_entita = id_entita;
         this.generale_id = generale_id;
         this.partitaIva = partitaIva;
         this.tipo = tipo;
@@ -86,7 +86,7 @@ public class EntitaIndividuali {
     }
 
     public Integer getId_giuridica() {
-        return id_giuridica;
+        return id_entita;
     }
 
     public void setPartitaIva(String partitaIva) {
