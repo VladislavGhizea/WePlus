@@ -45,7 +45,7 @@ public class UtentiGeneraliController implements IController<UtenteGenerale, Int
         return null;
     }
 
-    @Override
+    @Override //cancellato=true
     public void delete(@PathVariable Integer id) {
         utenteGeneraleRepository.deleteById(id);
     }
