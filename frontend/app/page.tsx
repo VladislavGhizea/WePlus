@@ -13,7 +13,7 @@ export default function Home() {
         exit={{ opacity: 0, y: 50, x: -50 }}
         transition={{ duration: 1 }}
       >
-        <motion.div
+        <motion.div 
           className="h-[27rem] w-[55.5rem] bg-containerGrey flex justify-between rounded-3xl shadow-2xl"
           initial={{ scale: 0.8 }}
           animate={{ scale: 1 }}
