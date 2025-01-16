@@ -5,13 +5,25 @@ import { Section } from "./sections";
 import { ActionButton } from "../../home/buttons";
 
 interface Props {
+  width: string;
+  height: string;
   parentImage: React.ReactNode;
   visible: boolean;
   onClose: () => void;
+  onSignUpClick: () => void;
 }
 
-const MainSnippet: React.FC<Props> = ({ parentImage, visible, onClose }) => {
+const MainSnippet: React.FC<Props> = ({
+  width,
+  height,
+  parentImage,
+  visible,
+  onClose,
+  onSignUpClick,
+}) => {
   const [isVisible, setIsVisible] = useState(visible);
+  const distanceTop = `calc((100vh - ${height}) / 2)`;
+  const distanceLeft = `calc((100vw - ${width}) / 2)`;
 
   useEffect(() => {
     setIsVisible(visible);
@@ -32,7 +44,13 @@ const MainSnippet: React.FC<Props> = ({ parentImage, visible, onClose }) => {
           ></div>
 
           <motion.div
-            className="fixed top-[calc((100vh-32rem)/2)] left-[calc((100vw-57rem)/2)] w-[57rem] h-[32rem] p-4 bg-containerGrey rounded-3xl shadow-lg z-50"
+            className="fixed p-4 bg-containerGrey rounded-3xl shadow-lg z-20"
+            style={{
+              top: distanceTop,
+              left: distanceLeft,
+              width: width,
+              height: height,
+            }}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -46,7 +64,12 @@ const MainSnippet: React.FC<Props> = ({ parentImage, visible, onClose }) => {
               <Section
                 image={parentImage}
                 button={
-                  <ActionButton text="Registrati" bgColor="bg-buttonBlue" />
+                  <ActionButton
+                    text="Registrati"
+                    bgColor="bg-buttonBlue"
+                    width="18rem"
+                    onClick={onSignUpClick}
+                  />
                 }
               >
                 Concludi la registrazione
@@ -54,7 +77,13 @@ const MainSnippet: React.FC<Props> = ({ parentImage, visible, onClose }) => {
               <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-[1px] rounded-full bg-gray-600"></div>
               <Section
                 image={<HiArrowRightEndOnRectangle className=" w-28 h-28" />}
-                button={<ActionButton text="Procedi" bgColor="bg-white" />}
+                button={
+                  <ActionButton
+                    text="Procedi"
+                    bgColor="bg-white"
+                    width="18rem"
+                  />
+                }
               >
                 Procedi senza concludere la registrazione
               </Section>
