@@ -95,7 +95,7 @@ CREATE TABLE Sedi(
 CREATE TABLE NumeriTelefono(
   id_numTel INT AUTO_INCREMENT PRIMARY KEY,
   numero INT NOT NULL,
-  soggetto_id INT,
+  soggetto_id INT NOT NULL,
   FOREIGN KEY (soggetto_id) REFERENCES UtentiGenerali(id_generale)
 );
 
