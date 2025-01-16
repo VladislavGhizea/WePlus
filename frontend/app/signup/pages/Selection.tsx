@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import { BackButton } from "@/app/components/signup/buttons";
 import { MainSnippet } from "@/app/components/signup/snippets";
+import FullSignUpSnippet from "@/app/components/signup/snippets/FullSignUpSnippet";
 
 interface Props {
   onBack: () => void;
@@ -40,23 +41,43 @@ const Selection: React.FC<Props> = ({ onBack }) => {
   const [selectedIcon, setSelectedIcon] = useState<React.ReactElement | null>(
     null
   );
+  const [selectedText, setSelectedText] = useState<string | null>(null);
 
-  const handleButtonClick = (icon: React.ReactElement) => {
+  const handleButtonClick = (icon: React.ReactElement, text: string) => {
     setSelectedIcon(icon);
     setIsSnippetVisible(true);
+    setSelectedText(text);
   };
 
   const handleSnippetClose = () => {
     setIsSnippetVisible(false);
     setSelectedIcon(null);
   };
+  const [isSignUpVisible, setIsSignUpVisible] = useState(false);
+  const handleSignUpClick = () => {
+    setIsSignUpVisible(true);
+  };
+  const handleSignupClose = () => {
+    setIsSignUpVisible(false);
+  };
 
   return (
     <>
+      <FullSignUpSnippet
+        width="60.5rem"
+        height="38.5rem"
+        visible={isSignUpVisible}
+        parentImage={selectedIcon}
+        onClose={handleSignupClose}
+        parentText={selectedText as string}
+      />
       <MainSnippet
+        width="57rem"
+        height="32rem"
         visible={isSnippetVisible}
         parentImage={selectedIcon}
         onClose={handleSnippetClose}
+        onSignUpClick={handleSignUpClick}
       />
       <div className="flex flex-col items-center h-screen">
         <div className="absolute top-0 left-0 mt-4 ml-4">
@@ -80,7 +101,7 @@ const Selection: React.FC<Props> = ({ onBack }) => {
                   transition: { delay: index * 0.3 },
                 },
               }}
-              onClick={() => handleButtonClick(account.icon)}
+              onClick={() => handleButtonClick(account.icon, account.text)}
             >
               <SelectionButton
                 text={account.text}
