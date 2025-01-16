@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class UtenteGenerale {
 
     @Id
+    @OneToOne
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_generale;
 
@@ -25,7 +26,18 @@ public class UtenteGenerale {
     @Column(nullable = false) // Campo obbligatorio
     private boolean cancellato=false;
 
+    public UtenteGenerale() {}
+
     public UtenteGenerale(String username, String email, String password, Tipo tipo, boolean cancellato) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.tipo = tipo;
+        this.cancellato = cancellato;
+    }
+
+    public UtenteGenerale(Integer id_generale, String username, String email, String password, Tipo tipo, boolean cancellato) {
+        this.id_generale = id_generale;
         this.username = username;
         this.email = email;
         this.password = password;

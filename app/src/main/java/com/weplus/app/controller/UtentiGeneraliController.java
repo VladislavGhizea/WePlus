@@ -34,15 +34,14 @@ public class UtentiGeneraliController implements IController<UtenteGenerale, Int
 
     @Override
     public UtenteGenerale update(@PathVariable Integer id, @RequestBody UtenteGenerale entity) {
-        if (utenteGeneraleRepository.existsById(id)) {
-            getById(id).setUsername(entity.getUsername());
-            getById(id).setEmail(entity.getEmail());
-            getById(id).setPassword(entity.getPassword());
-            getById(id).setTipo(entity.getTipo());
-            getById(id).setCancellato(entity.isCancellato());
-            return utenteGeneraleRepository.save(entity); // aggiorna l'utente
-        }
-        return null;
+        UtenteGenerale existingUser = utenteGeneraleRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("Utente con id " + id + " non trovato"));
+        existingUser.setUsername(entity.getUsername());
+        existingUser.setEmail(entity.getEmail());
+        existingUser.setPassword(entity.getPassword());
+        existingUser.setTipo(entity.getTipo());
+        existingUser.setCancellato(entity.isCancellato());
+        return utenteGeneraleRepository.save(existingUser); // Salva l'oggetto aggiornato
     }
 
     @Override //cancellato=true
