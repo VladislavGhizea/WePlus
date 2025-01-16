@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { HiArrowRightEndOnRectangle } from "react-icons/hi2";
 import { Section } from "./sections";
 import { ActionButton } from "../../home/buttons";
-import { TbXboxXFilled } from "react-icons/tb";
 
 interface Props {
   parentImage: React.ReactNode;
@@ -33,7 +32,7 @@ const MainSnippet: React.FC<Props> = ({ parentImage, visible, onClose }) => {
           ></div>
 
           <motion.div
-            className="fixed top-[calc((100vh-32rem)/2)] left-[calc((100vw-57rem)/2)] w-[57rem] h-[32rem] p-4 bg-containerGrey rounded-lg shadow-lg z-50"
+            className="fixed top-[calc((100vh-32rem)/2)] left-[calc((100vw-57rem)/2)] w-[57rem] h-[32rem] p-4 bg-containerGrey rounded-3xl shadow-lg z-50"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
