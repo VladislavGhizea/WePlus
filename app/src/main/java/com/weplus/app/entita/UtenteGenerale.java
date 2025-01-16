@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class UtenteGenerale {
 
     @Id
+    @OneToOne
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_generale;
 
