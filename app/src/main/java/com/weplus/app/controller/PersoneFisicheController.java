@@ -34,15 +34,16 @@ public class PersoneFisicheController implements IController<PersonaFisica, Inte
 
     @Override
     public PersonaFisica update(@PathVariable Integer id, @RequestBody PersonaFisica entity) {
-        if (personaFisicaRepository.existsById(id)) {
-            PersonaFisica existing = getById(id);
-            existing.setNome(entity.getNome());
-            existing.setCognome(entity.getCognome());
-            existing.setDataDiN(entity.getDataDiN());
-            existing.setCf(entity.getCf());
-            return personaFisicaRepository.save(existing);
-        }
-        return null;
+        PersonaFisica existingPersonaFisica = personaFisicaRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("PersonaFisica con id " + id + " non trovata"));
+        existingPersonaFisica.setCf(entity.getCf());
+        existingPersonaFisica.setCognome(entity.getCognome());
+        existingPersonaFisica.setNome(entity.getNome());
+        existingPersonaFisica.setDataDiN(entity.getDataDiN());
+        existingPersonaFisica.setGenere(entity.getGenere());
+        existingPersonaFisica.setComuneDiN(entity.getComuneDiN());
+        existingPersonaFisica.setSesso(entity.getSesso());
+        return personaFisicaRepository.save(existingPersonaFisica); // Salva l'oggetto aggiornato
     }
 
     @Override

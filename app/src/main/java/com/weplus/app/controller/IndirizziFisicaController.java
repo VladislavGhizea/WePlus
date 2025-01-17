@@ -1,30 +1,47 @@
 package com.weplus.app.controller;
 
+import com.weplus.app.entita.IndirizzoFisica;
+import com.weplus.app.repository.IndirizziFisicaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
-public class IndirizziFisicaController implements IController{
+@RestController
+@RequestMapping("/IndirizziFisica")
+public class IndirizziFisicaController implements IController<IndirizzoFisica, Integer>{
+    @Autowired
+    private IndirizziFisicaRepository indirizzoFisicaRepository;
+
     @Override
-    public Object create(Object entity) {
-        return null;
+    public IndirizzoFisica create(@RequestBody IndirizzoFisica entity) {
+        return indirizzoFisicaRepository.save(entity);
     }
 
     @Override
-    public Object getById(Object o) {
-        return null;
+    public IndirizzoFisica getById(@PathVariable Integer id) {
+        return indirizzoFisicaRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List getAll() {
-        return List.of();
+    public List<IndirizzoFisica> getAll() {
+        return indirizzoFisicaRepository.findAll();
     }
 
     @Override
-    public Object update(Object o, Object entity) {
-        return null;
+    public IndirizzoFisica update(@PathVariable Integer id, @RequestBody IndirizzoFisica entity) {
+        IndirizzoFisica existingIndirizzoFisica = indirizzoFisicaRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("IndirizzoFisica con id " + id + " non trovato"));
+        existingIndirizzoFisica.setIndiDomicilio(entity.getIndiDomicilio());
+        existingIndirizzoFisica.setIndiResidenza(entity.getIndiResidenza());
+        return indirizzoFisicaRepository.save(existingIndirizzoFisica); // Salva l'oggetto aggiornato
     }
 
-    @Override
-    public void delete(Object o) {
-
+    @Override //cancellato=true
+    public void delete(@PathVariable Integer id) {
+        indirizzoFisicaRepository.deleteById(id);
     }
 }

@@ -1,4 +1,47 @@
 package com.weplus.app.controller;
 
-public class AmbitiController {
+import com.weplus.app.entita.Ambito;
+import com.weplus.app.repository.AmbitoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/AmbitiController")
+public class AmbitiController implements  IController<Ambito, Integer>{
+
+    @Autowired
+    private AmbitoRepository ambitoRepository;
+
+    @Override
+    public Ambito create(@RequestBody Ambito entity) {
+        return ambitoRepository.save(entity);
+    }
+
+    @Override
+    public Ambito getById(@PathVariable Integer id) {
+        return ambitoRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Ambito> getAll() {
+        return ambitoRepository.findAll();
+    }
+
+    @Override
+    public Ambito update(@PathVariable Integer id, @RequestBody Ambito entity) {
+        Ambito existingAmbito = ambitoRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("Ambito con id " + id + " non trovato"));
+        existingAmbito.setNome(entity.getNome());
+        return ambitoRepository.save(existingAmbito); // Salva l'oggetto aggiornato
+    }
+
+    @Override //cancellato=true
+    public void delete(@PathVariable Integer id) {
+        ambitoRepository.deleteById(id);
+    }
 }
