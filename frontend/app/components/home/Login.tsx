@@ -21,7 +21,7 @@ const Login = () => {
         </div>
         <div className="mt-[1rem] flex justify-center">
           <a href="#" className="text-[#3BA5F0]">
-            credenziali dimenticate?
+            Hai dimenticato la password?
           </a>
         </div>
         <div className="mt-[2rem] flex flex-row">

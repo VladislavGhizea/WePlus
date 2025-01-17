@@ -58,17 +58,17 @@ const FullSignUpSnippet: React.FC<Props> = ({
               className="absolute top-0 right-0 w-8 h-8"
               onClick={handleClose}
             /> */}
-            <div className="flex h-[3rem] w-full items-center">
+            <div className="flex h-[3rem] w-full justify center items-center">
               <div className="h-[3rem] w-[3rem] mr-4">{parentImage}</div>
               <h2 className="text-3xl">{parentText}</h2>
             </div>
             <div className="grid grid-cols-2 grid-rows-1">
               <InputSection
-                className="mt-[2rem]"
+                className="mt-[2rem] mr-[4rem] ml-[4rem]"
                 inputs={Fisiche.slice(0, Math.floor(Fisiche.length / 2) + 1)}
               />
               <InputSection
-                className="mt-[2rem]"
+                className="mt-[2rem] mr-[4rem] ml-[4rem]"
                 inputs={Fisiche.slice(
                   Math.floor(Fisiche.length / 2) + 1,
                   Fisiche.length
