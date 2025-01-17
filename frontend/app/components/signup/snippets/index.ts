@@ -1,2 +1,3 @@
 import MainSnippet from "./MainSnippet";
-export { MainSnippet };
+import FullSignUpSnippet from "./FullSignUpSnippet";
+export { MainSnippet, FullSignUpSnippet };

@@ -1,7 +1,24 @@
 import React from "react";
+import { TextInput } from "@/app/components/home/buttons";
 
-const InputSection = () => {
-  return <div>InputSection</div>;
+interface Props {
+  inputs: { text: string; type: string; options?: string[] }[];
+  className?: string;
+}
+
+const InputSection: React.FC<Props> = ({ inputs, className }) => {
+  return (
+    <div className={`${className}`}>
+      {inputs.map((input, index) => (
+        <TextInput
+          key={index}
+          text={input.text}
+          type={input.type}
+          options={input.options}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default InputSection;

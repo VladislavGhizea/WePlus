@@ -1,3 +1,3 @@
 import Section from "./Section";
-import FullSignUpSnippet from "../FullSignUpSnippet";
-export { Section, FullSignUpSnippet };
+import InputSection from "./InputSection";
+export { Section, InputSection };

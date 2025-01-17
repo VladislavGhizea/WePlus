@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-
+import { ActionButton } from "../../home/buttons";
+import { InputSection } from "./sections";
+import { Fisiche } from "@/app/variables";
 interface Props {
   width: string;
   height: string;
@@ -9,7 +11,6 @@ interface Props {
   onClose: () => void;
   parentText: string;
 }
-
 const FullSignUpSnippet: React.FC<Props> = ({
   width,
   height,
@@ -60,6 +61,22 @@ const FullSignUpSnippet: React.FC<Props> = ({
             <div className="flex h-[3rem] w-full items-center">
               <div className="h-[3rem] w-[3rem] mr-4">{parentImage}</div>
               <h2 className="text-3xl">{parentText}</h2>
+            </div>
+            <div className="grid grid-cols-2 grid-rows-1">
+              <InputSection
+                className="mt-[2rem]"
+                inputs={Fisiche.slice(0, Math.floor(Fisiche.length / 2) + 1)}
+              />
+              <InputSection
+                className="mt-[2rem]"
+                inputs={Fisiche.slice(
+                  Math.floor(Fisiche.length / 2) + 1,
+                  Fisiche.length
+                )}
+              />
+            </div>
+            <div className="flex items-center justify-end mt-[2.5rem]">
+              <ActionButton text="Avanti" bgColor="bg-buttonBlue" />
             </div>
           </motion.div>
         </>

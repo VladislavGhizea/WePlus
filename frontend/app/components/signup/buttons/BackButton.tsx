@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { IoIosArrowBack, IoIosArrowDown, IoIosArrowDropleft, IoIosArrowDropleftCircle, IoIosArrowRoundBack } from "react-icons/io";
+import { IoArrowUndoOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 interface Props {
   backTo?: string;
@@ -18,8 +18,8 @@ const BackButton: React.FC<Props> = ({ backTo, onClick }) => {
   };
   return (
     <button onClick={onButtonClick}>
-      <div className="h-15 w-15  rounded-full flex justify-center items-center border-[3px] bg-white border-black">
-        <IoIosArrowBack className="h-12 w-12" /> 
+      <div className="h-15 w-15  rounded-full flex justify-center items-center  ">
+        <IoArrowUndoOutline className="h-12 w-12" />
       </div>
     </button>
   );
