@@ -1,7 +1,7 @@
 package com.weplus.app.repository;
 
-import com.weplus.app.entita.IndirizziFisica;
+import com.weplus.app.entita.IndirizzoFisica;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IndirizziFisicaRepository extends JpaRepository<IndirizziFisica, Integer> {
+public interface IndirizziFisicaRepository extends JpaRepository<IndirizzoFisica, Integer> {
 }

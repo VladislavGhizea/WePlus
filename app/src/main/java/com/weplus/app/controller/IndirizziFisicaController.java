@@ -2,7 +2,7 @@ package com.weplus.app.controller;
 
 import java.util.List;
 
-public class NumTelController implements IController{
+public class IndirizziFisicaController implements IController{
     @Override
     public Object create(Object entity) {
         return null;

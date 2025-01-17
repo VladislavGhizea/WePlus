@@ -40,7 +40,7 @@ public class PersonaFisica {
 
     @OneToOne
     @JoinColumn(name = "indirizzo_id", nullable = false)
-    private IndirizziFisica indirizzo;
+    private IndirizzoFisica indirizzo;
 
     public PersonaFisica() {
     }
@@ -57,7 +57,7 @@ public class PersonaFisica {
                          Genere genere,
                          String comuneDiN,
                          String dataDiN,
-                         IndirizziFisica indirizzo) {
+                         IndirizzoFisica indirizzo) {
         this.id_fisica = id_fisica;
         this.nome = nome;
         this.cognome = cognome;
@@ -78,7 +78,7 @@ public class PersonaFisica {
                          Genere genere,
                          String comuneDiN,
                          String dataDiN,
-                         IndirizziFisica indirizzo) {
+                         IndirizzoFisica indirizzo) {
         this.nome = nome;
         this.cognome = cognome;
         this.id_generale = id_generale;
@@ -154,7 +154,7 @@ public class PersonaFisica {
         this.nome = nome;
     }
 
-    public IndirizziFisica getIndirizzo() {
+    public IndirizzoFisica getIndirizzo() {
         return indirizzo;
     }
 }

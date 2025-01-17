@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "NumeriTelefono")
-public class NumeriTelefono {
+public class NumeroTelefono {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
@@ -17,16 +17,16 @@ public class NumeriTelefono {
     @JoinColumn(name = "soggetto_id", nullable = false)
     private UtenteGenerale soggetto;
 
-    public NumeriTelefono() {}
+    public NumeroTelefono() {}
 
-    public NumeriTelefono(Integer id_numTel, Integer numero, UtenteGenerale soggetto) {
+    public NumeroTelefono(Integer id_numTel, Integer numero, UtenteGenerale soggetto) {
         this.id_numTel = id_numTel;
         this.numero = numero;
         this.soggetto = soggetto;
     }
 
 
-    public NumeriTelefono(Integer numero, UtenteGenerale soggetto) {
+    public NumeroTelefono(Integer numero, UtenteGenerale soggetto) {
         this.numero = numero;
         this.soggetto = soggetto;
     }

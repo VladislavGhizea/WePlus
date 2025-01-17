@@ -40,7 +40,7 @@ public class EntitaIndividuale {
 
     @OneToOne //configura anche nella tab indirizzi
     @JoinColumn(name = "indirizzoFisica_id", nullable = false) // Campo obbligatorio
-    private IndirizziFisica indirizzoFisica;
+    private IndirizzoFisica indirizzoFisica;
 
     @Column(nullable = false, length=11) // Campo obbligatorio
     private String partitaIva;
@@ -66,7 +66,7 @@ public class EntitaIndividuale {
                              Genere genere,
                              String comuneDiN,
                              String dataDiN,
-                             IndirizziFisica indirizzoFisica,
+                             IndirizzoFisica indirizzoFisica,
                              String partitaIva,
                              TipoPersGiur tipo,
                              String ragione_sociale,
@@ -95,7 +95,7 @@ public class EntitaIndividuale {
                              Genere genere,
                              String comuneDiN,
                              String dataDiN,
-                             IndirizziFisica indirizzoFisica,
+                             IndirizzoFisica indirizzoFisica,
                              String partitaIva,
                              TipoPersGiur tipo,
                              String ragione_sociale,
@@ -127,7 +127,7 @@ public class EntitaIndividuale {
         return partitaIva;
     }
 
-    public IndirizziFisica getIndirizzoFisica() {
+    public IndirizzoFisica getIndirizzoFisica() {
         return indirizzoFisica;
     }
 

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "IndirizziFisica")
-public class IndirizziFisica {
+public class IndirizzoFisica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
@@ -20,16 +20,16 @@ public class IndirizziFisica {
     @Column(nullable = false) // Campo obbligatorio
     private String indiResidenza;
 
-    public IndirizziFisica() {
+    public IndirizzoFisica() {
     }
 
-    public IndirizziFisica(Integer id_indirizzo, String indiDomicilio, String indiResidenza) {
+    public IndirizzoFisica(Integer id_indirizzo, String indiDomicilio, String indiResidenza) {
         this.id_indirizzo = id_indirizzo;
         this.indiDomicilio = indiDomicilio;
         this.indiResidenza = indiResidenza;
     }
 
-    public IndirizziFisica(String indiDomicilio, String indiResidenza) {
+    public IndirizzoFisica(String indiDomicilio, String indiResidenza) {
         this.indiDomicilio = indiDomicilio;
         this.indiResidenza = indiResidenza;
     }

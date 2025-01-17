@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/PersonaFisica")
-public class PersonaFisicaController implements IController<PersonaFisica, Integer> {
+public class PersoneFisicheController implements IController<PersonaFisica, Integer> {
 
     @Autowired
     private PersonaFisicaRepository personaFisicaRepository;
