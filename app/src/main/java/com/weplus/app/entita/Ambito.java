@@ -9,7 +9,6 @@ import java.util.List;
 public class Ambito {
 
     @Id
-    @ManyToMany //controllare con la key di indiceambiti
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_ambito;
 

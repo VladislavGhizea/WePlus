@@ -52,8 +52,9 @@ public class EntitaIndividuale {
     private String ragione_sociale;
 
     @ManyToOne
-    @JoinColumn(name = "indirizzoSede_id")
+    @JoinColumn(name = "sede_id")
     private Sede sede;
+
 
     public EntitaIndividuale() {}
 

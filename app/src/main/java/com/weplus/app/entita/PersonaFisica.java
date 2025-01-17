@@ -19,9 +19,9 @@ public class PersonaFisica {
     @Column(nullable = false) // Campo obbligatorio
     private String cognome;
 
-    @OneToOne //testare
-    @JoinColumn(name = "generale_id", nullable = false, unique = true) // ID auto-increment
-    private Integer id_generale;
+    @OneToOne
+    @JoinColumn(name = "generale_id", nullable = false, unique = true) // Relazione con UtenteGenerale
+    private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false) // Campo obbligatorio
     private String cf;
@@ -42,16 +42,13 @@ public class PersonaFisica {
     @JoinColumn(name = "indirizzo_id", nullable = false)
     private IndirizzoFisica indirizzo;
 
-    public PersonaFisica() {
-    }
+    public PersonaFisica() {}
 
-    //principalmente per test
-
-
+    // Costruttori aggiornati
     public PersonaFisica(Integer id_fisica,
                          String nome,
                          String cognome,
-                         Integer id_generale,
+                         UtenteGenerale utenteGenerale,
                          String cf,
                          Sesso sesso,
                          Genere genere,
@@ -61,7 +58,7 @@ public class PersonaFisica {
         this.id_fisica = id_fisica;
         this.nome = nome;
         this.cognome = cognome;
-        this.id_generale = id_generale;
+        this.utenteGenerale = utenteGenerale;
         this.cf = cf;
         this.sesso = sesso;
         this.genere = genere;
@@ -72,7 +69,7 @@ public class PersonaFisica {
 
     public PersonaFisica(String nome,
                          String cognome,
-                         Integer id_generale,
+                         UtenteGenerale utenteGenerale,
                          String cf,
                          Sesso sesso,
                          Genere genere,
@@ -81,7 +78,7 @@ public class PersonaFisica {
                          IndirizzoFisica indirizzo) {
         this.nome = nome;
         this.cognome = cognome;
-        this.id_generale = id_generale;
+        this.utenteGenerale = utenteGenerale;
         this.cf = cf;
         this.sesso = sesso;
         this.genere = genere;
@@ -110,8 +107,8 @@ public class PersonaFisica {
         return cf;
     }
 
-    public Integer getId_generale() {
-        return id_generale;
+    public UtenteGenerale getId_generale() {
+        return utenteGenerale;
     }
 
     public String getCognome() {

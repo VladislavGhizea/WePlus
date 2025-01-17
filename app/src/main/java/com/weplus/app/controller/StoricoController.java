@@ -1,4 +1,4 @@
-package com.weplus.app.controller;
+/*package com.weplus.app.controller;
 
 import com.weplus.app.entita.Storico;
 import com.weplus.app.repository.StoricoRepository;
@@ -45,4 +45,4 @@ public class StoricoController implements IController<Storico, Integer>{
     public void delete(@PathVariable Integer id) {
         storicoRepository.deleteById(id);
     }
-}
+}*/

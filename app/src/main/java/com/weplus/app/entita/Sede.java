@@ -9,21 +9,20 @@ import java.util.List;
 public class Sede {
 
     @Id
-    @OneToMany //controllare con entInidiv e persGiurid, aggiungere il join
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_sede;
 
     @OneToMany(mappedBy = "sede")
     private List<PersonaGiuridica> personaGiuridica;
 
-    @OneToMany(mappedBy = "indirizzoSede")
+    @OneToMany(mappedBy = "sede") // Corretto il nome del campo
     private List<EntitaIndividuale> entitaIndividuale;
 
     @Column(nullable = false) // Campo obbligatorio
     private String indirizzo;
 
     @Column(nullable = false) // Campo obbligatorio
-    private boolean principale=false;
+    private boolean principale = false;
 
     public Sede() {}
 
@@ -50,8 +49,6 @@ public class Sede {
         return id_sede;
     }
 
-
-
     public String getIndirizzo() {
         return indirizzo;
     }
@@ -67,5 +64,4 @@ public class Sede {
     public void setPrincipale(boolean principale) {
         this.principale = principale;
     }
-
 }

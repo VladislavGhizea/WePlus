@@ -2,23 +2,20 @@ package com.weplus.app.entita;
 
 import com.weplus.app.entita.chiaviComposte.PKIndiceAmbiti;
 import jakarta.persistence.*;
-import jakarta.persistence.EmbeddedId;
 
 @Entity
 @Table(name = "IndiceAmbito")
 public class IndiceAmbito {
 
     @EmbeddedId
-    private PKIndiceAmbiti id;
+    private PKIndiceAmbiti id; // Usa la chiave composta
 
     @ManyToOne
-    @MapsId("idAmbito")
-    @JoinColumn(name = "id_ambito")
+    @JoinColumn(name = "id_ambito", insertable = false, updatable = false) // Collega la chiave esterna
     private Ambito ambito;
 
     @ManyToOne
-    @MapsId("idSoggetto")
-    @JoinColumn(name = "id_soggetto")
+    @JoinColumn(name = "id_soggetto", insertable = false, updatable = false) // Collega la chiave esterna
     private UtenteGenerale soggetto;
 
     public IndiceAmbito() {

@@ -15,18 +15,18 @@ public class PersonaGiuridica {
     @JoinColumn(name = "generale_id", nullable = false, unique = true)
     private UtenteGenerale utenteGenerale;
 
-    @Column(nullable = false, length=11) // Campo obbligatorio
+    @Column(nullable = false, length = 11) // Campo obbligatorio
     private String partitaIva;
 
     @Column(nullable = false) // Campo obbligatorio
     private TipoPersGiur tipo;
 
-    @Column(nullable = true, length=25) // Campo obbligatorio
+    @Column(nullable = true, length = 25) // Campo opzionale
     private String ragione_sociale;
 
     @OneToOne
-    @JoinColumn(name = "sede_id", nullable = false) // ID auto-increment
-    private Integer indirizzoFisica_id;
+    @JoinColumn(name = "indirizzoFisica_id", nullable = false) // Associazione con entità
+    private IndirizzoFisica indirizzoFisica;
 
     @ManyToOne
     @JoinColumn(name = "sede_id", nullable = false)
@@ -40,14 +40,14 @@ public class PersonaGiuridica {
                             String partitaIva,
                             TipoPersGiur tipo,
                             String ragione_sociale,
-                            Integer indirizzoFisica_id,
+                            IndirizzoFisica indirizzoFisica,
                             Sede sede) {
         this.id_giuridica = id_giuridica;
         this.utenteGenerale = utenteGenerale;
         this.partitaIva = partitaIva;
         this.tipo = tipo;
         this.ragione_sociale = ragione_sociale;
-        this.indirizzoFisica_id = indirizzoFisica_id;
+        this.indirizzoFisica = indirizzoFisica;
         this.sede = sede;
     }
 
@@ -55,13 +55,13 @@ public class PersonaGiuridica {
                             String partitaIva,
                             TipoPersGiur tipo,
                             String ragione_sociale,
-                            Integer indirizzoFisica_id,
+                            IndirizzoFisica indirizzoFisica,
                             Sede sede) {
         this.utenteGenerale = utenteGenerale;
         this.partitaIva = partitaIva;
         this.tipo = tipo;
         this.ragione_sociale = ragione_sociale;
-        this.indirizzoFisica_id = indirizzoFisica_id;
+        this.indirizzoFisica = indirizzoFisica;
         this.sede = sede;
     }
 
@@ -81,16 +81,16 @@ public class PersonaGiuridica {
         return ragione_sociale;
     }
 
-    public Integer getIndirizzoFisica_id() {
-        return indirizzoFisica_id;
+    public IndirizzoFisica getIndirizzoFisica() {
+        return indirizzoFisica;
     }
 
     public Sede getSede() {
         return sede;
     }
 
-    public void setIndirizzoFisica_id(Integer indirizzoFisica_id) {
-        this.indirizzoFisica_id = indirizzoFisica_id;
+    public void setIndirizzoFisica(IndirizzoFisica indirizzoFisica) {
+        this.indirizzoFisica = indirizzoFisica;
     }
 
     public void setSede(Sede sede) {

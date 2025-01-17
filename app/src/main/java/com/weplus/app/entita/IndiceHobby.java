@@ -8,27 +8,27 @@ import jakarta.persistence.*;
 public class IndiceHobby {
 
     @EmbeddedId
-    private IndiceHobbyId id;
+    private IndiceHobbyId id;  // Chiave primaria composta
 
     @ManyToOne
-    @MapsId("idHobby")
-    @JoinColumn(name = "id_hobby", nullable = false)
-    private Hobby hobby;
+    @JoinColumn(name = "id_hobby", insertable = false, updatable = false, nullable = false)
+    private Hobby hobby;  // Relazione con Hobby
 
     @ManyToOne
-    @MapsId("idSoggetto")
-    @JoinColumn(name = "id_soggetto", nullable = false)
-    private UtenteGenerale soggetto;
+    @JoinColumn(name = "id_soggetto", insertable = false, updatable = false, nullable = false)
+    private UtenteGenerale soggetto;  // Relazione con UtenteGenerale
 
     // Costruttore predefinito
     public IndiceHobby() {}
 
+    // Costruttore con chiave primaria e oggetti relazionati
     public IndiceHobby(IndiceHobbyId id, Hobby hobby, UtenteGenerale soggetto) {
         this.id = id;
         this.hobby = hobby;
         this.soggetto = soggetto;
     }
 
+    // Costruttore con oggetti relazionati
     public IndiceHobby(Hobby hobby, UtenteGenerale soggetto) {
         this.hobby = hobby;
         this.soggetto = soggetto;
@@ -46,6 +46,4 @@ public class IndiceHobby {
     public UtenteGenerale getSoggetto() {
         return soggetto;
     }
-
-
 }
