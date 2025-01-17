@@ -89,6 +89,14 @@ public class PersonaGiuridica {
         return sede;
     }
 
+    public void setIndirizzoFisica_id(Integer indirizzoFisica_id) {
+        this.indirizzoFisica_id = indirizzoFisica_id;
+    }
+
+    public void setSede(Sede sede) {
+        this.sede = sede;
+    }
+
     public void setPartitaIva(String partitaIva) {
         this.partitaIva = partitaIva;
     }
