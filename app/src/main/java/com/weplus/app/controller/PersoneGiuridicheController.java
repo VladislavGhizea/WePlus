@@ -3,14 +3,12 @@ package com.weplus.app.controller;
 import com.weplus.app.entita.PersonaGiuridica;
 import com.weplus.app.repository.PersonaGiuridicaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000") // Permetti richieste dal frontend
 @RequestMapping("/PersoneGiuridiche")
 public class PersoneGiuridicheController implements IController<PersonaGiuridica, Integer>{
     @Autowired
