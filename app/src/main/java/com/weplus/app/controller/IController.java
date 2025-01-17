@@ -19,4 +19,7 @@ public interface IController<T, ID> {
 
     @DeleteMapping("/{id}")
     void delete(@PathVariable ID id);
+
+    //todo, metodo per prendere i dati json in input (pensavamo di fargli creare l'entitàb)
+
 }
