@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import { BackButton } from "@/app/components/signup/buttons";
 import { MainSnippet } from "@/app/components/signup/snippets";
-import FullSignUpSnippet from "@/app/components/signup/snippets/FullSignUpSnippet";
+import { FullSignUpSnippet } from "@/app/components/signup/snippets";
 
 interface Props {
   onBack: () => void;
@@ -64,8 +64,8 @@ const Selection: React.FC<Props> = ({ onBack }) => {
   return (
     <>
       <FullSignUpSnippet
-        width="60.5rem"
-        height="38.5rem"
+        width="72rem"
+        height="39rem"
         visible={isSignUpVisible}
         parentImage={selectedIcon}
         onClose={handleSignupClose}

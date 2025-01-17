@@ -31,7 +31,7 @@ CREATE TABLE PersoneGiuridiche (
   id_giuridica INT AUTO_INCREMENT PRIMARY KEY,
   generale_id INT NOT NULL,
   partitaIva VARCHAR(11) NOT NULL,
-  tipo VARCHAR ENUM('SpA','SrL','SnC';) NOT NULL,
+  tipo ENUM('SpA','SrL','SnC';) NOT NULL,
   ragione_sociale VARCHAR(25) NOT NULL,
   sede_id INT NOT NULL,
   FOREIGN KEY (generale_id) REFERENCES UtentiGenerali(id_generale),
