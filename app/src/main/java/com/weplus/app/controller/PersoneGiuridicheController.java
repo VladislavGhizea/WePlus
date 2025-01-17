@@ -1,30 +1,48 @@
 package com.weplus.app.controller;
 
+import com.weplus.app.entita.PersonaGiuridica;
+import com.weplus.app.repository.PersonaGiuridicaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
-public class PersoneGiuridicheController implements IController{
+@RestController
+@RequestMapping("/PersoneGiuridiche")
+public class PersoneGiuridicheController implements IController<PersonaGiuridica, Integer>{
+    @Autowired
+    private PersonaGiuridicaRepository personaGiuridicaRepository;
+
     @Override
-    public Object create(Object entity) {
-        return null;
+    public PersonaGiuridica create(@RequestBody PersonaGiuridica entity) {
+        return personaGiuridicaRepository.save(entity);
     }
 
     @Override
-    public Object getById(Object o) {
-        return null;
+    public PersonaGiuridica getById(@PathVariable Integer id) {
+        return personaGiuridicaRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List getAll() {
-        return List.of();
+    public List<PersonaGiuridica> getAll() {
+        return personaGiuridicaRepository.findAll();
     }
 
     @Override
-    public Object update(Object o, Object entity) {
-        return null;
+    public PersonaGiuridica update(@PathVariable Integer id, @RequestBody PersonaGiuridica entity) {
+        PersonaGiuridica existingPersonaGiuridica = personaGiuridicaRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("PersonaGiuridica con id " + id + " non trovata"));
+        existingPersonaGiuridica.setTipo(entity.getTipo());
+        existingPersonaGiuridica.setPartitaIva(entity.getPartitaIva());
+        existingPersonaGiuridica.setRagione_sociale(entity.getRagione_sociale());
+        return personaGiuridicaRepository.save(existingPersonaGiuridica); // Salva l'oggetto aggiornato
     }
 
-    @Override
-    public void delete(Object o) {
-
+    @Override //cancellato=true
+    public void delete(@PathVariable Integer id) {
+        personaGiuridicaRepository.deleteById(id);
     }
 }
