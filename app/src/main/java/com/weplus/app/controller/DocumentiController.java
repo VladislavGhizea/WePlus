@@ -1,30 +1,52 @@
 package com.weplus.app.controller;
 
+import com.weplus.app.entita.Documento;
+import com.weplus.app.repository.DocumentoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
-public class DocumentiController implements IController{
+@RestController
+@RequestMapping("/Documenti")
+public class DocumentiController implements IController<Documento, Integer>{
+
+    @Autowired
+    private DocumentoRepository DocumentoRepository;
+
     @Override
-    public Object create(Object entity) {
-        return null;
+    public Documento create(@RequestBody Documento entity) {
+        return DocumentoRepository.save(entity);
     }
 
     @Override
-    public Object getById(Object o) {
-        return null;
+    public Documento getById(@PathVariable Integer id) {
+        return DocumentoRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List getAll() {
-        return List.of();
+    public List<Documento> getAll() {
+        return DocumentoRepository.findAll();
     }
 
     @Override
-    public Object update(Object o, Object entity) {
-        return null;
+    public Documento update(@PathVariable Integer id, @RequestBody Documento entity) {
+        Documento existingDocumento = DocumentoRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("Documento con id " + id + " non trovato"));
+        existingDocumento.setTipo(entity.getTipo());
+        existingDocumento.setNumero(entity.getNumero());
+        existingDocumento.setScadenza(entity.getScadenza());
+        existingDocumento.setEnteEmissivo(entity.getEnteEmissivo());
+        existingDocumento.setDataEmissione(entity.getDataEmissione());
+
+        return DocumentoRepository.save(existingDocumento);// Salva l'oggetto aggiornato
     }
 
-    @Override
-    public void delete(Object o) {
-
+    @Override //cancellato=true
+    public void delete(@PathVariable Integer id) {
+        DocumentoRepository.deleteById(id);
     }
 }
