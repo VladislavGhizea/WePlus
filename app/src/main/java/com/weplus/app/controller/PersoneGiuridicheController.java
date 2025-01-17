@@ -38,6 +38,7 @@ public class PersoneGiuridicheController implements IController<PersonaGiuridica
         existingPersonaGiuridica.setTipo(entity.getTipo());
         existingPersonaGiuridica.setPartitaIva(entity.getPartitaIva());
         existingPersonaGiuridica.setRagione_sociale(entity.getRagione_sociale());
+        existingPersonaGiuridica.setSede(entity.getSede());
         return personaGiuridicaRepository.save(existingPersonaGiuridica); // Salva l'oggetto aggiornato
     }
 
