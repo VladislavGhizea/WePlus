@@ -1,5 +1,6 @@
 package com.weplus.app.entita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -14,7 +15,7 @@ public class Documento {
     @Column(nullable = false, length = 15)
     private String tipo;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Integer numero;
 
     @Column
@@ -27,8 +28,20 @@ public class Documento {
     private Date dataEmissione;
 
     @ManyToOne
-    @JoinColumn(name = "soggetto_id", nullable = false) // Chiave esterna verso UtentiGenerali
+    @JoinColumn(name = "soggetto_id", nullable = false, referencedColumnName = "id_generale")
+    @JsonIgnore
     private UtenteGenerale soggetto;
+
+    @Transient
+    private Integer soggettoId;
+
+    public void setSoggettoId(Integer soggettoId) {
+        this.soggettoId = soggettoId;
+    }
+
+    public Integer getSoggettoId() {
+        return soggetto != null ? soggetto.getId_generale() : soggettoId;
+    }
 
     public Documento() {
     }
@@ -96,5 +109,7 @@ public class Documento {
         return soggetto;
     }
 
-
+    public void setSoggetto(UtenteGenerale soggetto) {
+        this.soggetto = soggetto;
+    }
 }

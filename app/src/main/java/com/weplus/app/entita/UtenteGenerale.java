@@ -41,7 +41,7 @@ public class UtenteGenerale {
     @OneToMany(mappedBy = "soggetto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Documento> documenti;
 
-    public UtenteGenerale(String pazzo, String mail, String moltopazzo69, Tipo fisica, boolean b) {}
+    public UtenteGenerale() {}
 
     public UtenteGenerale(String username, String email, String password, Tipo tipo) {
         this.username = username;
