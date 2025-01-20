@@ -18,8 +18,8 @@ public class UtentiGeneraliController implements IController<UtenteGenerale, Int
     private UtenteGeneraleRepository utenteGeneraleRepository;
 
     @Override
-    public UtenteGenerale create(@RequestBody UtenteGenerale entity) {
-        return utenteGeneraleRepository.save(entity);
+    public void create(@RequestBody UtenteGenerale entity) {
+        utenteGeneraleRepository.save(entity);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class UtentiGeneraliController implements IController<UtenteGenerale, Int
     }
 
     @Override
-    public UtenteGenerale update(@PathVariable Integer id, @RequestBody UtenteGenerale entity) {
+    public void update(@PathVariable Integer id, @RequestBody UtenteGenerale entity) {
         UtenteGenerale existingUser = utenteGeneraleRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Utente con id " + id + " non trovato"));
         existingUser.setUsername(entity.getUsername());
@@ -41,7 +41,7 @@ public class UtentiGeneraliController implements IController<UtenteGenerale, Int
         existingUser.setPassword(entity.getPassword());
         existingUser.setTipo(entity.getTipo());
         existingUser.setCancellato(entity.isCancellato());
-        return utenteGeneraleRepository.save(existingUser); // Salva l'oggetto aggiornato
+        utenteGeneraleRepository.save(existingUser); // Salva l'oggetto aggiornato
     }
 
     @Override //cancellato=true

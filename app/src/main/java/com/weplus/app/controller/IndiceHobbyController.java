@@ -18,8 +18,8 @@ public class IndiceHobbyController implements IController<IndiceHobby, Integer>{
     private IndiceHobbyRepository indiceHobbyRepository;
 
     @Override
-    public IndiceHobby create(@RequestBody IndiceHobby entity) {
-        return indiceHobbyRepository.save(entity);
+    public void create(@RequestBody IndiceHobby entity) {
+        indiceHobbyRepository.save(entity);
     }
 
     @Override
@@ -33,9 +33,8 @@ public class IndiceHobbyController implements IController<IndiceHobby, Integer>{
     }
 
     @Override
-    public IndiceHobby update(@PathVariable Integer id, @RequestBody IndiceHobby entity) {
+    public void update(@PathVariable Integer id, @RequestBody IndiceHobby entity) {
         //non c'è nulla da modificare
-        return null;
     }
 
     @Override //cancellato=true

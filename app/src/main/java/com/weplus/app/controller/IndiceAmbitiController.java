@@ -19,8 +19,8 @@ public class IndiceAmbitiController implements IController<IndiceAmbito, Integer
     private IndiceAmbitoRepository IndiceAmbitoRepository;
 
     @Override
-    public IndiceAmbito create(@RequestBody IndiceAmbito entity) {
-        return IndiceAmbitoRepository.save(entity);
+    public void create(@RequestBody IndiceAmbito entity) {
+         IndiceAmbitoRepository.save(entity);
     }
 
     @Override
@@ -34,9 +34,8 @@ public class IndiceAmbitiController implements IController<IndiceAmbito, Integer
     }
 
     @Override
-    public IndiceAmbito update(@PathVariable Integer id, @RequestBody IndiceAmbito entity) {
+    public void update(@PathVariable Integer id, @RequestBody IndiceAmbito entity) {
         //è un indice nostro, l'utente non può modificare
-       return null;
     }
 
     @Override //cancellato=true

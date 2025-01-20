@@ -18,8 +18,8 @@ public class AmbitiController implements  IController<Ambito, Integer>{
     private AmbitoRepository ambitoRepository;
 
     @Override
-    public Ambito create(@RequestBody Ambito entity) {
-        return ambitoRepository.save(entity);
+    public void create(@RequestBody Ambito entity) {
+        ambitoRepository.save(entity);
     }
 
     @Override
@@ -33,11 +33,11 @@ public class AmbitiController implements  IController<Ambito, Integer>{
     }
 
     @Override
-    public Ambito update(@PathVariable Integer id, @RequestBody Ambito entity) {
+    public void update(@PathVariable Integer id, @RequestBody Ambito entity) {
         Ambito existingAmbito = ambitoRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Ambito con id " + id + " non trovato"));
         existingAmbito.setNome(entity.getNome());
-        return ambitoRepository.save(existingAmbito); // Salva l'oggetto aggiornato
+        ambitoRepository.save(existingAmbito); // Salva l'oggetto aggiornato
     }
 
     @Override //cancellato=true

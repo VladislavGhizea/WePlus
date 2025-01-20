@@ -18,8 +18,8 @@ public class EntitaIndividualiController implements IController<EntitaIndividual
     private EntitaIndividualeRepository EntitaIndividualeRepository;
 
     @Override
-    public EntitaIndividuale create(@RequestBody EntitaIndividuale entity) {
-        return EntitaIndividualeRepository.save(entity);
+    public void create(@RequestBody EntitaIndividuale entity) {
+        EntitaIndividualeRepository.save(entity);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class EntitaIndividualiController implements IController<EntitaIndividual
     }
 
     @Override
-    public EntitaIndividuale update(@PathVariable Integer id, @RequestBody EntitaIndividuale entity) {
+    public void update(@PathVariable Integer id, @RequestBody EntitaIndividuale entity) {
         EntitaIndividuale existingEntita = EntitaIndividualeRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Entità con id " + id + " non trovata"));
         existingEntita.setNome(entity.getNome());
@@ -47,7 +47,7 @@ public class EntitaIndividualiController implements IController<EntitaIndividual
         existingEntita.setTipo(entity.getTipo());
         existingEntita.setRagione_sociale(entity.getRagione_sociale()); // Salva l'oggetto aggiornato
 
-        return EntitaIndividualeRepository.save(existingEntita);
+        EntitaIndividualeRepository.save(existingEntita);
     }
 
     @Override //cancellato=true

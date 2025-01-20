@@ -7,7 +7,7 @@ import java.util.List;
 @RequestMapping("/default")
 public interface IController<T, ID> {
     @PostMapping
-    T create(@RequestBody T entity);
+    void create(@RequestBody T entity);
 
     @GetMapping("/{id}")
     T getById(@PathVariable ID id);
@@ -16,7 +16,7 @@ public interface IController<T, ID> {
     List<T> getAll();
 
     @PutMapping("/{id}")
-    T update(@PathVariable ID id, @RequestBody T entity);
+    void update(@PathVariable ID id, @RequestBody T entity);
 
     @DeleteMapping("/{id}")
     void delete(@PathVariable ID id);
