@@ -30,10 +30,6 @@ public class Hobby {
         this.descrizione = descrizione;
     }
 
-    public Hobby(String descrizione) {
-        this.descrizione = descrizione;
-    }
-
     public Integer getId_hobby() {
         return id_hobby;
     }
