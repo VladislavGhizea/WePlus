@@ -29,6 +29,8 @@ const Giuridiche = [
 ];
 
 // array di valori di input delle entità individuali
-const Individuali = [...Fisiche, ...Giuridiche];
+const Individuali = [...Fisiche, ...Giuridiche].filter(
+  (input) => input.text !== "Tipo Società"
+);
 
 export { Fisiche, Giuridiche, Individuali };
