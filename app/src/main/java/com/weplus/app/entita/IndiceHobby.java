@@ -1,6 +1,6 @@
 package com.weplus.app.entita;
 
-import com.weplus.app.entita.chiaviComposte.IndiceHobbyId;
+import com.weplus.app.entita.chiaviComposte.PKIndiceHobby;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class IndiceHobby {
 
     @EmbeddedId
-    private IndiceHobbyId id;  // Chiave primaria composta
+    private PKIndiceHobby id;  // Chiave primaria composta
 
     @ManyToOne
     @JoinColumn(name = "id_hobby", insertable = false, updatable = false, nullable = false)
@@ -28,7 +28,7 @@ public class IndiceHobby {
     }
 
     // Getter e Setter
-    public IndiceHobbyId getId() {
+    public PKIndiceHobby getId() {
         return id;
     }
 

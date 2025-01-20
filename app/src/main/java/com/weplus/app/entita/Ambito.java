@@ -1,5 +1,6 @@
 package com.weplus.app.entita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,8 +13,9 @@ public class Ambito {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_ambito;
 
-    @OneToMany(mappedBy = "ambito")
-    private List<IndiceAmbito> indiceAmbiti;
+    @ManyToMany(mappedBy = "ambiti")
+    @JsonIgnore
+    private List<UtenteGenerale> soggetti;
 
     @Column(nullable = false, length=25) // Campo obbligatorio
     private String nome;
@@ -21,17 +23,12 @@ public class Ambito {
     public Ambito() {
     }
 
-    public Ambito( List<IndiceAmbito> indiceAmbiti, String nome) {
-        this.indiceAmbiti = indiceAmbiti;
-        this.nome = nome;
-    }
-
     public Ambito(String nome) {
         this.nome = nome;
     }
 
-    public List<IndiceAmbito> getIndiceAmbiti() {
-        return indiceAmbiti;
+    public List<UtenteGenerale> getSoggetti() {
+        return soggetti;
     }
 
     public Integer getId_ambito() {
@@ -41,6 +38,8 @@ public class Ambito {
     public String getNome() {
         return nome;
     }
+
+
 
     public void setNome(String nome) {
         this.nome = nome;

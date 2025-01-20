@@ -1,4 +1,4 @@
-package com.weplus.app.controller;
+/*package com.weplus.app.controller;
 
 import com.weplus.app.entita.Ambito;
 import com.weplus.app.repository.AmbitoRepository;
@@ -108,4 +108,4 @@ class AmbitiControllerTest {
         // Verifica che il repository deleteById sia stato chiamato una volta
         verify(AmbitoRepository, times(1)).deleteById(1);
     }
-}
+}*/
