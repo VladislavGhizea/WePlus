@@ -33,22 +33,6 @@ public class Documento {
     public Documento() {
     }
 
-    public Documento(Integer id_documento,
-                     String tipo,
-                     Integer numero,
-                     Date scadenza,
-                     String enteEmissivo,
-                     Date dataEmissione,
-                     UtenteGenerale soggetto) {
-        this.id_documento = id_documento;
-        this.tipo = tipo;
-        this.numero = numero;
-        this.scadenza = scadenza;
-        this.enteEmissivo = enteEmissivo;
-        this.dataEmissione = dataEmissione;
-        this.soggetto = soggetto;
-    }
-
     public Documento(String tipo,
                      Integer numero,
                      Date scadenza,

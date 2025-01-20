@@ -21,13 +21,6 @@ public class IndiceHobby {
     // Costruttore predefinito
     public IndiceHobby() {}
 
-    // Costruttore con chiave primaria e oggetti relazionati
-    public IndiceHobby(IndiceHobbyId id, Hobby hobby, UtenteGenerale soggetto) {
-        this.id = id;
-        this.hobby = hobby;
-        this.soggetto = soggetto;
-    }
-
     // Costruttore con oggetti relazionati
     public IndiceHobby(Hobby hobby, UtenteGenerale soggetto) {
         this.hobby = hobby;

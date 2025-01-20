@@ -21,13 +21,7 @@ public class Ambito {
     public Ambito() {
     }
 
-    public Ambito(Integer id_ambito, String nome) {
-        this.id_ambito = id_ambito;
-        this.nome = nome;
-    }
-
-    public Ambito(Integer id_ambito, List<IndiceAmbito> indiceAmbiti, String nome) {
-        this.id_ambito = id_ambito;
+    public Ambito( List<IndiceAmbito> indiceAmbiti, String nome) {
         this.indiceAmbiti = indiceAmbiti;
         this.nome = nome;
     }

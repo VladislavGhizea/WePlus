@@ -39,7 +39,5 @@ public class SediController implements IController<Sede, Integer> {
     }
 
     @Override //cancellato=true
-    public void delete(@PathVariable Integer id) {
-        sedeRepositoryy.deleteById(id);
-    }
+    public void delete(@PathVariable Integer id) {sedeRepositoryy.deleteById(id);}
 }

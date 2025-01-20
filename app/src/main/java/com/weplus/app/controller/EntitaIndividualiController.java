@@ -54,4 +54,6 @@ public class EntitaIndividualiController implements IController<EntitaIndividual
     public void delete(@PathVariable Integer id) {
         EntitaIndividualeRepository.deleteById(id);
     }
+
+
 }
