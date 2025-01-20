@@ -1,14 +1,15 @@
 import React from "react";
 import { TextInput } from "@/app/components/home/buttons";
+import classNames from "classnames";
 
 interface Props {
   inputs: { text: string; type: string; options?: string[] }[];
   className?: string;
 }
 
-const InputSection: React.FC<Props> = ({ inputs, className }) => {
+const InputSection: React.FC<Props> = React.memo(({ inputs, className }) => {
   return (
-    <div className={`${className}`}>
+    <div className={classNames(className)}>
       {inputs.map((input, index) => (
         <TextInput
           classNameContainer="mt-4"
@@ -20,6 +21,8 @@ const InputSection: React.FC<Props> = ({ inputs, className }) => {
       ))}
     </div>
   );
-};
+});
+
+InputSection.displayName = "InputSection";
 
 export default InputSection;

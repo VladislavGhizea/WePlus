@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { ActionButton } from "../../home/buttons";
-import { InputSection } from "./sections";
-import { Fisiche, Giuridiche, Individuali } from "@/app/variables";
+import React, { useState, useEffect, useCallback } from "react";
+import { AnimatePresence } from "motion/react";
+import { Fisiche, Giuridiche } from "@/app/variables";
+import { Modal, Backdrop } from "./sections/fullSnippet";
+
 interface Props {
   width: string;
   height: string;
@@ -11,6 +11,7 @@ interface Props {
   onClose: () => void;
   parentText: string;
 }
+
 const FullSignUpSnippet: React.FC<Props> = ({
   width,
   height,
@@ -19,84 +20,78 @@ const FullSignUpSnippet: React.FC<Props> = ({
   onClose,
   parentText,
 }) => {
+  const [wizardStep, setWizardStep] = useState(0);
   const [isVisible, setIsVisible] = useState(visible);
   const distanceTop = `calc((100vh - ${height}) / 2)`;
   const distanceLeft = `calc((100vw - ${width}) / 2)`;
   const [values, setValues] = useState<
     { text: string; type: string; options?: string[] }[]
   >([]);
+
   useEffect(() => {
     setIsVisible(visible);
   }, [visible]);
 
-  const handleClose = () => {
-    setIsVisible(false);
-    onClose();
-  };
   useEffect(() => {
     if (parentText?.toLowerCase() === "persone fisiche") {
       setValues(Fisiche);
     } else if (parentText?.toLowerCase() === "persone giuridiche") {
       setValues(Giuridiche);
     } else {
-      setValues(Individuali);
+      setWizardStep(0);
+      setValues(Fisiche);
     }
   }, [parentText]);
+
+  const handleClose = useCallback(() => {
+    setIsVisible(false);
+    onClose();
+  }, [onClose]);
+
+  const handleNext = useCallback(() => {
+    if (parentText?.toLowerCase() === "entità individuali") {
+      if (wizardStep === 0) {
+        setWizardStep(1);
+        setValues(Giuridiche.filter((value) => value.text !== "Tipo Società"));
+      } else {
+        handleClose();
+        setWizardStep(0);
+      }
+    } else {
+      handleClose();
+    }
+  }, [handleClose, parentText, wizardStep]);
+
+  const handlePrev = useCallback(() => {
+    if (parentText?.toLowerCase() === "entità individuali") {
+      if (wizardStep === 1) {
+        setWizardStep(0);
+        setValues(Fisiche);
+      }
+    } else {
+      handleClose();
+    }
+  }, [handleClose, parentText, wizardStep]);
 
   return (
     <AnimatePresence>
       {isVisible && (
         <>
-          <div
-            className="fixed z-[30] inset-0 bg-slate-500 bg-opacity-50 backdrop-blur-[2px]"
-            onClick={handleClose}
-          ></div>
-
-          <motion.div
-            className="fixed p-4 bg-containerGrey rounded-3xl shadow-lg z-[40]"
-            style={{
-              top: distanceTop,
-              left: distanceLeft,
-              width: width,
-              height: height,
-            }}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* <TbXboxXFilled
-              className="absolute top-0 right-0 w-8 h-8"
-              onClick={handleClose}
-            /> */}
-            <div className="flex h-[3rem] w-full justify center items-center">
-              <div className="h-[3rem] w-[3rem] mr-4">{parentImage}</div>
-              <h2 className="text-3xl">{parentText}</h2>
-            </div>
-            <div className="grid grid-cols-2 grid-rows-1">
-              <InputSection
-                className="mr-[4rem] ml-[4rem]"
-                inputs={values.slice(0, Math.floor(values.length / 2) + 1)}
-              />
-              <InputSection
-                className="mr-[4rem] ml-[4rem]"
-                inputs={values.slice(
-                  Math.floor(values.length / 2) + 1,
-                  values.length
-                )}
-              />
-            </div>
-            <div className=" absolute items-center right-[4.5rem] mt-[2.5rem]">
-              <ActionButton text="Avanti" bgColor="bg-buttonBlue" />             
-            </div>
-            <div className=" absolute items-center left-[4.5rem] mt-[2.5rem]">
-              <ActionButton text="Indietro" bgColor="bg-buttonBlue" />             
-            </div>
-          </motion.div>
+          <Backdrop onClose={handleClose} />
+          <Modal
+            width={width}
+            height={height}
+            distanceTop={distanceTop}
+            distanceLeft={distanceLeft}
+            parentImage={parentImage}
+            parentText={parentText}
+            values={values}
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+          />
         </>
       )}
     </AnimatePresence>
   );
 };
-
 export default FullSignUpSnippet;
