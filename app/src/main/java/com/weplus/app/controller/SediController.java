@@ -15,8 +15,8 @@ public class SediController implements IController<Sede, Integer> {
     private SedeRepository sedeRepositoryy;
 
     @Override
-    public Sede create(@RequestBody Sede entity) {
-        return sedeRepositoryy.save(entity);
+    public void create(@RequestBody Sede entity) {
+         sedeRepositoryy.save(entity);
     }
 
     @Override
@@ -30,12 +30,12 @@ public class SediController implements IController<Sede, Integer> {
     }
 
     @Override
-    public Sede update(@PathVariable Integer id, @RequestBody Sede entity) {
+    public void update(@PathVariable Integer id, @RequestBody Sede entity) {
         Sede existingSede = sedeRepositoryy.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Sede con id " + id + " non trovata"));
         existingSede.setIndirizzo(entity.getIndirizzo());
         existingSede.setPrincipale(entity.isPrincipale());
-        return sedeRepositoryy.save(existingSede); // Salva l'oggetto aggiornato
+         sedeRepositoryy.save(existingSede); // Salva l'oggetto aggiornato
     }
 
     @Override //cancellato=true

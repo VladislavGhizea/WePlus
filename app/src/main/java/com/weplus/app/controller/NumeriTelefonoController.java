@@ -18,8 +18,8 @@ public class NumeriTelefonoController implements IController<NumeroTelefono, Int
     private NumeriTelefonoRepository numeriTelefonoRepository;
 
     @Override
-    public NumeroTelefono create(@RequestBody NumeroTelefono entity) {
-        return numeriTelefonoRepository.save(entity);
+    public void create(@RequestBody NumeroTelefono entity) {
+         numeriTelefonoRepository.save(entity);
     }
 
     @Override
@@ -33,11 +33,11 @@ public class NumeriTelefonoController implements IController<NumeroTelefono, Int
     }
 
     @Override
-    public NumeroTelefono update(@PathVariable Integer id, @RequestBody NumeroTelefono entity) {
+    public void update(@PathVariable Integer id, @RequestBody NumeroTelefono entity) {
         NumeroTelefono existingNumeroTelefono = numeriTelefonoRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("NumeroTelefono con id " + id + " non trovato"));
         existingNumeroTelefono.setNumero(entity.getNumero());
-        return numeriTelefonoRepository.save(existingNumeroTelefono); // Salva l'oggetto aggiornato
+         numeriTelefonoRepository.save(existingNumeroTelefono); // Salva l'oggetto aggiornato
     }
 
     @Override //cancellato=true

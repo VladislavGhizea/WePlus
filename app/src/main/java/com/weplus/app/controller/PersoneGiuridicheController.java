@@ -15,8 +15,8 @@ public class PersoneGiuridicheController implements IController<PersonaGiuridica
     private PersonaGiuridicaRepository personaGiuridicaRepository;
 
     @Override
-    public PersonaGiuridica create(@RequestBody PersonaGiuridica entity) {
-        return personaGiuridicaRepository.save(entity);
+    public void create(@RequestBody PersonaGiuridica entity) {
+         personaGiuridicaRepository.save(entity);
     }
 
     @Override
@@ -30,14 +30,14 @@ public class PersoneGiuridicheController implements IController<PersonaGiuridica
     }
 
     @Override
-    public PersonaGiuridica update(@PathVariable Integer id, @RequestBody PersonaGiuridica entity) {
+    public void update(@PathVariable Integer id, @RequestBody PersonaGiuridica entity) {
         PersonaGiuridica existingPersonaGiuridica = personaGiuridicaRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("PersonaGiuridica con id " + id + " non trovata"));
         existingPersonaGiuridica.setTipo(entity.getTipo());
         existingPersonaGiuridica.setPartitaIva(entity.getPartitaIva());
         existingPersonaGiuridica.setRagione_sociale(entity.getRagione_sociale());
         existingPersonaGiuridica.setSede(entity.getSede());
-        return personaGiuridicaRepository.save(existingPersonaGiuridica); // Salva l'oggetto aggiornato
+         personaGiuridicaRepository.save(existingPersonaGiuridica); // Salva l'oggetto aggiornato
     }
 
     @Override //cancellato=true

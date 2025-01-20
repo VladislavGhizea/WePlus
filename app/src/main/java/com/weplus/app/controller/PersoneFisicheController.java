@@ -18,8 +18,8 @@ public class PersoneFisicheController implements IController<PersonaFisica, Inte
     private PersonaFisicaRepository personaFisicaRepository;
 
     @Override
-    public PersonaFisica create(@RequestBody PersonaFisica entity) {
-        return personaFisicaRepository.save(entity);
+    public void create(@RequestBody PersonaFisica entity) {
+         personaFisicaRepository.save(entity);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class PersoneFisicheController implements IController<PersonaFisica, Inte
     }
 
     @Override
-    public PersonaFisica update(@PathVariable Integer id, @RequestBody PersonaFisica entity) {
+    public void update(@PathVariable Integer id, @RequestBody PersonaFisica entity) {
         PersonaFisica existingPersonaFisica = personaFisicaRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("PersonaFisica con id " + id + " non trovata"));
         existingPersonaFisica.setCf(entity.getCf());
@@ -43,7 +43,7 @@ public class PersoneFisicheController implements IController<PersonaFisica, Inte
         existingPersonaFisica.setGenere(entity.getGenere());
         existingPersonaFisica.setComuneDiN(entity.getComuneDiN());
         existingPersonaFisica.setSesso(entity.getSesso());
-        return personaFisicaRepository.save(existingPersonaFisica); // Salva l'oggetto aggiornato
+         personaFisicaRepository.save(existingPersonaFisica); // Salva l'oggetto aggiornato
     }
 
     @Override
