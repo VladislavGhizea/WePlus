@@ -34,10 +34,10 @@ class PersoneGiuridicheControllerTest {
     void setUp() {
         MockitoAnnotations.openMocks(this); // Inizializza i mock
 
-        UtenteGenerale pazzo = new UtenteGenerale(1,"pazzo", "pazzo@gmail.com", "moltopazzo69", Tipo.FISICA, false);
-        Sede casa = new Sede(1, true, "Via zio pera 69");
+        UtenteGenerale pazzo = new UtenteGenerale("pazzo", "pazzo@gmail.com", "moltopazzo69", Tipo.FISICA, false);
+        Sede casa = new Sede( true, "Via zio pera 69");
 
-        peano = new PersonaGiuridica(1, pazzo, "123456789", TipoPersGiur.SpA, "ragioniamo tanto", null, casa);
+        peano = new PersonaGiuridica( pazzo, "123456789", TipoPersGiur.SpA, "ragioniamo tanto", null, casa);
 
         // Mock dei comportamenti
         when(personaGiuridicaRepository.existsById(1)).thenReturn(true);  // Simula che l'utente esista
@@ -100,10 +100,10 @@ class PersoneGiuridicheControllerTest {
     @Test
     void update() {
         // aggiornato
-        UtenteGenerale pazzo = new UtenteGenerale(1,"pazzo", "pazzo@gmail.com", "moltopazzo69", Tipo.FISICA, false);
-        Sede casa = new Sede(1, true, "Via zio pera 69");
+        UtenteGenerale pazzo = new UtenteGenerale("pazzo", "pazzo@gmail.com", "moltopazzo69", Tipo.FISICA, false);
+        Sede casa = new Sede( true, "Via zio pera 69");
 
-        PersonaGiuridica grassi = new PersonaGiuridica(1, pazzo, "987654321", TipoPersGiur.SrL, "ragioniamo poco", null, casa);
+        PersonaGiuridica grassi = new PersonaGiuridica( pazzo, "987654321", TipoPersGiur.SrL, "ragioniamo poco", null, casa);
 
         // Simula il comportamento del repository
         when(personaGiuridicaRepository.findById(1)).thenReturn(Optional.of(peano));

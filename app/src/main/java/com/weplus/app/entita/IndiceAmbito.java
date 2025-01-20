@@ -21,12 +21,6 @@ public class IndiceAmbito {
     public IndiceAmbito() {
     }
 
-    public IndiceAmbito(PKIndiceAmbiti id, Ambito ambito, UtenteGenerale soggetto) {
-        this.id = id;
-        this.ambito = ambito;
-        this.soggetto = soggetto;
-    }
-
     public IndiceAmbito(Ambito ambito, UtenteGenerale soggetto) {
         this.ambito = ambito;
         this.soggetto = soggetto;

@@ -41,24 +41,15 @@ public class UtenteGenerale {
     @OneToMany(mappedBy = "soggetto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Documento> documenti;
 
-    public UtenteGenerale() {}
+    public UtenteGenerale(String pazzo, String mail, String moltopazzo69, Tipo fisica, boolean b) {}
 
-    public UtenteGenerale(String username, String email, String password, Tipo tipo, boolean cancellato) {
+    public UtenteGenerale(String username, String email, String password, Tipo tipo) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.tipo = tipo;
-        this.cancellato = cancellato;
     }
 
-    public UtenteGenerale(Integer id_generale, String username, String email, String password, Tipo tipo, boolean cancellato) {
-        this.id_generale = id_generale;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.tipo = tipo;
-        this.cancellato = cancellato;
-    }
 
     public Integer getId_generale() {
         return id_generale;

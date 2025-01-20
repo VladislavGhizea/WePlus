@@ -26,11 +26,6 @@ public class Hobby {
         return indiceHobby;
     }
 
-    public Hobby(Integer id_hobby, String descrizione) {
-        this.id_hobby = id_hobby;
-        this.descrizione = descrizione;
-    }
-
     public Hobby(String descrizione) {
         this.descrizione = descrizione;
     }

@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("/default")
 public interface IController<T, ID> {
     @PostMapping
     T create(@RequestBody T entity);

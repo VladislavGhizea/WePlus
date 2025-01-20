@@ -87,7 +87,10 @@ const FullSignUpSnippet: React.FC<Props> = ({
               />
             </div>
             <div className=" absolute items-center right-[4.5rem] mt-[2.5rem]">
-              <ActionButton text="Avanti" bgColor="bg-buttonBlue" />
+              <ActionButton text="Avanti" bgColor="bg-buttonBlue" />             
+            </div>
+            <div className=" absolute items-center left-[4.5rem] mt-[2.5rem]">
+              <ActionButton text="Indietro" bgColor="bg-buttonBlue" />             
             </div>
           </motion.div>
         </>

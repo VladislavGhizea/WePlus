@@ -44,28 +44,6 @@ public class PersonaFisica {
 
     public PersonaFisica() {}
 
-    // Costruttori aggiornati
-    public PersonaFisica(Integer id_fisica,
-                         String nome,
-                         String cognome,
-                         UtenteGenerale utenteGenerale,
-                         String cf,
-                         Sesso sesso,
-                         Genere genere,
-                         String comuneDiN,
-                         String dataDiN,
-                         IndirizzoFisica indirizzo) {
-        this.id_fisica = id_fisica;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.utenteGenerale = utenteGenerale;
-        this.cf = cf;
-        this.sesso = sesso;
-        this.genere = genere;
-        this.comuneDiN = comuneDiN;
-        this.dataDiN = dataDiN;
-        this.indirizzo = indirizzo;
-    }
 
     public PersonaFisica(String nome,
                          String cognome,

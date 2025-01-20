@@ -58,36 +58,6 @@ public class EntitaIndividuale {
 
     public EntitaIndividuale() {}
 
-    public EntitaIndividuale(Integer id_entita,
-                             UtenteGenerale utenteGenerale,
-                             String nome,
-                             String cognome,
-                             String cf,
-                             Sesso sesso,
-                             Genere genere,
-                             String comuneDiN,
-                             String dataDiN,
-                             IndirizzoFisica indirizzoFisica,
-                             String partitaIva,
-                             TipoPersGiur tipo,
-                             String ragione_sociale,
-                             Sede sede) {
-        this.id_entita = id_entita;
-        this.utenteGenerale = utenteGenerale;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.cf = cf;
-        this.sesso = sesso;
-        this.genere = genere;
-        this.comuneDiN = comuneDiN;
-        this.dataDiN = dataDiN;
-        this.indirizzoFisica = indirizzoFisica;
-        this.partitaIva = partitaIva;
-        this.tipo = tipo;
-        this.ragione_sociale = ragione_sociale;
-        this.sede = sede;
-    }
-
     public EntitaIndividuale(UtenteGenerale utenteGenerale,
                              String nome,
                              String cognome,
@@ -101,6 +71,7 @@ public class EntitaIndividuale {
                              TipoPersGiur tipo,
                              String ragione_sociale,
                              Sede sede) {
+        this.id_entita = id_entita;
         this.utenteGenerale = utenteGenerale;
         this.nome = nome;
         this.cognome = cognome;

@@ -3,10 +3,7 @@ package com.weplus.app.controller;
 import com.weplus.app.entita.Sede;
 import com.weplus.app.repository.SedeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,7 +39,5 @@ public class SediController implements IController<Sede, Integer> {
     }
 
     @Override //cancellato=true
-    public void delete(@PathVariable Integer id) {
-        sedeRepositoryy.deleteById(id);
-    }
+    public void delete(@PathVariable Integer id) {sedeRepositoryy.deleteById(id);}
 }

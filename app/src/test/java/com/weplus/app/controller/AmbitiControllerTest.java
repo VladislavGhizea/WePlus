@@ -28,7 +28,7 @@ class AmbitiControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this); // Inizializza i mock
-        ambito = new Ambito(1, "Idraulico");
+        ambito = new Ambito ("Idraulico");
         // Mock dei comportamenti
         when(AmbitoRepository.existsById(1)).thenReturn(true);  // Simula che l'ambito esista
         when(AmbitoRepository.save(any(Ambito.class))).thenAnswer(invocation -> invocation.getArgument(0));  // Mock del salvataggio
@@ -79,7 +79,7 @@ class AmbitiControllerTest {
     @Test
     void update() {
         // Utente aggiornato
-        Ambito ambitoNuovo = new Ambito(1, "Meccanico");
+        Ambito ambitoNuovo = new Ambito("Meccanico");
         // Simula il comportamento del repository
         when(AmbitoRepository.findById(1)).thenReturn(Optional.of(ambito));
         when(AmbitoRepository.save(any(Ambito.class))).thenAnswer(invocation -> invocation.getArgument(0));

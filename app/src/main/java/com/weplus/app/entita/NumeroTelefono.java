@@ -19,13 +19,6 @@ public class NumeroTelefono {
 
     public NumeroTelefono() {}
 
-    public NumeroTelefono(Integer id_numTel, Integer numero, UtenteGenerale soggetto) {
-        this.id_numTel = id_numTel;
-        this.numero = numero;
-        this.soggetto = soggetto;
-    }
-
-
     public NumeroTelefono(Integer numero, UtenteGenerale soggetto) {
         this.numero = numero;
         this.soggetto = soggetto;
