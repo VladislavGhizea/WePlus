@@ -28,7 +28,7 @@ class UtentiGeneraliControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this); // Inizializza i mock
-        pazzo = new UtenteGenerale(1,"pazzo", "pazzo@gmail.com", "moltopazzo69", Tipo.FISICA, false);
+        pazzo = new UtenteGenerale("pazzo", "pazzo@gmail.com", "moltopazzo69", Tipo.FISICA, false);
         // Mock dei comportamenti
         when(utenteGeneraleRepository.existsById(1)).thenReturn(true);  // Simula che l'utente esista
         when(utenteGeneraleRepository.save(any(UtenteGenerale.class))).thenAnswer(invocation -> invocation.getArgument(0));  // Mock del salvataggio
@@ -79,7 +79,7 @@ class UtentiGeneraliControllerTest {
     @Test
     void update() {
         // Utente aggiornato
-        UtenteGenerale updatedUser = new UtenteGenerale(1,"pazzoUpdated", "updatedEmail@gmail.com", "newPassword", Tipo.FISICA, false);
+        UtenteGenerale updatedUser = new UtenteGenerale("pazzoUpdated", "updatedEmail@gmail.com", "newPassword", Tipo.FISICA, false);
 
         // Simula il comportamento del repository
         when(utenteGeneraleRepository.findById(1)).thenReturn(Optional.of(pazzo));

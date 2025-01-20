@@ -28,7 +28,7 @@ class SediControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this); // Inizializza i mock
-        casa = new Sede(1, true, "Via zio pera 69");
+        casa = new Sede( true, "Via zio pera 69");
                 // Mock dei comportamenti
         when(sedeRepository.existsById(1)).thenReturn(true);  // Simula che l'utente esista
         when(sedeRepository.save(any(Sede.class))).thenAnswer(invocation -> invocation.getArgument(0));  // Mock del salvataggio
@@ -79,7 +79,7 @@ class SediControllerTest {
     @Test
     void update() {
         // Utente aggiornato
-        Sede casaNuova = new Sede(1, false, "Via Cigna 70");
+        Sede casaNuova = new Sede( false, "Via Cigna 70");
         // Simula il comportamento del repository
         when(sedeRepository.findById(1)).thenReturn(Optional.of(casa));
         when(sedeRepository.save(any(Sede.class))).thenAnswer(invocation -> invocation.getArgument(0));

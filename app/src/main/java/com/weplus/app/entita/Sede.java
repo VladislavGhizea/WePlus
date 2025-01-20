@@ -26,11 +26,6 @@ public class Sede {
 
     public Sede() {}
 
-    public Sede(Integer id_sede, boolean principale, String indirizzo) {
-        this.id_sede = id_sede;
-        this.principale = principale;
-        this.indirizzo = indirizzo;
-    }
 
     public Sede(boolean principale, String indirizzo) {
         this.principale = principale;

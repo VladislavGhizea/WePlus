@@ -35,21 +35,6 @@ public class PersonaGiuridica {
     public PersonaGiuridica() {
     }
 
-    public PersonaGiuridica(Integer id_giuridica,
-                            UtenteGenerale utenteGenerale,
-                            String partitaIva,
-                            TipoPersGiur tipo,
-                            String ragione_sociale,
-                            IndirizzoFisica indirizzoFisica,
-                            Sede sede) {
-        this.id_giuridica = id_giuridica;
-        this.utenteGenerale = utenteGenerale;
-        this.partitaIva = partitaIva;
-        this.tipo = tipo;
-        this.ragione_sociale = ragione_sociale;
-        this.indirizzoFisica = indirizzoFisica;
-        this.sede = sede;
-    }
 
     public PersonaGiuridica(UtenteGenerale utenteGenerale,
                             String partitaIva,

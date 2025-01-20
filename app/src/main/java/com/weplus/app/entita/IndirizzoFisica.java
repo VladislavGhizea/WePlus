@@ -23,12 +23,6 @@ public class IndirizzoFisica {
     public IndirizzoFisica() {
     }
 
-    public IndirizzoFisica(Integer id_indirizzo, String indiDomicilio, String indiResidenza) {
-        this.id_indirizzo = id_indirizzo;
-        this.indiDomicilio = indiDomicilio;
-        this.indiResidenza = indiResidenza;
-    }
-
     public IndirizzoFisica(String indiDomicilio, String indiResidenza) {
         this.indiDomicilio = indiDomicilio;
         this.indiResidenza = indiResidenza;
