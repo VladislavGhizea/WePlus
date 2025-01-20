@@ -43,21 +43,19 @@ public class UtenteGenerale {
 
     public UtenteGenerale() {}
 
-    public UtenteGenerale(String username, String email, String password, Tipo tipo, boolean cancellato) {
+    public UtenteGenerale(String username, String email, String password, Tipo tipo) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.tipo = tipo;
-        this.cancellato = cancellato;
     }
 
-    public UtenteGenerale(Integer id_generale, String username, String email, String password, Tipo tipo, boolean cancellato) {
+    public UtenteGenerale(Integer id_generale, String username, String email, String password, Tipo tipo) {
         this.id_generale = id_generale;
         this.username = username;
         this.email = email;
         this.password = password;
         this.tipo = tipo;
-        this.cancellato = cancellato;
     }
 
     public Integer getId_generale() {
