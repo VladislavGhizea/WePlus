@@ -11,6 +11,7 @@ const InputSection: React.FC<Props> = ({ inputs, className }) => {
     <div className={`${className}`}>
       {inputs.map((input, index) => (
         <TextInput
+          classNameContainer="mt-4"
           key={index}
           text={input.text}
           type={input.type}

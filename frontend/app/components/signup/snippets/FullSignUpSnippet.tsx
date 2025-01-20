@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ActionButton } from "../../home/buttons";
 import { InputSection } from "./sections";
-import { Fisiche } from "@/app/variables";
+import { Fisiche, Giuridiche, Individuali } from "@/app/variables";
 interface Props {
   width: string;
   height: string;
@@ -22,7 +22,9 @@ const FullSignUpSnippet: React.FC<Props> = ({
   const [isVisible, setIsVisible] = useState(visible);
   const distanceTop = `calc((100vh - ${height}) / 2)`;
   const distanceLeft = `calc((100vw - ${width}) / 2)`;
-
+  const [values, setValues] = useState<
+    { text: string; type: string; options?: string[] }[]
+  >([]);
   useEffect(() => {
     setIsVisible(visible);
   }, [visible]);
@@ -31,6 +33,15 @@ const FullSignUpSnippet: React.FC<Props> = ({
     setIsVisible(false);
     onClose();
   };
+  useEffect(() => {
+    if (parentText?.toLowerCase() === "persone fisiche") {
+      setValues(Fisiche);
+    } else if (parentText?.toLowerCase() === "persone giuridiche") {
+      setValues(Giuridiche);
+    } else {
+      setValues(Individuali);
+    }
+  }, [parentText]);
 
   return (
     <AnimatePresence>
@@ -64,18 +75,18 @@ const FullSignUpSnippet: React.FC<Props> = ({
             </div>
             <div className="grid grid-cols-2 grid-rows-1">
               <InputSection
-                className="mt-[2rem] mr-[4rem] ml-[4rem]"
-                inputs={Fisiche.slice(0, Math.floor(Fisiche.length / 2) + 1)}
+                className="mr-[4rem] ml-[4rem]"
+                inputs={values.slice(0, Math.floor(values.length / 2) + 1)}
               />
               <InputSection
-                className="mt-[2rem] mr-[4rem] ml-[4rem]"
-                inputs={Fisiche.slice(
-                  Math.floor(Fisiche.length / 2) + 1,
-                  Fisiche.length
+                className="mr-[4rem] ml-[4rem]"
+                inputs={values.slice(
+                  Math.floor(values.length / 2) + 1,
+                  values.length
                 )}
               />
             </div>
-            <div className="flex items-center justify-end mt-[2.5rem]">
+            <div className=" absolute items-center right-[4.5rem] mt-[2.5rem]">
               <ActionButton text="Avanti" bgColor="bg-buttonBlue" />
             </div>
           </motion.div>
