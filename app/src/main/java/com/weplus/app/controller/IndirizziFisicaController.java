@@ -17,8 +17,8 @@ public class IndirizziFisicaController implements IController<IndirizzoFisica, I
     private IndirizziFisicaRepository indirizzoFisicaRepository;
 
     @Override
-    public IndirizzoFisica create(@RequestBody IndirizzoFisica entity) {
-        return indirizzoFisicaRepository.save(entity);
+    public void create(@RequestBody IndirizzoFisica entity) {
+       indirizzoFisicaRepository.save(entity);
     }
 
     @Override
@@ -32,12 +32,12 @@ public class IndirizziFisicaController implements IController<IndirizzoFisica, I
     }
 
     @Override
-    public IndirizzoFisica update(@PathVariable Integer id, @RequestBody IndirizzoFisica entity) {
+    public void update(@PathVariable Integer id, @RequestBody IndirizzoFisica entity) {
         IndirizzoFisica existingIndirizzoFisica = indirizzoFisicaRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("IndirizzoFisica con id " + id + " non trovato"));
         existingIndirizzoFisica.setIndiDomicilio(entity.getIndiDomicilio());
         existingIndirizzoFisica.setIndiResidenza(entity.getIndiResidenza());
-        return indirizzoFisicaRepository.save(existingIndirizzoFisica); // Salva l'oggetto aggiornato
+         indirizzoFisicaRepository.save(existingIndirizzoFisica); // Salva l'oggetto aggiornato
     }
 
     @Override //cancellato=true

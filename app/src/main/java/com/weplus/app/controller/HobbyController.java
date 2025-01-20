@@ -18,8 +18,8 @@ public class HobbyController implements IController<Hobby, Integer>{
     private HobbyRepository HobbyRepository;
 
     @Override
-    public Hobby create(@RequestBody Hobby entity) {
-        return HobbyRepository.save(entity);
+    public void create(@RequestBody Hobby entity) {
+         HobbyRepository.save(entity);
     }
 
     @Override
@@ -33,12 +33,12 @@ public class HobbyController implements IController<Hobby, Integer>{
     }
 
     @Override
-    public Hobby update(@PathVariable Integer id, @RequestBody Hobby entity) {
+    public void update(@PathVariable Integer id, @RequestBody Hobby entity) {
         Hobby existingHobby = HobbyRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Hobby con id " + id + " non trovato"));
         existingHobby.setDescrizione(entity.getDescrizione());
 
-        return HobbyRepository.save(existingHobby); // Salva l'oggetto aggiornato
+         HobbyRepository.save(existingHobby); // Salva l'oggetto aggiornato
     }
 
 

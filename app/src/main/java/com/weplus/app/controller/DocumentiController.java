@@ -18,9 +18,7 @@ public class DocumentiController implements IController<Documento, Integer>{
     private DocumentoRepository DocumentoRepository;
 
     @Override
-    public Documento create(@RequestBody Documento entity) {
-        return DocumentoRepository.save(entity);
-    }
+    public void create(@RequestBody Documento entity) {DocumentoRepository.save(entity);}
 
     @Override
     public Documento getById(@PathVariable Integer id) {
@@ -33,7 +31,7 @@ public class DocumentiController implements IController<Documento, Integer>{
     }
 
     @Override
-    public Documento update(@PathVariable Integer id, @RequestBody Documento entity) {
+    public void update(@PathVariable Integer id, @RequestBody Documento entity) {
         Documento existingDocumento = DocumentoRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Documento con id " + id + " non trovato"));
         existingDocumento.setTipo(entity.getTipo());
@@ -42,7 +40,7 @@ public class DocumentiController implements IController<Documento, Integer>{
         existingDocumento.setEnteEmissivo(entity.getEnteEmissivo());
         existingDocumento.setDataEmissione(entity.getDataEmissione());
 
-        return DocumentoRepository.save(existingDocumento);// Salva l'oggetto aggiornato
+        DocumentoRepository.save(existingDocumento);// Salva l'oggetto aggiornato
     }
 
     @Override //cancellato=true
