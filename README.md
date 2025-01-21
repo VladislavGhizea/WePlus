@@ -2,7 +2,7 @@
 
 <br>
 
-# **TODO swagger, docusaurus, normalizzare API, normalizzare e controllare campi frontend, LISTA ENUM, Chat MongoDB, Foto, Recensioni, AUTENTICAZIONE E SICUREZZA**
+# **TODO swagger, docusaurus, normalizzare API, normalizzare e controllare campi frontend, LISTA ENUM, Chat MongoDB, Foto, Recensioni, AUTENTICAZIONE E SICUREZZA, Documenti, Controllo e modifica documentazione, per riferimenti a utente generale passare l'id generale assegnato**
 
 
 <br><br><br>
