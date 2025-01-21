@@ -1,45 +1,50 @@
 package com.weplus.app.controller;
 
-import com.weplus.app.entita.IndiceAmbito;
-import com.weplus.app.entita.chiaviComposte.PKIndiceAmbiti;
-import com.weplus.app.repository.IndiceAmbitoRepository;
+import com.weplus.app.entita.Ambito;
+import com.weplus.app.entita.UtenteGenerale;
+import com.weplus.app.repository.AmbitoRepository;
+import com.weplus.app.repository.UtenteGeneraleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/IndiceAmbiti")
-public class IndiceAmbitiController implements IController<IndiceAmbito, Integer>{
+@RequestMapping("/indiceAmbiti")
+public class IndiceAmbitiController {
 
     @Autowired
-    private IndiceAmbitoRepository IndiceAmbitoRepository;
+    private UtenteGeneraleRepository utenteGeneraleRepository;
 
-    @Override
-    public void create(@RequestBody IndiceAmbito entity) {
-         IndiceAmbitoRepository.save(entity);
-    }
+    @Autowired
+    private AmbitoRepository ambitoRepository;
 
-    @Override
-    public IndiceAmbito getById(@PathVariable Integer id) {
-        return IndiceAmbitoRepository.findById(id).orElse(null);
-    }
+    @PostMapping
+    public ResponseEntity<String> associaAmbitoAlUtente(@RequestBody Map<String, Integer> associazione) {
+        // Recupera l'utente e l'ambito tramite i loro ID
+        Integer utenteId = associazione.get("utenteId");
+        Integer ambitoId = associazione.get("ambitoId");
 
-    @Override
-    public List<IndiceAmbito> getAll() {
-        return IndiceAmbitoRepository.findAll();
-    }
+        UtenteGenerale utente = utenteGeneraleRepository.findById(utenteId).orElse(null);
+        Ambito ambito = ambitoRepository.findById(ambitoId).orElse(null);
 
-    @Override
-    public void update(@PathVariable Integer id, @RequestBody IndiceAmbito entity) {
-        //è un indice nostro, l'utente non può modificare
-    }
+        if (utente == null || ambito == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Utente o Ambito non trovato");
+        }
 
-    @Override //cancellato=true
-    public void delete(@PathVariable Integer id) {
-        IndiceAmbitoRepository.deleteById(id);
+        // Aggiungi l'ambito alla lista degli ambiti dell'utente
+        utente.getAmbiti().add(ambito);
+
+        // Aggiungi l'utente alla lista degli utenti dell'ambito
+        ambito.getSoggetti().add(utente);
+
+        // Salva le modifiche nel database
+        utenteGeneraleRepository.save(utente);
+        ambitoRepository.save(ambito);
+
+        return ResponseEntity.ok("Associazione effettuata con successo");
     }
 }

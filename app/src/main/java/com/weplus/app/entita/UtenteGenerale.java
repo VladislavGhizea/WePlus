@@ -1,5 +1,6 @@
 package com.weplus.app.entita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.weplus.app.entita.listaEnum.Tipo;
 import jakarta.persistence.*;
 
@@ -12,6 +13,15 @@ public class UtenteGenerale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_generale;
+
+    @ManyToMany
+    @JoinTable(
+            name = "IndiceAmbito",  // Nome della tabella di join
+            joinColumns = @JoinColumn(name = "id_soggetto"),  // Colonna nella tabella di join per 'UtenteGenerale'
+            inverseJoinColumns = @JoinColumn(name = "id_ambito")  // Colonna nella tabella di join per 'Ambito'
+    )
+    @JsonIgnore
+    private List<Ambito> ambiti;
 
     @OneToOne(mappedBy = "utenteGenerale", cascade = CascadeType.ALL, orphanRemoval = true)
     private PersonaFisica personaFisica;
@@ -41,7 +51,7 @@ public class UtenteGenerale {
     @OneToMany(mappedBy = "soggetto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Documento> documenti;
 
-    public UtenteGenerale(String pazzo, String mail, String moltopazzo69, Tipo fisica, boolean b) {}
+    public UtenteGenerale() {}
 
     public UtenteGenerale(String username, String email, String password, Tipo tipo) {
         this.username = username;
@@ -57,6 +67,26 @@ public class UtenteGenerale {
 
     public String getUsername() {
         return username;
+    }
+
+    public List<Ambito> getAmbiti() {
+        return ambiti;
+    }
+
+    public PersonaFisica getPersonaFisica() {
+        return personaFisica;
+    }
+
+    public PersonaGiuridica getPersonaGiuridica() {
+        return personaGiuridica;
+    }
+
+    public EntitaIndividuale getEntitaIndividuale() {
+        return entitaIndividuale;
+    }
+
+    public List<Documento> getDocumenti() {
+        return documenti;
     }
 
     public void setUsername(String username) {

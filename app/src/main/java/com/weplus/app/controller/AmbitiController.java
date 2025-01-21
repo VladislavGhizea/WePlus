@@ -1,17 +1,17 @@
 package com.weplus.app.controller;
 
 import com.weplus.app.entita.Ambito;
+import com.weplus.app.entita.UtenteGenerale;
 import com.weplus.app.repository.AmbitoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/AmbitiController")
+@RequestMapping("/ambiti")
 public class AmbitiController implements  IController<Ambito, Integer>{
 
     @Autowired
@@ -38,6 +38,15 @@ public class AmbitiController implements  IController<Ambito, Integer>{
                 new IllegalArgumentException("Ambito con id " + id + " non trovato"));
         existingAmbito.setNome(entity.getNome());
         ambitoRepository.save(existingAmbito); // Salva l'oggetto aggiornato
+    }
+
+    @GetMapping("/{id}/utenti")
+    public ResponseEntity<List<UtenteGenerale>> getUtentiByAmbito(@PathVariable Integer id) {
+        Ambito ambito = ambitoRepository.findById(id).orElse(null);
+        if (ambito == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(ambito.getSoggetti()); // Ottieni la lista di utenti per quell'ambito
     }
 
     @Override //cancellato=true

@@ -1,17 +1,17 @@
 package com.weplus.app.controller;
 
+import com.weplus.app.entita.Ambito;
 import com.weplus.app.entita.UtenteGenerale;
 import com.weplus.app.repository.UtenteGeneraleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/UtentiGenerali")
+@RequestMapping("/utentiGenerali")
 public class UtentiGeneraliController implements IController<UtenteGenerale, Integer>{
 
     @Autowired
@@ -42,6 +42,15 @@ public class UtentiGeneraliController implements IController<UtenteGenerale, Int
         existingUser.setTipo(entity.getTipo());
         existingUser.setCancellato(entity.isCancellato());
         utenteGeneraleRepository.save(existingUser); // Salva l'oggetto aggiornato
+    }
+
+    @GetMapping("/{id}/ambiti")
+    public ResponseEntity<List<Ambito>> getAmbitiByUtente(@PathVariable Integer id) {
+        UtenteGenerale utente = utenteGeneraleRepository.findById(id).orElse(null);
+        if (utente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(utente.getAmbiti()); // Ottieni la lista di ambiti per quell'utente
     }
 
     @Override //cancellato=true
