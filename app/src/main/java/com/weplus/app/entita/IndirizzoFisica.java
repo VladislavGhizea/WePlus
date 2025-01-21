@@ -11,8 +11,8 @@ public class IndirizzoFisica {
     private Integer id_indirizzo;
 
     @OneToOne
-    @JoinColumn(name = "id_fisica", referencedColumnName = "id_fisica")
-    private PersonaFisica personaFisica;
+    @JoinColumn(name = "soggetto_id", referencedColumnName = "soggetto_id")
+    private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false) // Campo obbligatorio
     private String indiDomicilio;
@@ -32,8 +32,8 @@ public class IndirizzoFisica {
         return id_indirizzo;
     }
 
-    public PersonaFisica getPersonaFisica() {
-        return personaFisica;
+    public UtenteGenerale getUtenteGenerale() {
+        return utenteGenerale;
     }
 
     public String getIndiDomicilio() {
@@ -51,4 +51,6 @@ public class IndirizzoFisica {
     public void setIndiResidenza(String indiResidenza) {
         this.indiResidenza = indiResidenza;
     }
+
+
 }

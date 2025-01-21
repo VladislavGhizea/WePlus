@@ -1,7 +1,11 @@
 package com.weplus.app.controller;
 
+import com.weplus.app.entita.IndirizzoFisica;
 import com.weplus.app.entita.PersonaFisica;
+import com.weplus.app.entita.UtenteGenerale;
+import com.weplus.app.repository.IndirizziFisicaRepository;
 import com.weplus.app.repository.PersonaFisicaRepository;
+import com.weplus.app.repository.UtenteGeneraleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,15 +15,29 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/PersonaFisica")
+@RequestMapping("/personaFisica")
 public class PersoneFisicheController implements IController<PersonaFisica, Integer> {
 
     @Autowired
     private PersonaFisicaRepository personaFisicaRepository;
 
+    @Autowired
+    private UtenteGeneraleRepository utenteGeneraleRepository;
+
+    @Autowired
+    private IndirizziFisicaRepository indirizziFisicaRepository;
+
     @Override
     public void create(@RequestBody PersonaFisica entity) {
-         personaFisicaRepository.save(entity);
+        UtenteGenerale utente = utenteGeneraleRepository.findById(entity.getUtenteGeneraleId())
+                .orElseThrow(() -> new IllegalArgumentException("Utente con ID " + entity.getUtenteGeneraleId() + " non trovato"));
+        entity.setUtenteGenerale(utente);
+
+        IndirizzoFisica indirizzoFisica = indirizziFisicaRepository.findById(entity.getUtenteGeneraleId())
+                .orElseThrow(() -> new IllegalArgumentException("Indirizzo con ID " + entity.getIndirizzo() + " non trovato"));
+        entity.setIndirizzo(indirizzoFisica);
+
+        personaFisicaRepository.save(entity);
     }
 
     @Override

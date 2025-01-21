@@ -13,17 +13,17 @@ public class PersonaFisica {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_fisica;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length=20) // Campo obbligatorio
     private String nome;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length=20) // Campo obbligatorio
     private String cognome;
 
     @OneToOne
     @JoinColumn(name = "generale_id", nullable = false, unique = true) // Relazione con UtenteGenerale
     private UtenteGenerale utenteGenerale;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length=16) // Campo obbligatorio
     private String cf;
 
     @Column(nullable = false) // Campo obbligatorio
@@ -32,7 +32,7 @@ public class PersonaFisica {
     @Column(nullable = false) // Campo obbligatorio
     private Genere genere;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length=2) // Campo obbligatorio
     private String comuneDiN;
 
     @Column(nullable = false) // Campo obbligatorio
@@ -42,27 +42,33 @@ public class PersonaFisica {
     @JoinColumn(name = "indirizzo_id", nullable = false)
     private IndirizzoFisica indirizzo;
 
+    @Transient
+    private Integer indirizzoFisicaId;
+
+    @Transient
+    private Integer utenteGeneraleId;
+
     public PersonaFisica() {}
 
 
     public PersonaFisica(String nome,
                          String cognome,
-                         UtenteGenerale utenteGenerale,
+                         Integer utenteGeneraleId,
                          String cf,
                          Sesso sesso,
                          Genere genere,
                          String comuneDiN,
                          String dataDiN,
-                         IndirizzoFisica indirizzo) {
+                         Integer indirizzoFisicaId) {
         this.nome = nome;
         this.cognome = cognome;
-        this.utenteGenerale = utenteGenerale;
+        this.utenteGeneraleId = utenteGeneraleId;
         this.cf = cf;
         this.sesso = sesso;
         this.genere = genere;
         this.comuneDiN = comuneDiN;
         this.dataDiN = dataDiN;
-        this.indirizzo = indirizzo;
+        this.indirizzoFisicaId = indirizzoFisicaId;
     }
 
     public String getDataDiN() {
@@ -131,6 +137,26 @@ public class PersonaFisica {
 
     public IndirizzoFisica getIndirizzo() {
         return indirizzo;
+    }
+
+    public void setUtenteGenerale(UtenteGenerale utenteGenerale) {
+        this.utenteGenerale = utenteGenerale;
+    }
+
+    public void setIndirizzo(IndirizzoFisica indirizzo) {
+        this.indirizzo = indirizzo;
+    }
+
+    public UtenteGenerale getUtenteGenerale() {
+        return utenteGenerale;
+    }
+
+    public Integer getIndirizzoFisicaId() {
+        return indirizzoFisicaId;
+    }
+
+    public Integer getUtenteGeneraleId() {
+        return utenteGeneraleId;
     }
 }
 

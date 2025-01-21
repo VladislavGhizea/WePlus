@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/IndirizziFisica")
+@RequestMapping("/indirizziFisica")
 public class IndirizziFisicaController implements IController<IndirizzoFisica, Integer>{
     @Autowired
     private IndirizziFisicaRepository indirizzoFisicaRepository;
