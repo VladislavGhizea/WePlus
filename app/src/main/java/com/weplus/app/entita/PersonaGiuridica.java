@@ -15,7 +15,7 @@ public class PersonaGiuridica {
     private Integer id_giuridica;
 
     @OneToOne
-    @JoinColumn(name = "generale_id", nullable = false, unique = true)
+    @JoinColumn(name = "soggetto_id", nullable = false, unique = true)
     private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false, length = 11) // Campo obbligatorio

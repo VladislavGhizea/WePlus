@@ -20,7 +20,7 @@ public class PersonaFisica {
     private String cognome;
 
     @OneToOne
-    @JoinColumn(name = "generale_id", nullable = false, unique = true) // Relazione con UtenteGenerale
+    @JoinColumn(name = "soggetto_id", nullable = false, unique = true) // Relazione con UtenteGenerale
     private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false, length=16) // Campo obbligatorio

@@ -12,12 +12,13 @@ public class UtenteGenerale {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer id_generale;
+    @Column(name = "soggetto_id")
+    private Integer soggetto_id;
 
     @ManyToMany
     @JoinTable(
             name = "IndiceAmbito",  // Nome della tabella di join
-            joinColumns = @JoinColumn(name = "id_soggetto"),  // Colonna nella tabella di join per 'UtenteGenerale'
+            joinColumns = @JoinColumn(name = "soggetto_id"),  // Colonna nella tabella di join per 'UtenteGenerale'
             inverseJoinColumns = @JoinColumn(name = "id_ambito")  // Colonna nella tabella di join per 'Ambito'
     )
     @JsonIgnore
@@ -26,13 +27,13 @@ public class UtenteGenerale {
     @ManyToMany
     @JoinTable(
             name = "IndiceHobby",  // Nome della tabella di join
-            joinColumns = @JoinColumn(name = "id_soggetto"),  // Colonna nella tabella di join per 'UtenteGenerale'
+            joinColumns = @JoinColumn(name = "soggetto_id"),  // Colonna nella tabella di join per 'UtenteGenerale'
             inverseJoinColumns = @JoinColumn(name = "id_hobby")  // Colonna nella tabella di join per 'Ambito'
     )
     @JsonIgnore
     private List<Hobby> hobby;
 
-    @OneToMany(mappedBy = "soggetto_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "soggetto", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<NumeroTelefono> numeroTelefono;
 
@@ -76,8 +77,8 @@ public class UtenteGenerale {
     }
 
 
-    public Integer getId_generale() {
-        return id_generale;
+    public Integer getSoggetto_id() {
+        return soggetto_id;
     }
 
     public String getUsername() {
@@ -151,7 +152,7 @@ public class UtenteGenerale {
     @Override
     public String toString() {
         return "UtenteGenerale{" +
-                "id_generale=" + id_generale.toString() +
+                "id_generale=" + soggetto_id.toString() +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

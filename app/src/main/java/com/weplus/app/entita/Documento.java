@@ -29,7 +29,7 @@ public class Documento {
     private Date dataEmissione;
 
     @ManyToOne
-    @JoinColumn(name = "soggetto_id", nullable = false, referencedColumnName = "id_generale")
+    @JoinColumn(name = "soggetto_id", nullable = false, referencedColumnName = "soggetto_id")
     @JsonIgnore
     private UtenteGenerale soggetto;
 
@@ -41,7 +41,7 @@ public class Documento {
     }
 
     public Integer getSoggettoId() {
-        return soggetto.getId_generale();
+        return soggetto.getSoggetto_id();
     }
 
     public Documento() {

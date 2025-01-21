@@ -16,7 +16,7 @@ public class EntitaIndividuale {
     private Integer id_entita;
 
     @OneToOne
-    @JoinColumn(name = "generale_id", nullable = false, unique = true)
+    @JoinColumn(name = "soggetto_id", nullable = false, unique = true)
     private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false, length=20) // Campo obbligatorio
