@@ -3,11 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: linear-gradient(180deg, #F3F8FF 0%, #C6E3EB 53.5%, #819ABC 100%);
+  --background-blue: #E0E7F1;
   --foreground: #171717;
   --container-grey: #EDEEF1;
+  --dark-grey: #CDCFD0;
   --button-blue: #74A9F1;
   --button-grey: #EDEEF1;
+  --text-grey: #a8a8a8;
   --text-blue: #335C67;
   overflow: hidden;
 }
@@ -22,6 +25,6 @@
 
 body {
   color: var(--foreground);
-  background: linear-gradient(180deg, #F3F8FF 0%, #C6E3EB 53.5%, #819ABC 100%);
+  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
