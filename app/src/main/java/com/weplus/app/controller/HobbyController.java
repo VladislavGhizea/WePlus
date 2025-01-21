@@ -1,12 +1,13 @@
 package com.weplus.app.controller;
 
+import com.weplus.app.entita.Ambito;
 import com.weplus.app.entita.Hobby;
+import com.weplus.app.entita.UtenteGenerale;
 import com.weplus.app.repository.HobbyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,35 +16,44 @@ import java.util.List;
 public class HobbyController implements IController<Hobby, Integer>{
 
     @Autowired
-    private HobbyRepository HobbyRepository;
+    private HobbyRepository hobbyRepository;
 
     @Override
     public void create(@RequestBody Hobby entity) {
-         HobbyRepository.save(entity);
+         hobbyRepository.save(entity);
     }
 
     @Override
     public Hobby getById(@PathVariable Integer id) {
-        return HobbyRepository.findById(id).orElse(null);
+        return hobbyRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<Hobby> getAll() {
-        return HobbyRepository.findAll();
+        return hobbyRepository.findAll();
     }
 
     @Override
     public void update(@PathVariable Integer id, @RequestBody Hobby entity) {
-        Hobby existingHobby = HobbyRepository.findById(id).orElseThrow(() ->
+        Hobby existingHobby = hobbyRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Hobby con id " + id + " non trovato"));
         existingHobby.setDescrizione(entity.getDescrizione());
 
-         HobbyRepository.save(existingHobby); // Salva l'oggetto aggiornato
+         hobbyRepository.save(existingHobby); // Salva l'oggetto aggiornato
+    }
+
+    @GetMapping("/{id}/utenti")
+    public ResponseEntity<List<UtenteGenerale>> getUtentiByHobby(@PathVariable Integer id) {
+        Hobby hobby = hobbyRepository.findById(id).orElse(null);
+        if (hobby == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(hobby.getSoggetti()); // Ottieni la lista di utenti per quell'ambito
     }
 
 
     @Override //cancellato=true
     public void delete(@PathVariable Integer id) {
-        HobbyRepository.deleteById(id);
+        hobbyRepository.deleteById(id);
     }
 }

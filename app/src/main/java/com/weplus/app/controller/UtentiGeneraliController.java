@@ -1,6 +1,7 @@
 package com.weplus.app.controller;
 
 import com.weplus.app.entita.Ambito;
+import com.weplus.app.entita.Hobby;
 import com.weplus.app.entita.UtenteGenerale;
 import com.weplus.app.repository.UtenteGeneraleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,15 @@ public class UtentiGeneraliController implements IController<UtenteGenerale, Int
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         return ResponseEntity.ok(utente.getAmbiti()); // Ottieni la lista di ambiti per quell'utente
+    }
+
+    @GetMapping("/{id}/hobby")
+    public ResponseEntity<List<Hobby>> getHobbyByUtente(@PathVariable Integer id) {
+        UtenteGenerale utente = utenteGeneraleRepository.findById(id).orElse(null);
+        if (utente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(utente.getHobby()); // Ottieni la lista di ambiti per quell'utente
     }
 
     @Override //cancellato=true

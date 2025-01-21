@@ -1,44 +1,49 @@
 package com.weplus.app.controller;
 
-import com.weplus.app.entita.IndiceHobby;
-import com.weplus.app.repository.IndiceHobbyRepository;
+import com.weplus.app.entita.Hobby;
+import com.weplus.app.entita.UtenteGenerale;
+import com.weplus.app.repository.HobbyRepository;
+import com.weplus.app.repository.UtenteGeneraleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/IndiceHobby")
-public class IndiceHobbyController implements IController<IndiceHobby, Integer>{
+@RequestMapping("/indiceHobby")
+public class IndiceHobbyController{
 
     @Autowired
-    private IndiceHobbyRepository indiceHobbyRepository;
+    private UtenteGeneraleRepository utenteGeneraleRepository;
 
-    @Override
-    public void create(@RequestBody IndiceHobby entity) {
-        indiceHobbyRepository.save(entity);
-    }
+    @Autowired
+    private HobbyRepository hobbyRepository;
 
-    @Override
-    public IndiceHobby getById(@PathVariable Integer id) {
-        return indiceHobbyRepository.findById(id).orElse(null);
-    }
+    @PostMapping
+    public ResponseEntity<String> associaHobbyAlUtente(@RequestBody Map<String, Integer> associazione) {
+        // Recupera l'utente e l'hobby tramite i loro ID
+        Integer utenteId = associazione.get("utenteId");
+        Integer hobbyId = associazione.get("hobbyId");
 
-    @Override
-    public List<IndiceHobby> getAll() {
-        return indiceHobbyRepository.findAll();
-    }
+        UtenteGenerale utente = utenteGeneraleRepository.findById(utenteId).orElse(null);
+        Hobby hobby = hobbyRepository.findById(hobbyId).orElse(null);
 
-    @Override
-    public void update(@PathVariable Integer id, @RequestBody IndiceHobby entity) {
-        //non c'è nulla da modificare
-    }
+        if (utente == null || hobby == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Utente o Hobby non trovato");
+        }
 
-    @Override //cancellato=true
-    public void delete(@PathVariable Integer id) {
-        indiceHobbyRepository.deleteById(id);
+        // Aggiungi l'hobby alla lista degli ambiti dell'utente
+        utente.getHobby().add(hobby);
+
+        // Aggiungi l'utente alla lista degli utenti dell'hobby
+        hobby.getSoggetti().add(utente);
+
+        // Salva le modifiche nel database
+        utenteGeneraleRepository.save(utente);
+        hobbyRepository.save(hobby);
+
+        return ResponseEntity.ok("Associazione effettuata con successo");
     }
 }

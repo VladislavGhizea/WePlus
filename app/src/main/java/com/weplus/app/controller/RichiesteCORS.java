@@ -1,4 +1,4 @@
-package com.weplus.app.controller;
+/*package com.weplus.app.controller;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -17,4 +17,4 @@ public class RichiesteCORS implements WebMvcConfigurer {
                 .allowedHeaders("*") // Header consentiti
                 .allowCredentials(true); // Consente l'invio di cookie o credenziali
     }
-}
+}*/

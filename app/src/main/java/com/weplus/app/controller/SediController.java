@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Sedi")
+@RequestMapping("/sedi")
 public class SediController implements IController<Sede, Integer> {
 
     @Autowired

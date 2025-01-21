@@ -23,6 +23,15 @@ public class UtenteGenerale {
     @JsonIgnore
     private List<Ambito> ambiti;
 
+    @ManyToMany
+    @JoinTable(
+            name = "IndiceHobby",  // Nome della tabella di join
+            joinColumns = @JoinColumn(name = "id_soggetto"),  // Colonna nella tabella di join per 'UtenteGenerale'
+            inverseJoinColumns = @JoinColumn(name = "id_hobby")  // Colonna nella tabella di join per 'Ambito'
+    )
+    @JsonIgnore
+    private List<Hobby> hobby;
+
     @OneToOne(mappedBy = "utenteGenerale", cascade = CascadeType.ALL, orphanRemoval = true)
     private PersonaFisica personaFisica;
 
@@ -111,6 +120,10 @@ public class UtenteGenerale {
 
     public Tipo getTipo() {
         return tipo;
+    }
+
+    public List<Hobby> getHobby() {
+        return hobby;
     }
 
     public void setTipo(Tipo tipo) {

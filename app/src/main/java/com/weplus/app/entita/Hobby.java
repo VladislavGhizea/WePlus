@@ -1,5 +1,6 @@
 package com.weplus.app.entita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,8 +13,9 @@ public class Hobby {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_hobby;
 
-    @OneToMany(mappedBy = "hobby")
-    private List<IndiceHobby> indiceHobby;
+    @ManyToMany(mappedBy = "hobby")
+    @JsonIgnore
+    private List<UtenteGenerale> soggetti;
 
     @Column(nullable = false) // Campo obbligatorio
     private String descrizione;
@@ -22,9 +24,6 @@ public class Hobby {
 
     }
 
-    public List<IndiceHobby> getIndiceHobby() {
-        return indiceHobby;
-    }
 
     public Hobby(String descrizione) {
         this.descrizione = descrizione;
@@ -40,5 +39,9 @@ public class Hobby {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public List<UtenteGenerale> getSoggetti() {
+        return soggetti;
     }
 }
