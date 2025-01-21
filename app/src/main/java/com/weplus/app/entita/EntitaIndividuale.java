@@ -5,6 +5,8 @@ import com.weplus.app.entita.listaEnum.Sesso;
 import com.weplus.app.entita.listaEnum.TipoPersGiur;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "EntitaIndividuali")
 public class EntitaIndividuale {
@@ -51,14 +53,19 @@ public class EntitaIndividuale {
     @Column(nullable = false, length=25) // Campo obbligatorio
     private String ragione_sociale;
 
-    @ManyToOne
-    @JoinColumn(name = "sede_id")
-    private Sede sede;
+    @OneToMany(mappedBy = "entitaIndividuale", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Sede> sedi;
+
+    @Transient
+    private Integer utenteGeneraleId;
+
+    @Transient
+    private Integer indirizzoFisicaId;
 
 
     public EntitaIndividuale() {}
 
-    public EntitaIndividuale(UtenteGenerale utenteGenerale,
+    public EntitaIndividuale(Integer utenteGeneraleId,
                              String nome,
                              String cognome,
                              String cf,
@@ -66,13 +73,11 @@ public class EntitaIndividuale {
                              Genere genere,
                              String comuneDiN,
                              String dataDiN,
-                             IndirizzoFisica indirizzoFisica,
+                             Integer indirizzoFisicaId,
                              String partitaIva,
                              TipoPersGiur tipo,
-                             String ragione_sociale,
-                             Sede sede) {
-        this.id_entita = id_entita;
-        this.utenteGenerale = utenteGenerale;
+                             String ragione_sociale){
+        this.utenteGeneraleId = utenteGeneraleId;
         this.nome = nome;
         this.cognome = cognome;
         this.cf = cf;
@@ -80,11 +85,10 @@ public class EntitaIndividuale {
         this.genere = genere;
         this.comuneDiN = comuneDiN;
         this.dataDiN = dataDiN;
-        this.indirizzoFisica = indirizzoFisica;
+        this.indirizzoFisicaId = indirizzoFisicaId;
         this.partitaIva = partitaIva;
         this.tipo = tipo;
         this.ragione_sociale = ragione_sociale;
-        this.sede = sede;
     }
 
     public String getRagione_sociale() {
@@ -103,8 +107,12 @@ public class EntitaIndividuale {
         return indirizzoFisica;
     }
 
-    public Sede getSede() {
-        return sede;
+    public void setUtenteGenerale(UtenteGenerale utenteGenerale) {
+        this.utenteGenerale = utenteGenerale;
+    }
+
+    public void setIndirizzoFisica(IndirizzoFisica indirizzoFisica) {
+        this.indirizzoFisica = indirizzoFisica;
     }
 
     public String getDataDiN() {
@@ -182,5 +190,17 @@ public class EntitaIndividuale {
 
     public UtenteGenerale getUtenteGenerale() {
         return utenteGenerale;
+    }
+
+    public List<Sede> getSedi() {
+        return sedi;
+    }
+
+    public Integer getUtenteGeneraleId() {
+        return utenteGeneraleId;
+    }
+
+    public Integer getIndirizzoFisicaId() {
+        return indirizzoFisicaId;
     }
 }

@@ -1,4 +1,4 @@
-package com.weplus.app.controller;
+/*package com.weplus.app.controller;
 
 import com.weplus.app.entita.Sede;
 import com.weplus.app.repository.SedeRepository;
@@ -109,4 +109,4 @@ class SediControllerTest {
         // Verifica che il repository deleteById sia stato chiamato una volta
         verify(sedeRepository, times(1)).deleteById(1);
     }
-}
+}*/

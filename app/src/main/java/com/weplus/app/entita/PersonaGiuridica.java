@@ -1,7 +1,10 @@
 package com.weplus.app.entita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.weplus.app.entita.listaEnum.TipoPersGiur;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "PersonaGiuridica")
@@ -24,30 +27,26 @@ public class PersonaGiuridica {
     @Column(nullable = true, length = 25) // Campo opzionale
     private String ragione_sociale;
 
-    @OneToOne
-    @JoinColumn(name = "indirizzoFisica_id", nullable = false) // Associazione con entità
-    private IndirizzoFisica indirizzoFisica;
-
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "sede_id", nullable = false)
-    private Sede sede;
+    @JsonIgnore
+    private List<Sede> sede;
+
+    @Transient
+    private Integer utenteGeneraleId;
 
     public PersonaGiuridica() {
     }
 
 
-    public PersonaGiuridica(UtenteGenerale utenteGenerale,
+    public PersonaGiuridica(Integer utenteGeneraleId,
                             String partitaIva,
                             TipoPersGiur tipo,
-                            String ragione_sociale,
-                            IndirizzoFisica indirizzoFisica,
-                            Sede sede) {
-        this.utenteGenerale = utenteGenerale;
+                            String ragione_sociale) {
+        this.utenteGeneraleId = utenteGeneraleId;
         this.partitaIva = partitaIva;
         this.tipo = tipo;
         this.ragione_sociale = ragione_sociale;
-        this.indirizzoFisica = indirizzoFisica;
-        this.sede = sede;
     }
 
     public Integer getId_giuridica() {
@@ -66,22 +65,6 @@ public class PersonaGiuridica {
         return ragione_sociale;
     }
 
-    public IndirizzoFisica getIndirizzoFisica() {
-        return indirizzoFisica;
-    }
-
-    public Sede getSede() {
-        return sede;
-    }
-
-    public void setIndirizzoFisica(IndirizzoFisica indirizzoFisica) {
-        this.indirizzoFisica = indirizzoFisica;
-    }
-
-    public void setSede(Sede sede) {
-        this.sede = sede;
-    }
-
     public void setPartitaIva(String partitaIva) {
         this.partitaIva = partitaIva;
     }
@@ -97,4 +80,18 @@ public class PersonaGiuridica {
     public UtenteGenerale getUtenteGenerale() {
         return utenteGenerale;
     }
+
+    public List<Sede> getSede() {
+        return sede;
+    }
+
+    public Integer getUtenteGeneraleId() {
+        return utenteGeneraleId;
+    }
+
+    public void setUtenteGenerale(UtenteGenerale utenteGenerale) {
+        this.utenteGenerale = utenteGenerale;
+    }
+
+
 }

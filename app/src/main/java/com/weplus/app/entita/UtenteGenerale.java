@@ -62,6 +62,7 @@ public class UtenteGenerale {
 
 
     @OneToMany(mappedBy = "soggetto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Documento> documenti;
 
     public UtenteGenerale() {}
@@ -71,6 +72,7 @@ public class UtenteGenerale {
         this.email = email;
         this.password = password;
         this.tipo = tipo;
+        this.cancellato=false;
     }
 
 

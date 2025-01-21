@@ -1,8 +1,7 @@
 package com.weplus.app.entita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "Sede")
@@ -12,11 +11,15 @@ public class Sede {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
     private Integer id_sede;
 
-    @OneToMany(mappedBy = "sede")
-    private List<PersonaGiuridica> personaGiuridica;
+    @ManyToOne
+    @JoinColumn(name = "giuridica_id")
+    @JsonIgnore
+    private PersonaGiuridica personaGiuridica;
 
-    @OneToMany(mappedBy = "sede") // Corretto il nome del campo
-    private List<EntitaIndividuale> entitaIndividuale;
+    @ManyToOne
+    @JoinColumn(name = "individuale_id")
+    @JsonIgnore
+    private EntitaIndividuale entitaIndividuale;
 
     @Column(nullable = false) // Campo obbligatorio
     private String indirizzo;
@@ -24,20 +27,50 @@ public class Sede {
     @Column(nullable = false) // Campo obbligatorio
     private boolean principale = false;
 
+    @Transient
+    private Integer personaGiuridicaId;
+
+    @Transient
+    private Integer entitaIndividualeId;
+
     public Sede() {}
 
-
-    public Sede(boolean principale, String indirizzo) {
+    public Sede(Integer personaGiuridicaId, boolean principale, String indirizzo) {
+        this.personaGiuridicaId = personaGiuridicaId;
         this.principale = principale;
         this.indirizzo = indirizzo;
+        this.entitaIndividualeId=null;
     }
 
-    public List<PersonaGiuridica> getPersonaGiuridica() {
+    public void setEntitaIndividuale(EntitaIndividuale entitaIndividuale) {
+        this.entitaIndividuale = entitaIndividuale;
+    }
+
+    public EntitaIndividuale getEntitaIndividuale() {
+        return entitaIndividuale;
+    }
+
+    public Integer getEntitaIndividualeId() {
+        return entitaIndividualeId;
+    }
+
+    public Sede(Integer entitaIndividualeId, String indirizzo, boolean principale) {
+        this.entitaIndividualeId = entitaIndividualeId;
+        this.indirizzo = indirizzo;
+        this.principale = principale;
+        this.personaGiuridicaId=null;
+    }
+
+    public void setPersonaGiuridica(PersonaGiuridica personaGiuridica) {
+        this.personaGiuridica = personaGiuridica;
+    }
+
+    public PersonaGiuridica getPersonaGiuridica() {
         return personaGiuridica;
     }
 
-    public List<EntitaIndividuale> getEntitaIndividuale() {
-        return entitaIndividuale;
+    public Integer getPersonaGiuridicaId() {
+        return personaGiuridicaId;
     }
 
     public Integer getId_sede() {

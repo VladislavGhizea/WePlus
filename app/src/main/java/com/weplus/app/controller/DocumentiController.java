@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Documenti")
+@RequestMapping("/documenti")
 public class DocumentiController implements IController<Documento, Integer>{
 
     @Autowired

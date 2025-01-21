@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Hobby")
+@RequestMapping("/hobby")
 public class HobbyController implements IController<Hobby, Integer>{
 
     @Autowired

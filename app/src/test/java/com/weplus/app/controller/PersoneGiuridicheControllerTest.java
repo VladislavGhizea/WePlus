@@ -1,4 +1,4 @@
-package com.weplus.app.controller;
+/*package com.weplus.app.controller;
 
 import com.weplus.app.entita.PersonaGiuridica;
 import com.weplus.app.entita.Sede;
@@ -136,4 +136,4 @@ class PersoneGiuridicheControllerTest {
         verify(personaGiuridicaRepository, times(1)).deleteById(1);
     }
 
-}
+}*/

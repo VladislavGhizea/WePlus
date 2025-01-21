@@ -1,6 +1,7 @@
 package com.weplus.app.entita;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.weplus.app.entita.listaEnum.TipoDoc;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -12,8 +13,8 @@ public class Documento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_documento;
 
-    @Column(nullable = false, length = 15)
-    private String tipo;
+    @Column(nullable = false)
+    private TipoDoc tipo;
 
     @Column(nullable = true)
     private Integer numero;
@@ -40,24 +41,24 @@ public class Documento {
     }
 
     public Integer getSoggettoId() {
-        return soggetto != null ? soggetto.getId_generale() : soggettoId;
+        return soggetto.getId_generale();
     }
 
     public Documento() {
     }
 
-    public Documento(String tipo,
+    public Documento(TipoDoc tipo,
                      Integer numero,
                      Date scadenza,
                      String enteEmissivo,
                      Date dataEmissione,
-                     UtenteGenerale soggetto) {
+                     Integer soggettoId) {
         this.tipo = tipo;
         this.numero = numero;
         this.scadenza = scadenza;
         this.enteEmissivo = enteEmissivo;
         this.dataEmissione = dataEmissione;
-        this.soggetto = soggetto;
+        this.soggettoId = soggettoId;
     }
 
     // Getter e Setter
@@ -65,11 +66,11 @@ public class Documento {
         return id_documento;
     }
 
-    public String getTipo() {
+    public TipoDoc getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoDoc tipo) {
         this.tipo = tipo;
     }
 
@@ -112,4 +113,6 @@ public class Documento {
     public void setSoggetto(UtenteGenerale soggetto) {
         this.soggetto = soggetto;
     }
+
+
 }
