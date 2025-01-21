@@ -32,6 +32,10 @@ public class UtenteGenerale {
     @JsonIgnore
     private List<Hobby> hobby;
 
+    @OneToMany(mappedBy = "soggetto_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<NumeroTelefono> numeroTelefono;
+
     @OneToOne(mappedBy = "utenteGenerale", cascade = CascadeType.ALL, orphanRemoval = true)
     private PersonaFisica personaFisica;
 
@@ -84,6 +88,10 @@ public class UtenteGenerale {
 
     public PersonaFisica getPersonaFisica() {
         return personaFisica;
+    }
+
+    public List<NumeroTelefono> getNumeroTelefono() {
+        return numeroTelefono;
     }
 
     public PersonaGiuridica getPersonaGiuridica() {

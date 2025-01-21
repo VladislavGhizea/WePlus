@@ -1,5 +1,6 @@
 package com.weplus.app.entita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,13 +16,17 @@ public class NumeroTelefono {
 
     @ManyToOne
     @JoinColumn(name = "soggetto_id", nullable = false)
+    @JsonIgnore
     private UtenteGenerale soggetto;
+
+    @Transient
+    private Integer soggettoId;
 
     public NumeroTelefono() {}
 
-    public NumeroTelefono(Integer numero, UtenteGenerale soggetto) {
+    public NumeroTelefono(Integer numero, Integer soggettoId) {
         this.numero = numero;
-        this.soggetto = soggetto;
+        this.soggettoId = soggettoId;
     }
 
     public Integer getId_numTel() {
@@ -36,6 +41,13 @@ public class NumeroTelefono {
         return soggetto;
     }
 
+    public Integer getSoggettoId() {
+        return soggettoId;
+    }
+
+    public void setSoggetto(UtenteGenerale soggetto) {
+        this.soggetto = soggetto;
+    }
 
     public void setNumero(Integer numero) {
         this.numero = numero;
