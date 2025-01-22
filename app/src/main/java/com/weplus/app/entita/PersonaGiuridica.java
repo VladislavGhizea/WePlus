@@ -1,6 +1,7 @@
 package com.weplus.app.entita;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.weplus.app.entita.listaEnum.TipoPersGiur;
 import jakarta.persistence.*;
 
@@ -12,10 +13,11 @@ public class PersonaGiuridica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer id_giuridica;
+    @Column(name = "giuridica_id")
+    private Integer giuridica_id;
 
     @OneToOne
-    @JoinColumn(name = "soggetto_id", nullable = false, unique = true)
+    @JoinColumn(name = "soggetto_id", nullable = false, unique = true, insertable = false, updatable = false)
     private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false, length = 11) // Campo obbligatorio
@@ -28,11 +30,11 @@ public class PersonaGiuridica {
     private String ragione_sociale;
 
     @OneToMany
-    @JoinColumn(name = "sede_id", nullable = false)
+    @JoinColumn(name = "sede_id", nullable = false, insertable = false, updatable = false)
     @JsonIgnore
     private List<Sede> sede;
 
-    @Transient
+    @Column(name = "soggetto_id", insertable = true, updatable = true)
     private Integer utenteGeneraleId;
 
     public PersonaGiuridica() {
@@ -49,8 +51,8 @@ public class PersonaGiuridica {
         this.ragione_sociale = ragione_sociale;
     }
 
-    public Integer getId_giuridica() {
-        return id_giuridica;
+    public Integer getGiuridica_id() {
+        return giuridica_id;
     }
 
     public String getPartitaIva() {
@@ -85,6 +87,7 @@ public class PersonaGiuridica {
         return sede;
     }
 
+    @JsonProperty("utenteGeneraleId")
     public Integer getUtenteGeneraleId() {
         return utenteGeneraleId;
     }

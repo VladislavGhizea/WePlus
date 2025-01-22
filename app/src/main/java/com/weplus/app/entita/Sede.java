@@ -1,6 +1,7 @@
 package com.weplus.app.entita;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,15 +10,16 @@ public class Sede {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer id_sede;
+    @Column(name = "sede_id")
+    private Integer sede_id;
 
     @ManyToOne
-    @JoinColumn(name = "giuridica_id")
+    @JoinColumn(name = "giuridica_id", insertable = false, updatable = false)
     @JsonIgnore
     private PersonaGiuridica personaGiuridica;
 
     @ManyToOne
-    @JoinColumn(name = "individuale_id")
+    @JoinColumn(name = "entita_id", insertable = false, updatable = false)
     @JsonIgnore
     private EntitaIndividuale entitaIndividuale;
 
@@ -27,10 +29,10 @@ public class Sede {
     @Column(nullable = false) // Campo obbligatorio
     private boolean principale = false;
 
-    @Transient
+    @Column(name = "giuridica_id", insertable = true, updatable = true)
     private Integer personaGiuridicaId;
 
-    @Transient
+    @Column(name = "entita_id", insertable = true, updatable = true)
     private Integer entitaIndividualeId;
 
     public Sede() {}
@@ -50,6 +52,7 @@ public class Sede {
         return entitaIndividuale;
     }
 
+    @JsonProperty("entitaIndividualeId")
     public Integer getEntitaIndividualeId() {
         return entitaIndividualeId;
     }
@@ -69,12 +72,13 @@ public class Sede {
         return personaGiuridica;
     }
 
+    @JsonProperty("personaGiuridicaId")
     public Integer getPersonaGiuridicaId() {
         return personaGiuridicaId;
     }
 
-    public Integer getId_sede() {
-        return id_sede;
+    public Integer getSede_id() {
+        return sede_id;
     }
 
     public String getIndirizzo() {
@@ -92,4 +96,6 @@ public class Sede {
     public void setPrincipale(boolean principale) {
         this.principale = principale;
     }
+
+
 }

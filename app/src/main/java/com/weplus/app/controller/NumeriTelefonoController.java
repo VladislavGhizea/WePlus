@@ -1,12 +1,10 @@
 package com.weplus.app.controller;
 
-import com.weplus.app.entita.Ambito;
 import com.weplus.app.entita.NumeroTelefono;
 import com.weplus.app.entita.UtenteGenerale;
 import com.weplus.app.repository.NumeriTelefonoRepository;
 import com.weplus.app.repository.UtenteGeneraleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +46,9 @@ public class NumeriTelefonoController {
     public void update(@PathVariable Integer id, @RequestBody NumeroTelefono entity) {
         NumeroTelefono existingNumeroTelefono = numeriTelefonoRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("NumeroTelefono con id " + id + " non trovato"));
-        existingNumeroTelefono.setNumero(entity.getNumero());
+        existingNumeroTelefono.setNumeroUno(entity.getNumeroUno());
+        existingNumeroTelefono.setNumeroDue(entity.getNumeroDue());
+        existingNumeroTelefono.setNumeroTre(entity.getNumeroTre());
 
          numeriTelefonoRepository.save(existingNumeroTelefono); // Salva l'oggetto aggiornato
     }

@@ -19,7 +19,7 @@ public class UtenteGenerale {
     @JoinTable(
             name = "IndiceAmbito",  // Nome della tabella di join
             joinColumns = @JoinColumn(name = "soggetto_id"),  // Colonna nella tabella di join per 'UtenteGenerale'
-            inverseJoinColumns = @JoinColumn(name = "id_ambito")  // Colonna nella tabella di join per 'Ambito'
+            inverseJoinColumns = @JoinColumn(name = "ambito_id")  // Colonna nella tabella di join per 'Ambito'
     )
     @JsonIgnore
     private List<Ambito> ambiti;
@@ -28,14 +28,14 @@ public class UtenteGenerale {
     @JoinTable(
             name = "IndiceHobby",  // Nome della tabella di join
             joinColumns = @JoinColumn(name = "soggetto_id"),  // Colonna nella tabella di join per 'UtenteGenerale'
-            inverseJoinColumns = @JoinColumn(name = "id_hobby")  // Colonna nella tabella di join per 'Ambito'
+            inverseJoinColumns = @JoinColumn(name = "hobby_id")  // Colonna nella tabella di join per 'Ambito'
     )
     @JsonIgnore
     private List<Hobby> hobby;
 
-    @OneToMany(mappedBy = "soggetto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "soggetto", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<NumeroTelefono> numeroTelefono;
+    private NumeroTelefono numeroTelefono;
 
     @OneToOne(mappedBy = "utenteGenerale", cascade = CascadeType.ALL, orphanRemoval = true)
     private PersonaFisica personaFisica;
@@ -61,7 +61,6 @@ public class UtenteGenerale {
     @Column(nullable = false) // Campo obbligatorio
     private boolean cancellato=false;
 
-
     @OneToMany(mappedBy = "soggetto", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Documento> documenti;
@@ -75,7 +74,6 @@ public class UtenteGenerale {
         this.tipo = tipo;
         this.cancellato=false;
     }
-
 
     public Integer getSoggetto_id() {
         return soggetto_id;
@@ -93,7 +91,7 @@ public class UtenteGenerale {
         return personaFisica;
     }
 
-    public List<NumeroTelefono> getNumeroTelefono() {
+    public NumeroTelefono getNumeroTelefono() {
         return numeroTelefono;
     }
 
@@ -147,17 +145,5 @@ public class UtenteGenerale {
 
     public void setCancellato(boolean cancellato) {
         this.cancellato = cancellato;
-    }
-
-    @Override
-    public String toString() {
-        return "UtenteGenerale{" +
-                "id_generale=" + soggetto_id.toString() +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", tipo=" + tipo +
-                ", cancellato=" + cancellato +
-                '}';
     }
 }

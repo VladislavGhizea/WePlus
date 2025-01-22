@@ -1,5 +1,7 @@
 package com.weplus.app.entita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,10 +10,12 @@ public class IndirizzoFisica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer id_indirizzo;
+    @Column(name = "indirizzo_id")
+    private Integer indirizzo_id;
 
     @OneToOne
-    @JoinColumn(name = "soggetto_id", referencedColumnName = "soggetto_id")
+    @JoinColumn(name = "soggetto_id", referencedColumnName = "soggetto_id", insertable = false, updatable = false)
+    @JsonIgnore
     private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false) // Campo obbligatorio
@@ -20,16 +24,20 @@ public class IndirizzoFisica {
     @Column(nullable = false) // Campo obbligatorio
     private String indiResidenza;
 
+    @Column(name = "soggetto_id", insertable = true, updatable = true, nullable = false)
+    private Integer soggettoId;  // ID della FK
+
     public IndirizzoFisica() {
     }
 
-    public IndirizzoFisica(String indiDomicilio, String indiResidenza) {
+    public IndirizzoFisica(Integer soggettoId, String indiDomicilio, String indiResidenza) {
         this.indiDomicilio = indiDomicilio;
         this.indiResidenza = indiResidenza;
+        this.soggettoId=soggettoId;
     }
 
-    public Integer getId_indirizzo() {
-        return id_indirizzo;
+    public Integer getIndirizzo_id() {
+        return indirizzo_id;
     }
 
     public UtenteGenerale getUtenteGenerale() {
@@ -52,5 +60,12 @@ public class IndirizzoFisica {
         this.indiResidenza = indiResidenza;
     }
 
+    @JsonProperty("soggettoId")
+    public Integer getSoggettoId() {
+        return soggettoId;
+    }
 
+    public void setUtenteGenerale(UtenteGenerale utenteGenerale) {
+        this.utenteGenerale = utenteGenerale;
+    }
 }

@@ -34,7 +34,7 @@ public class Documento {
     @JsonIgnore
     private UtenteGenerale soggetto;
 
-    @Column(name = "soggetto_id", insertable = true, updatable = true)  // Qui
+    @Column(name = "soggetto_id", insertable = true, updatable = true)
     private Integer soggettoId;  // ID della FK
 
     public void setSoggettoId(Integer soggettoId) {

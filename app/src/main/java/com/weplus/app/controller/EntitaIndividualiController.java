@@ -30,6 +30,12 @@ public class EntitaIndividualiController implements IController<EntitaIndividual
                 .orElseThrow(() -> new IllegalArgumentException("Utente con ID " + entity.getUtenteGeneraleId() + " non trovato"));
         entity.setUtenteGenerale(utente);
 
+        IndirizzoFisica indirizzo = indirizziFisicaRepository.findById(entity.getIndirizzoFisicaId())
+                .orElseThrow(() -> new IllegalArgumentException("indirizzo con ID " + entity.getIndirizzoFisicaId() + " non trovato"));
+        entity.setIndirizzoFisica(indirizzo);
+
+        indirizzo.setUtenteGenerale(utente);
+
         entitaIndividualeRepository.save(entity);
     }
 
@@ -64,8 +70,7 @@ public class EntitaIndividualiController implements IController<EntitaIndividual
         existingEntita.setComuneDiN(entity.getComuneDiN());
         existingEntita.setDataDiN(entity.getDataDiN());
         existingEntita.setPartitaIva(entity.getPartitaIva());
-        existingEntita.setTipo(entity.getTipo());
-        existingEntita.setRagione_sociale(entity.getRagione_sociale()); // Salva l'oggetto aggiornato
+        existingEntita.setRagioneSociale(entity.getRagioneSociale()); // Salva l'oggetto aggiornato
 
         entitaIndividualeRepository.save(existingEntita);
     }
