@@ -18,6 +18,7 @@ export default {
         darkGrey: "var(--dark-grey)",
         backgroundBlue: "var(--background-blue)",
         textGrey: "var(--text-grey)",
+        iconGrey: "var(--icon-grey)",
       },
     },
   },

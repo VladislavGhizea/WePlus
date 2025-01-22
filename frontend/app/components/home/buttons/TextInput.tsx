@@ -1,12 +1,15 @@
 "use client";
 import React, { useState, useCallback } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import classNames from "classnames";
 
 interface Props {
   text: string;
   type: string;
   options?: string[];
   classNameContainer?: string;
+  width?: string;
+  height?: string;
 }
 
 const TextInput: React.FC<Props> = ({
@@ -14,6 +17,8 @@ const TextInput: React.FC<Props> = ({
   type,
   options,
   classNameContainer = "",
+  width = "w-full",
+  height = "h-[4.5rem]",
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -22,13 +27,12 @@ const TextInput: React.FC<Props> = ({
   }, []);
 
   const renderInput = () => {
+    const inputClass = classNames(width, height, "rounded-2xl", "text-2xl", "px-[1rem]", "pr-[3rem]");
+    
     switch (type) {
       case "select":
         return (
-          <select
-            className="w-full h-[4.5rem] rounded-2xl text-2xl px-[1rem] pr-[3rem]"
-            defaultValue=""
-          >
+          <select className={inputClass} defaultValue="">
             <option value="" disabled>
               {text}
             </option>
@@ -50,7 +54,7 @@ const TextInput: React.FC<Props> = ({
         return (
           <>
             <input
-              className="w-full h-[4.5rem] rounded-2xl text-2xl px-[1rem] pr-[3rem]"
+              className={inputClass}
               placeholder={text}
               type={showPassword ? "text" : "password"}
             />
@@ -69,7 +73,7 @@ const TextInput: React.FC<Props> = ({
       default:
         return (
           <input
-            className="w-full h-[4.5rem] rounded-2xl text-2xl px-[1rem] pr-[3rem]"
+            className={inputClass}
             placeholder={text}
             type={type}
           />
@@ -78,7 +82,7 @@ const TextInput: React.FC<Props> = ({
   };
 
   return (
-    <div className={`relative ${classNameContainer}`}>{renderInput()}</div>
+    <div className={classNames("relative", classNameContainer)}>{renderInput()}</div>
   );
 };
 

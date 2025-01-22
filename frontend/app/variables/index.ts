@@ -1,2 +1,3 @@
 import { Fisiche, Giuridiche, Individuali } from "./entities";
-export { Fisiche, Giuridiche, Individuali };
+import { SERVER }  from "./constants";
+export { Fisiche, Giuridiche, Individuali, SERVER };

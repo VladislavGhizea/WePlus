@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
+import classNames from "classnames";
+
 interface Props {
   text: string;
   className?: string;
@@ -9,7 +11,9 @@ interface Props {
   onClick?: () => void;
   width?: string;
   height?: string;
+  rounded?: string; // Aggiungi la proprietà rounded
 }
+
 const ActionButton: React.FC<Props> = ({
   text,
   className,
@@ -18,11 +22,13 @@ const ActionButton: React.FC<Props> = ({
   onClick,
   width,
   height,
+  rounded, // Aggiungi la proprietà rounded
 }) => {
   width = width || "9rem";
   height = height || "3.5rem";
   className = className || "";
   bgColor = bgColor || "bg-white";
+  rounded = rounded || "rounded-full"; // Imposta un valore predefinito per rounded
   const router = useRouter();
   const onButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -32,10 +38,11 @@ const ActionButton: React.FC<Props> = ({
       router.push(linkTo || "/");
     }
   };
+
   return (
-    <button className={className + " relative"} onClick={onButtonClick}>
+    <button className={classNames(className, "relative")} onClick={onButtonClick}>
       <div
-        className={`w-[${width}] h-[${height}] rounded-full ${bgColor}`}
+        className={classNames(`w-[${width}] h-[${height}]`, bgColor, rounded)}
         style={{ width, height }}
       >
         <div className="flex justify-center items-center h-full text-2xl">
@@ -45,4 +52,5 @@ const ActionButton: React.FC<Props> = ({
     </button>
   );
 };
+
 export default ActionButton;

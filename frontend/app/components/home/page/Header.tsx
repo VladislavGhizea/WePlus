@@ -32,8 +32,9 @@ const Header = () => {
       <IconButton
         icon={<HiArrowRightOnRectangle className="w-[3rem] h-[3rem]" />}
         onClick={handleLogoutClick}
+        className="bg-darkGrey rounded-full p-2"
       />
-      <div className="flex justify-between flex-row h-[4rem] w-[24rem] bg-darkGrey rounded-full px-4">
+      <div className="flex justify-around items-center flex-row h-[4rem] w-[24rem] bg-darkGrey rounded-full px-4">
         <IconButton
           icon={<HiOutlineHome className="w-[3rem] h-[3rem]" />}
           onClick={handleHomeClick}
@@ -52,6 +53,7 @@ const Header = () => {
       <IconButton
         icon={<HiOutlineUser className="w-[3rem] h-[3rem]" />}
         onClick={handleUserClick}
+        className="bg-darkGrey rounded-full p-2"
       />
     </div>
   );

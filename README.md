@@ -2,7 +2,7 @@
 
 <br>
 
-# **TODO swagger, docusaurus, normalizzare API, normalizzare e controllare campi frontend, LISTA ENUM, Chat MongoDB, Foto, Recensioni, AUTENTICAZIONE E SICUREZZA, Documenti, Controllo e modifica documentazione, per riferimenti a utente generale passare l'id generale assegnato**
+# **TODO swagger, docusaurus, normalizzare API, normalizzare e controllare campi frontend, LISTA ENUM, Chat MongoDB, Foto, Recensioni, AUTENTICAZIONE E SICUREZZA, Documenti, Controllo e modifica documentazione, per riferimenti a utente generale passare l'id generale assegnato, MODULO DI PSW DIMENTICATA, CONTROLLO CAMPI E NORMALIZZAZIONE frontend, SCROLLBAR LATERALE filtri, Cambio tipo entità giuridica**
 
 
 <br><br><br>
