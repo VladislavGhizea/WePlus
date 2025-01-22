@@ -1,6 +1,7 @@
 package com.weplus.app.entita;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.weplus.app.entita.listaEnum.TipoDoc;
 import jakarta.persistence.*;
 import java.util.Date;
@@ -29,19 +30,20 @@ public class Documento {
     private Date dataEmissione;
 
     @ManyToOne
-    @JoinColumn(name = "soggetto_id", nullable = false, referencedColumnName = "soggetto_id")
+    @JoinColumn(name = "soggetto_id", nullable = false, insertable = false, updatable = false)  // Qui
     @JsonIgnore
     private UtenteGenerale soggetto;
 
-    @Transient
-    private Integer soggettoId;
+    @Column(name = "soggetto_id", insertable = true, updatable = true)  // Qui
+    private Integer soggettoId;  // ID della FK
 
     public void setSoggettoId(Integer soggettoId) {
         this.soggettoId = soggettoId;
     }
 
+    @JsonProperty("soggettoId")
     public Integer getSoggettoId() {
-        return soggetto.getSoggetto_id();
+        return soggettoId;
     }
 
     public Documento() {
@@ -59,6 +61,7 @@ public class Documento {
         this.enteEmissivo = enteEmissivo;
         this.dataEmissione = dataEmissione;
         this.soggettoId = soggettoId;
+
     }
 
     // Getter e Setter

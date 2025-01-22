@@ -30,10 +30,6 @@ public class EntitaIndividualiController implements IController<EntitaIndividual
                 .orElseThrow(() -> new IllegalArgumentException("Utente con ID " + entity.getUtenteGeneraleId() + " non trovato"));
         entity.setUtenteGenerale(utente);
 
-        IndirizzoFisica indirizzoFisica = indirizziFisicaRepository.findById(entity.getIndirizzoFisicaId())
-                .orElseThrow(() -> new IllegalArgumentException("Indirizzo con ID " + entity.getIndirizzoFisicaId() + " non trovato"));
-        entity.setIndirizzoFisica(indirizzoFisica);
-
         entitaIndividualeRepository.save(entity);
     }
 
