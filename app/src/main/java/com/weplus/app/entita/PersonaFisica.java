@@ -1,6 +1,8 @@
 package com.weplus.app.entita;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.weplus.app.entita.listaEnum.Genere;
 import com.weplus.app.entita.listaEnum.Sesso;
 import jakarta.persistence.*;
@@ -11,7 +13,8 @@ public class PersonaFisica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer id_fisica;
+    @Column(name = "fisica_id")
+    private Integer fisica_id;
 
     @Column(nullable = false, length=20) // Campo obbligatorio
     private String nome;
@@ -20,7 +23,8 @@ public class PersonaFisica {
     private String cognome;
 
     @OneToOne
-    @JoinColumn(name = "soggetto_id", nullable = false, unique = true) // Relazione con UtenteGenerale
+    @JoinColumn(name = "soggetto_id", nullable = false, unique = true, insertable = false, updatable = false) // Relazione con UtenteGenerale
+    @JsonIgnore
     private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false, length=16) // Campo obbligatorio
@@ -39,13 +43,14 @@ public class PersonaFisica {
     private String dataDiN;
 
     @OneToOne
-    @JoinColumn(name = "indirizzo_id", nullable = false)
+    @JoinColumn(name = "indirizzo_id", nullable = false, insertable = false, updatable = false)
+    @JsonIgnore
     private IndirizzoFisica indirizzo;
 
-    @Transient
+    @Column(name = "indirizzo_id", insertable = true, updatable = true)
     private Integer indirizzoFisicaId;
 
-    @Transient
+    @Column(name = "soggetto_id", insertable = true, updatable = true)
     private Integer utenteGeneraleId;
 
     public PersonaFisica() {}
@@ -103,8 +108,8 @@ public class PersonaFisica {
         return nome;
     }
 
-    public Integer getId_fisica() {
-        return id_fisica;
+    public Integer getFisica_id() {
+        return fisica_id;
     }
 
     public void setDataDiN(String dataDiN) {
@@ -151,13 +156,17 @@ public class PersonaFisica {
         return utenteGenerale;
     }
 
+    @JsonProperty("indirizzoFisicaId")
     public Integer getIndirizzoFisicaId() {
         return indirizzoFisicaId;
     }
 
+    @JsonProperty("utenteGeneraleId")
     public Integer getUtenteGeneraleId() {
         return utenteGeneraleId;
     }
+
+
 }
 
 

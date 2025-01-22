@@ -11,7 +11,8 @@ public class Ambito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer id_ambito;
+    @Column(name = "ambito_id")
+    private Integer ambito_id;
 
     @ManyToMany(mappedBy = "ambiti")
     @JsonIgnore
@@ -31,8 +32,8 @@ public class Ambito {
         return soggetti;
     }
 
-    public Integer getId_ambito() {
-        return id_ambito;
+    public Integer getAmbito_id() {
+        return ambito_id;
     }
 
     public String getNome() {

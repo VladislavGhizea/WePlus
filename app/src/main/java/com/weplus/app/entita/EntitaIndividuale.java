@@ -1,5 +1,7 @@
 package com.weplus.app.entita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.weplus.app.entita.listaEnum.Genere;
 import com.weplus.app.entita.listaEnum.Sesso;
 import com.weplus.app.entita.listaEnum.TipoPersGiur;
@@ -13,10 +15,12 @@ public class EntitaIndividuale {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer id_entita;
+    @Column(name = "entita_id")
+    private Integer entita_id;
 
     @OneToOne
-    @JoinColumn(name = "soggetto_id", nullable = false, unique = true)
+    @JoinColumn(name = "soggetto_id", nullable = false, unique = true, insertable = false, updatable = false)
+    @JsonIgnore
     private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false, length=20) // Campo obbligatorio
@@ -41,25 +45,24 @@ public class EntitaIndividuale {
     private String dataDiN;
 
     @OneToOne //configura anche nella tab indirizzi
-    @JoinColumn(name = "indirizzoFisica_id", nullable = false) // Campo obbligatorio
+    @JoinColumn(name = "indirizzo_id", nullable = false, insertable = false, updatable = false) // Campo obbligatorio
+    @JsonIgnore
     private IndirizzoFisica indirizzoFisica;
 
     @Column(nullable = false, length=11) // Campo obbligatorio
     private String partitaIva;
 
-    @Column(nullable = false) // Campo obbligatorio
-    private TipoPersGiur tipo;
-
     @Column(nullable = false, length=25) // Campo obbligatorio
-    private String ragione_sociale;
+    private String ragioneSociale;
 
     @OneToMany(mappedBy = "entitaIndividuale", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Sede> sedi;
 
-    @Transient
+    @Column(name = "soggetto_id", insertable = true, updatable = true)
     private Integer utenteGeneraleId;
 
-    @Transient
+    @Column(name = "indirizzo_id", insertable = true, updatable = true)
     private Integer indirizzoFisicaId;
 
 
@@ -75,8 +78,7 @@ public class EntitaIndividuale {
                              String dataDiN,
                              Integer indirizzoFisicaId,
                              String partitaIva,
-                             TipoPersGiur tipo,
-                             String ragione_sociale){
+                             String ragioneSociale){
         this.utenteGeneraleId = utenteGeneraleId;
         this.nome = nome;
         this.cognome = cognome;
@@ -87,16 +89,11 @@ public class EntitaIndividuale {
         this.dataDiN = dataDiN;
         this.indirizzoFisicaId = indirizzoFisicaId;
         this.partitaIva = partitaIva;
-        this.tipo = tipo;
-        this.ragione_sociale = ragione_sociale;
+        this.ragioneSociale = ragioneSociale;
     }
 
-    public String getRagione_sociale() {
-        return ragione_sociale;
-    }
-
-    public TipoPersGiur getTipo() {
-        return tipo;
+    public String getRagioneSociale() {
+        return ragioneSociale;
     }
 
     public String getPartitaIva() {
@@ -143,10 +140,6 @@ public class EntitaIndividuale {
         return nome;
     }
 
-    public Integer getId_entita() {
-        return id_entita;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -175,17 +168,12 @@ public class EntitaIndividuale {
         this.dataDiN = dataDiN;
     }
 
-
     public void setPartitaIva(String partitaIva) {
         this.partitaIva = partitaIva;
     }
 
-    public void setTipo(TipoPersGiur tipo) {
-        this.tipo = tipo;
-    }
-
-    public void setRagione_sociale(String ragione_sociale) {
-        this.ragione_sociale = ragione_sociale;
+    public void setRagioneSociale(String ragioneSociale) {
+        this.ragioneSociale = ragioneSociale;
     }
 
     public UtenteGenerale getUtenteGenerale() {
@@ -196,11 +184,19 @@ public class EntitaIndividuale {
         return sedi;
     }
 
+    @JsonProperty("utenteGeneraleId")
     public Integer getUtenteGeneraleId() {
         return utenteGeneraleId;
     }
 
+    @JsonProperty("indirizzoFisicaId")
     public Integer getIndirizzoFisicaId() {
         return indirizzoFisicaId;
     }
+
+    public Integer getEntita_id() {
+        return entita_id;
+    }
+
+
 }

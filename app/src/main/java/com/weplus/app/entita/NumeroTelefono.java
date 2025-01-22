@@ -1,6 +1,7 @@
 package com.weplus.app.entita;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,38 +10,48 @@ public class NumeroTelefono {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer id_numTel;
+    @Column(name = "numTel_id")
+    private Integer numTel_id;
 
-    @Column(nullable = false) // Campo obbligatorio
-    private Integer numero;
+    @Column(nullable = false, length = 10) // Campo obbligatorio
+    private Integer numeroUno;
+
+    @Column(length = 10)
+    private Integer numeroDue;
+
+    @Column(length = 10)
+    private Integer numeroTre;
 
     @ManyToOne
-    @JoinColumn(name = "soggetto_id", nullable = false)
+    @JoinColumn(name = "soggetto_id", nullable = false, insertable = false, updatable = false)
     @JsonIgnore
     private UtenteGenerale soggetto;
 
-    @Transient
+    @Column(name = "soggetto_id", insertable = true, updatable = true, nullable = false)
     private Integer soggettoId;
 
     public NumeroTelefono() {}
 
-    public NumeroTelefono(Integer numero, Integer soggettoId) {
-        this.numero = numero;
+    public NumeroTelefono(Integer numeroUno, Integer numeroDue, Integer numeroTre, Integer soggettoId) {
+        this.numeroUno = numeroUno;
+        this.numeroDue = numeroDue;
+        this.numeroTre = numeroTre;
         this.soggettoId = soggettoId;
     }
 
-    public Integer getId_numTel() {
-        return id_numTel;
+    public Integer getNumTel_id() {
+        return numTel_id;
     }
 
-    public Integer getNumero() {
-        return numero;
+    public Integer getNumeroUno() {
+        return numeroUno;
     }
 
     public UtenteGenerale getSoggetto() {
         return soggetto;
     }
 
+    @JsonProperty("soggettoId")
     public Integer getSoggettoId() {
         return soggettoId;
     }
@@ -49,7 +60,25 @@ public class NumeroTelefono {
         this.soggetto = soggetto;
     }
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setNumeroUno(Integer numeroUno) {
+        this.numeroUno = numeroUno;
     }
+
+    public Integer getNumeroDue() {
+        return numeroDue;
+    }
+
+    public void setNumeroDue(Integer numeroDue) {
+        this.numeroDue = numeroDue;
+    }
+
+    public Integer getNumeroTre() {
+        return numeroTre;
+    }
+
+    public void setNumeroTre(Integer numeroTre) {
+        this.numeroTre = numeroTre;
+    }
+
+
 }

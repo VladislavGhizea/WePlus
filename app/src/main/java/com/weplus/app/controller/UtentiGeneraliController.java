@@ -67,16 +67,16 @@ public class UtentiGeneraliController implements IController<UtenteGenerale, Int
         if (utente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-        return ResponseEntity.ok(utente.getHobby()); // Ottieni la lista di ambiti per quell'utente
+        return ResponseEntity.ok(utente.getHobby()); // Ottieni la lista di hobby dell'utente
     }
 
     @GetMapping("/{id}/numeriTelefono")
-    public ResponseEntity<List<NumeroTelefono>> getNumeroTelefonoByUtente(@PathVariable Integer id) {
+    public ResponseEntity<NumeroTelefono> getNumeroTelefonoByUtente(@PathVariable Integer id) {
         UtenteGenerale utente = utenteGeneraleRepository.findById(id).orElse(null);
         if (utente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-        return ResponseEntity.ok(utente.getNumeroTelefono()); // Ottieni la lista di ambiti per quell'utente
+        return ResponseEntity.ok(utente.getNumeroTelefono()); // Ottieni numeri di quell'utente
     }
 
     @Override //cancellato=true

@@ -11,7 +11,8 @@ public class Hobby {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment
-    private Integer id_hobby;
+    @Column(name = "hobby_id")
+    private Integer hobby_id;
 
     @ManyToMany(mappedBy = "hobby")
     @JsonIgnore
@@ -29,8 +30,8 @@ public class Hobby {
         this.descrizione = descrizione;
     }
 
-    public Integer getId_hobby() {
-        return id_hobby;
+    public Integer getHobby_id() {
+        return hobby_id;
     }
 
     public String getDescrizione() {

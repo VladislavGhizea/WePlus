@@ -1,7 +1,9 @@
 package com.weplus.app.controller;
 
 import com.weplus.app.entita.IndirizzoFisica;
+import com.weplus.app.entita.UtenteGenerale;
 import com.weplus.app.repository.IndirizziFisicaRepository;
+import com.weplus.app.repository.UtenteGeneraleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,8 +18,14 @@ public class IndirizziFisicaController implements IController<IndirizzoFisica, I
     @Autowired
     private IndirizziFisicaRepository indirizzoFisicaRepository;
 
+    @Autowired
+    private UtenteGeneraleRepository utenteGeneraleRepository;
+
     @Override
     public void create(@RequestBody IndirizzoFisica entity) {
+        UtenteGenerale utente = utenteGeneraleRepository.findById(entity.getSoggettoId())
+                .orElseThrow(() -> new IllegalArgumentException("Utente con ID " + entity.getSoggettoId() + " non trovato"));
+        entity.setUtenteGenerale(utente);
        indirizzoFisicaRepository.save(entity);
     }
 

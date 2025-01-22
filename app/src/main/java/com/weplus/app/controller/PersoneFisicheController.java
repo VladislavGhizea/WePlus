@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/personaFisica")
+@RequestMapping("/personeFisiche")
 public class PersoneFisicheController implements IController<PersonaFisica, Integer> {
 
     @Autowired
@@ -36,6 +36,7 @@ public class PersoneFisicheController implements IController<PersonaFisica, Inte
         IndirizzoFisica indirizzoFisica = indirizziFisicaRepository.findById(entity.getUtenteGeneraleId())
                 .orElseThrow(() -> new IllegalArgumentException("Indirizzo con ID " + entity.getIndirizzo() + " non trovato"));
         entity.setIndirizzo(indirizzoFisica);
+        indirizzoFisica.setUtenteGenerale(utente);
 
         personaFisicaRepository.save(entity);
     }
