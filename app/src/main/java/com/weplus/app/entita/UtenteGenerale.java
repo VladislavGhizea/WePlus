@@ -38,12 +38,15 @@ public class UtenteGenerale {
     private NumeroTelefono numeroTelefono;
 
     @OneToOne(mappedBy = "utenteGenerale", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private PersonaFisica personaFisica;
 
     @OneToOne(mappedBy = "utenteGenerale", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private PersonaGiuridica personaGiuridica;
 
     @OneToOne(mappedBy = "utenteGenerale", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private EntitaIndividuale entitaIndividuale;
 
     @Column(nullable = false) // Campo obbligatorio
