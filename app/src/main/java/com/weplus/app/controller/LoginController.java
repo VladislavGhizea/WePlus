@@ -29,13 +29,13 @@ public class LoginController {
         if (utenteOpt.isPresent()) {
             UtenteGenerale utente = utenteOpt.get();
 
-            // Restituisce la password criptata nel database (già criptata dal frontend)
-            return ResponseEntity.ok(new LoginResponse(true, utente.getPassword()));
+            // Restituisce utente
+            return ResponseEntity.ok(new LoginResponse(utente));
         }
 
         // Se username non trovato o credenziali non valide, ritorna un errore
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(new LoginResponse(false, null));
+                .body(new LoginResponse(null));
     }
 
 }

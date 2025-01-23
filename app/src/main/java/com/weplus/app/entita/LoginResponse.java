@@ -1,20 +1,16 @@
 package com.weplus.app.entita;
 
+import com.weplus.app.entita.listaEnum.Tipo;
+
 public class LoginResponse {
 
-    private boolean success;
-    private String password;
+    private UtenteGenerale utenteGenerale;
 
-    public LoginResponse(boolean success, String password) {
-        this.success = success;
-        this.password=password;
+    public LoginResponse(UtenteGenerale utenteGenerale) {
+        this.utenteGenerale= utenteGenerale;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public String getPassword() {
-        return password;
+    public UtenteGenerale getUtenteGenerale() {
+        return utenteGenerale;
     }
 }
