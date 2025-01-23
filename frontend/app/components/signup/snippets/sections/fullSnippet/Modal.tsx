@@ -1,5 +1,7 @@
 import { motion } from "motion/react";
 import { Header, Content, Footer } from "./";
+import React from "react";
+
 interface ModalProps {
   width: string;
   height: string;
@@ -11,6 +13,7 @@ interface ModalProps {
   handleNext: () => void;
   handlePrev: () => void;
 }
+
 const Modal: React.FC<ModalProps> = ({
   width,
   height,
@@ -34,10 +37,21 @@ const Modal: React.FC<ModalProps> = ({
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -10 }}
     transition={{ duration: 0.3 }}
+    role="dialog"
+    aria-labelledby="modal-header"
+    aria-describedby="modal-content"
   >
-    <Header parentImage={parentImage} parentText={parentText} />
-    <Content values={values} />
+    <Header
+      // id="modal-header"
+      parentImage={parentImage}
+      parentText={parentText}
+    />
+    <Content
+      //id="modal-content"
+      values={values}
+    />
     <Footer handleNext={handleNext} handlePrev={handlePrev} />
   </motion.div>
 );
+
 export default Modal;

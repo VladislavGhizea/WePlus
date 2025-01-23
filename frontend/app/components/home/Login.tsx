@@ -54,7 +54,7 @@ const Login = () => {
           <ActionButton
             text="Registrati"
             bgColor="bg-buttonBlue"
-            onClick={handleSignup}
+            linkTo="signup"
           />
         </div>
       </form>

@@ -21,11 +21,12 @@ export const login = async (
   try {
     const response = await fetch(`${SERVER}/login`, {
       method: "POST",
-      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username }),
+      body: JSON.stringify({
+        username,
+      }),
     });
 
     if (!response.ok) {
@@ -39,7 +40,7 @@ export const login = async (
 
     const data: User = await response.json();
 
-    // Confronta la password hashata
+    //!AGGIUNGERE POI DOPO INSHALLAH Confronta la password hashata
     // const isPasswordValid = await bcrypt.compare(password, data.password);
     // if (!isPasswordValid) {
     //   return { success: false, error: "Credenziali non valide" };

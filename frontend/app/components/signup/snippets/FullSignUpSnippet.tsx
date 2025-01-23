@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { AnimatePresence } from "motion/react";
 import { Fisiche, Giuridiche } from "@/app/variables";
 import { Modal, Backdrop } from "./sections/fullSnippet";
@@ -22,8 +22,10 @@ const FullSignUpSnippet: React.FC<Props> = ({
 }) => {
   const [wizardStep, setWizardStep] = useState(0);
   const [isVisible, setIsVisible] = useState(visible);
-  const distanceTop = `calc((100vh - ${height}) / 2)`;
-  const distanceLeft = `calc((100vw - ${width}) / 2)`;
+
+  const distanceTop = useMemo(() => `calc((100vh - ${height}) / 2)`, [height]);
+  const distanceLeft = useMemo(() => `calc((100vw - ${width}) / 2)`, [width]);
+
   const [values, setValues] = useState<
     { text: string; type: string; options?: string[] }[]
   >([]);
@@ -94,4 +96,5 @@ const FullSignUpSnippet: React.FC<Props> = ({
     </AnimatePresence>
   );
 };
+
 export default FullSignUpSnippet;
