@@ -34,6 +34,11 @@ public class IndiceAmbitiController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Utente o Ambito non trovato");
         }
 
+        // Verifica se l'associazione esiste già
+        if (utente.getAmbiti().contains(ambito)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Associazione già esistente");
+        }
+
         // Aggiungi l'ambito alla lista degli ambiti dell'utente
         utente.getAmbiti().add(ambito);
 
@@ -42,7 +47,6 @@ public class IndiceAmbitiController {
 
         // Salva le modifiche nel database
         utenteGeneraleRepository.save(utente);
-        ambitoRepository.save(ambito);
 
         return ResponseEntity.ok("Associazione effettuata con successo");
     }

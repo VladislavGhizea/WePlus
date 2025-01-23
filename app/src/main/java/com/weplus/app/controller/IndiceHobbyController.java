@@ -34,6 +34,11 @@ public class IndiceHobbyController{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Utente o Hobby non trovato");
         }
 
+        // Verifica se l'associazione esiste già
+        if (utente.getHobby().contains(hobby)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Associazione già esistente");
+        }
+
         // Aggiungi l'hobby alla lista degli ambiti dell'utente
         utente.getHobby().add(hobby);
 
@@ -42,7 +47,6 @@ public class IndiceHobbyController{
 
         // Salva le modifiche nel database
         utenteGeneraleRepository.save(utente);
-        hobbyRepository.save(hobby);
 
         return ResponseEntity.ok("Associazione effettuata con successo");
     }
