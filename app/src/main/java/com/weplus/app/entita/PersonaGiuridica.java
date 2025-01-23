@@ -18,6 +18,7 @@ public class PersonaGiuridica {
 
     @OneToOne
     @JoinColumn(name = "soggetto_id", nullable = false, unique = true, insertable = false, updatable = false)
+    @JsonIgnore
     private UtenteGenerale utenteGenerale;
 
     @Column(nullable = false, length = 11) // Campo obbligatorio
