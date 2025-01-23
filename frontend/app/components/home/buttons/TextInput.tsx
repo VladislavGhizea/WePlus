@@ -10,6 +10,8 @@ interface Props {
   classNameContainer?: string;
   width?: string;
   height?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextInput: React.FC<Props> = ({
@@ -19,6 +21,8 @@ const TextInput: React.FC<Props> = ({
   classNameContainer = "",
   width = "w-full",
   height = "h-[4.5rem]",
+  value,
+  onChange,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -27,8 +31,15 @@ const TextInput: React.FC<Props> = ({
   }, []);
 
   const renderInput = () => {
-    const inputClass = classNames(width, height, "rounded-2xl", "text-2xl", "px-[1rem]", "pr-[3rem]");
-    
+    const inputClass = classNames(
+      width,
+      height,
+      "rounded-2xl",
+      "text-2xl",
+      "px-[1rem]",
+      "pr-[3rem]"
+    );
+
     switch (type) {
       case "select":
         return (
@@ -57,6 +68,8 @@ const TextInput: React.FC<Props> = ({
               className={inputClass}
               placeholder={text}
               type={showPassword ? "text" : "password"}
+              value={value}
+              onChange={onChange}
             />
             <div
               className="absolute right-[1rem] top-1/2 transform -translate-y-1/2 cursor-pointer"
@@ -76,13 +89,17 @@ const TextInput: React.FC<Props> = ({
             className={inputClass}
             placeholder={text}
             type={type}
+            value={value}
+            onChange={onChange}
           />
         );
     }
   };
 
   return (
-    <div className={classNames("relative", classNameContainer)}>{renderInput()}</div>
+    <div className={classNames("relative", classNameContainer)}>
+      {renderInput()}
+    </div>
   );
 };
 

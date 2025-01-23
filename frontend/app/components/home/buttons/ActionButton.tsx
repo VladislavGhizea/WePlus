@@ -8,7 +8,7 @@ interface Props {
   className?: string;
   bgColor?: string;
   linkTo?: string;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   width?: string;
   height?: string;
   rounded?: string; // Aggiungi la proprietà rounded
@@ -33,14 +33,17 @@ const ActionButton: React.FC<Props> = ({
   const onButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (onClick) {
-      onClick();
+      onClick(e);
     } else {
       router.push(linkTo || "/");
     }
   };
 
   return (
-    <button className={classNames(className, "relative")} onClick={onButtonClick}>
+    <button
+      className={classNames(className, "relative")}
+      onClick={onButtonClick}
+    >
       <div
         className={classNames(`w-[${width}] h-[${height}]`, bgColor, rounded)}
         style={{ width, height }}
