@@ -19,7 +19,8 @@ public class UtenteGenerale {
     @JoinTable(
             name = "IndiceAmbito",  // Nome della tabella di join
             joinColumns = @JoinColumn(name = "soggetto_id"),  // Colonna nella tabella di join per 'UtenteGenerale'
-            inverseJoinColumns = @JoinColumn(name = "ambito_id")  // Colonna nella tabella di join per 'Ambito'
+            inverseJoinColumns = @JoinColumn(name = "ambito_id"),  // Colonna nella tabella di join per 'Ambito'
+            uniqueConstraints = @UniqueConstraint(columnNames = {"soggetto_id", "ambito_id"})
     )
     @JsonIgnore
     private List<Ambito> ambiti;
@@ -28,7 +29,8 @@ public class UtenteGenerale {
     @JoinTable(
             name = "IndiceHobby",  // Nome della tabella di join
             joinColumns = @JoinColumn(name = "soggetto_id"),  // Colonna nella tabella di join per 'UtenteGenerale'
-            inverseJoinColumns = @JoinColumn(name = "hobby_id")  // Colonna nella tabella di join per 'Ambito'
+            inverseJoinColumns = @JoinColumn(name = "hobby_id"), // Colonna nella tabella di join per 'Ambito'
+            uniqueConstraints = @UniqueConstraint(columnNames = {"soggetto_id", "hobby_id"})
     )
     @JsonIgnore
     private List<Hobby> hobby;
@@ -49,13 +51,13 @@ public class UtenteGenerale {
     @JsonIgnore
     private EntitaIndividuale entitaIndividuale;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, unique = true) // Campo obbligatorio
     private String username;
 
     @Column(nullable = false, unique = true) // Campo obbligatorio e univoco
     private String email;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length = 60) // Campo obbligatorio
     private String password;
 
     @Column(nullable = false) // Campo obbligatorio

@@ -24,7 +24,7 @@ public class IndirizzoFisica {
     @Column(nullable = false) // Campo obbligatorio
     private String indiResidenza;
 
-    @Column(name = "soggetto_id", insertable = true, updatable = true, nullable = false)
+    @Column(name = "soggetto_id", insertable = true, updatable = true, nullable = false, unique = true)
     private Integer soggettoId;  // ID della FK
 
     public IndirizzoFisica() {

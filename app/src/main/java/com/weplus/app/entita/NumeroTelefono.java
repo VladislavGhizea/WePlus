@@ -27,7 +27,7 @@ public class NumeroTelefono {
     @JsonIgnore
     private UtenteGenerale soggetto;
 
-    @Column(name = "soggetto_id", insertable = true, updatable = true, nullable = false)
+    @Column(name = "soggetto_id", insertable = true, updatable = true, nullable = false, unique = true)
     private Integer soggettoId;
 
     public NumeroTelefono() {}

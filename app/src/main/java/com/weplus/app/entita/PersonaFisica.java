@@ -50,7 +50,7 @@ public class PersonaFisica {
     @Column(name = "indirizzo_id", insertable = true, updatable = true)
     private Integer indirizzoFisicaId;
 
-    @Column(name = "soggetto_id", insertable = true, updatable = true)
+    @Column(name = "soggetto_id", insertable = true, updatable = true, unique = true)
     private Integer utenteGeneraleId;
 
     public PersonaFisica() {}

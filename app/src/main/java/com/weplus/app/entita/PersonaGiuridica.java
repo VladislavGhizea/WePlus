@@ -35,7 +35,7 @@ public class PersonaGiuridica {
     @JsonIgnore
     private List<Sede> sede;
 
-    @Column(name = "soggetto_id", insertable = true, updatable = true)
+    @Column(name = "soggetto_id", insertable = true, updatable = true, unique = true)
     private Integer utenteGeneraleId;
 
     public PersonaGiuridica() {
