@@ -12,7 +12,7 @@ public class Documento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_documento;
+    private Integer documento_id;
 
     @Column(nullable = false)
     private TipoDoc tipo;
@@ -65,8 +65,8 @@ public class Documento {
     }
 
     // Getter e Setter
-    public Integer getId_documento() {
-        return id_documento;
+    public Integer getDocumento_id() {
+        return documento_id;
     }
 
     public TipoDoc getTipo() {
