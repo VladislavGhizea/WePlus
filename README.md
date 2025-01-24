@@ -2,16 +2,25 @@
 
 # **WorkHub**
 
+## **Premessa**
+
+La versione presentata per ora non è completa rispetto a quelli che erano i nostri piani ma provvederemo al di fuori di queste due settimane qui a perfezionare il progetto, arrivare al nostro obiettivo che ci eravamo prefissati e ottimizzare secondo i piani futuri e le nostre possibilità.
+Al momento ciò che offre WorkHub è una serie di interfacce web ancora statiche (provvedero a renderle dinamiche), per il sinin, il signup e la pagina home visibile dopo essersi registrati. In questa versione nella pagina di login il tasto accedi è legato a del codice in corso di sviluppo per poter mostrare a chi etra nel sito dei dati specifici in base al tipo di account creato, pertanto non presenta nessun collegamento ad altre sezioni. Il tasto registrati invece apre l'accesso verso la sezione di registrazione che, al termine della scelta del tipo di account permette di entrare nella sezione home che, al momento è costruita staticamente in modo da mostrare ciò che è l'idea di base. Al termine del tempo ci stavamo concentrando nel rendere il tutto dinamico e creato sulla base del DB gestito dal backend perciò eventuali errori, commenti o malfunzionamenti sono dovuti al fatto che era in corso questo processo e, per poter mostrare ciò che avevamo in mente, abbiamo dovuto tornare alla versione statica. Nel prossimi periodi ci concentreremo per rendere il tutto funzionante secondo ciò che ci eravamo prefissati in modo da finire il progetto e renderlo utilizzabile.
+
+## **Cosa è presente nella folder**
+
+Ci sarà una cartella denominata "WePlus" con all'interno tutte le sezioni del progetto divise appositamente.
+
 backend--> run AppApplication
 <br>
-frontend--> cd frontend --> npm install --> npm run dev
+frontend--> cd frontend --> npm start
 <br>
 
 ---
 
 ## **Introduzione**
 
-Il sito web è una piattaforma che connette lavoratori e aziende, fornendo interfacce personalizzate a seconda del tipo di account. La comunicazione tra frontend e backend avviene tramite API, e i dati sono gestiti in un database centralizzato.
+WorkHub è una piattaforma che connette lavoratori e aziende, fornendo interfacce personalizzate a seconda del tipo di account. La comunicazione tra frontend e backend avviene tramite API, e i dati sono gestiti in un database centralizzato.
 
 ---
 
@@ -167,13 +176,13 @@ I dati sono salvati nel database tramite API backend, che gestiscono operazioni 
 
 ---
 
-## **API** 
+## **API**
 
- [Swagger](http://localhost:8080/swagger-ui/index.html#/) (funziona in run)
+[Swagger](http://localhost:8080/swagger-ui/index.html#/) (funziona in run)
 
-### **Autenticazione e Sicurezza** TODO
+### **Autenticazione e Sicurezza**
 
-- Autenticazione tramite **JWT (JSON Web Token)**.
+- Autenticazione tramite **JWT (JSON Web Token) NON ANCORA IMPLEMENTATA**.
 - Validazione delle richieste e crittografia delle password.
 
 ---
@@ -191,11 +200,11 @@ I dati sono salvati nel database tramite API backend, che gestiscono operazioni 
 ## **Testing e Debugging**
 
 - **JUnit5**:
-   Abbiamo utilizzato JUnit5 per creare e gestire i test unitari verificando che ogni componente del sistema funzionasse correttamente in modo isolato.
+  Abbiamo utilizzato JUnit5 per creare e gestire i test unitari verificando che ogni componente del sistema funzionasse correttamente in modo isolato.
 - **Mockito**:
-   Abbiamo utilizzato Mockito in combinazione con JUnit5 per eseguire il mocking delle dipendenze durante i test unitari. 
+  Abbiamo utilizzato Mockito in combinazione con JUnit5 per eseguire il mocking delle dipendenze durante i test unitari.
 - **Postman**:
-    Nel progetto abbiamo utilizzato Postman per testare manualmente le API e verificare il corretto funzionamento delle comunicazioni tra frontend e backend. 
+  Nel progetto abbiamo utilizzato Postman per testare manualmente le API e verificare il corretto funzionamento delle comunicazioni tra frontend e backend.
 
   I primi test con JUnit5 e Mockito sono stati eseguiti prima dell'implementazione del database H2 e sono stati successivamente commentati.
   Una volta implementato il database abbiamo utilizzato Postman.
@@ -208,6 +217,7 @@ Il sito rappresenta una soluzione innovativa per connettere lavoratori e aziende
 
 ### **Piani Futuri**
 
+- Rendere dinamico l'intero sistema (tutto costruito sulla base del tipo di account)
 - Implementare una funzionalità di chat in tempo reale.
 - Migliorare l’algoritmo di matching tra lavoratori e aziende.
 
