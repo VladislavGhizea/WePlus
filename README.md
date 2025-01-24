@@ -13,7 +13,9 @@ Ci sarà una cartella denominata "WePlus" con all'interno tutte le sezioni del p
 
 backend--> run AppApplication
 <br>
-frontend--> cd frontend --> npm start
+frontend--> cd frontend --> npm build --> npm start
+
+(frontend--> cd frontend --> npm install --> npm run dev)
 <br>
 
 ---
