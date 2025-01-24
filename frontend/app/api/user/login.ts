@@ -1,5 +1,6 @@
 import { SERVER } from "../../variables";
 import bcrypt from "bcryptjs";
+import { setCookie } from "nookies";
 
 interface User {
   soggetto_id: number;
@@ -13,7 +14,7 @@ interface User {
 export const login = async (
   username: string,
   password: string
-): Promise<{ success: boolean; user?: any; error?: string }> => {
+): Promise<{ success: boolean; error?: string }> => {
   if (!username || !password) {
     return { success: false, error: "Username e password sono richiesti" };
   }
@@ -23,9 +24,13 @@ export const login = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
       },
       body: JSON.stringify({
         username,
+        password,
       }),
     });
 
@@ -40,14 +45,22 @@ export const login = async (
 
     const data: User = await response.json();
 
-    //!AGGIUNGERE POI DOPO INSHALLAH Confronta la password hashata
     // const isPasswordValid = await bcrypt.compare(password, data.password);
     // if (!isPasswordValid) {
     //   return { success: false, error: "Credenziali non valide" };
     // }
-    console.log(data);
-    return { success: true, user: data };
+
+    // Imposta il cookie con i dati dell'utente
+    setCookie(null, "user", JSON.stringify(data), {
+      maxAge: 30 * 24 * 60 * 60, // 30 giorni
+      path: "/",
+    });
+
+    return { success: true };
   } catch (error) {
-    return { success: false, error: "Errore di connessione al server" };
+    return {
+      success: false,
+      error: (error as Error).message || "Errore di connessione al server",
+    };
   }
 };

@@ -19,90 +19,97 @@ interface CreateUserInput {
 interface CreateUserResponse {
   success: boolean;
   error?: string;
-  user?: any;
+  user?: Fisica | Giuridica | Individuale;
 }
-//post generalUser, post indriziFisica?, post specificUser
+
+const createIndirizzoFisico = async (
+  userData: CreateUserInput
+): Promise<number | null> => {
+  const indirizzoResponse = await fetch(`${SERVER}/indirizziFisici`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      indiDomicilio: userData.indirizzoFisicaId,
+      indiResidenza: userData.indirizzoFisicaId,
+      soggettoId: userData.utenteGeneraleId,
+    }),
+  });
+
+  if (!indirizzoResponse.ok) {
+    const errorData = await indirizzoResponse.json();
+    throw new Error(
+      errorData.message || "Errore nella creazione dell'indirizzo fisico"
+    );
+  }
+
+  const indirizzoData = await indirizzoResponse.json();
+  return indirizzoData.id;
+};
+
+const determineUserType = (
+  userData: CreateUserInput
+): Fisica | Giuridica | Individuale => {
+  if (userData.cf && userData.partitaIva) {
+    return new Individuale(
+      userData.utenteGeneraleId,
+      userData.nome!,
+      userData.cognome!,
+      userData.cf,
+      userData.sesso!,
+      userData.genere!,
+      userData.comuneDiN!,
+      userData.dataDiN!,
+      userData.indirizzoFisicaId!,
+      userData.partitaIva,
+      userData.ragioneSociale!
+    );
+  } else if (userData.cf) {
+    return new Fisica(
+      userData.nome!,
+      userData.cognome!,
+      userData.cf,
+      userData.sesso!,
+      userData.genere!,
+      userData.comuneDiN!,
+      userData.dataDiN!,
+      userData.indirizzoFisicaId!
+    );
+  } else if (userData.partitaIva) {
+    return new Giuridica(
+      userData.partitaIva,
+      userData.tipo!,
+      userData.ragioneSociale!
+    );
+  } else {
+    throw new Error("Dati insufficienti per determinare il tipo di utente");
+  }
+};
+
 const createUser = async (
   userData: CreateUserInput
 ): Promise<CreateUserResponse> => {
   try {
-    // Crea l'indirizzo fisico se necessario
     if (userData.cf) {
-      const indirizzoResponse = await fetch(`${SERVER}/indirizziFisici`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          indiDomicilio: userData.indirizzoFisicaId,
-          indiResidenza: userData.indirizzoFisicaId,
-          soggettoId: userData.utenteGeneraleId, //!PASSARE L'UTENTE GENERALE
-        }),
-      });
-
-      if (!indirizzoResponse.ok) {
-        const errorData = await indirizzoResponse.json();
-        return {
-          success: false,
-          error:
-            errorData.message || "Errore nella creazione dell'indirizzo fisico",
-        };
+      const indirizzoId = await createIndirizzoFisico(userData);
+      if (indirizzoId !== null) {
+        userData.indirizzoFisicaId = indirizzoId;
+      } else {
+        throw new Error("Errore nella creazione dell'indirizzo fisico");
       }
-
-      const indirizzoData = await indirizzoResponse.json();
-      userData.indirizzoFisicaId = indirizzoData.id;
     }
 
-    // Determina il tipo di utente
-    let userType;
-    if (userData.cf && userData.partitaIva) {
-      userType = new Individuale(
-        userData.utenteGeneraleId,
-        userData.nome!,
-        userData.cognome!,
-        userData.cf,
-        userData.sesso!,
-        userData.genere!,
-        userData.comuneDiN!,
-        userData.dataDiN!,
-        userData.indirizzoFisicaId!,
-        userData.partitaIva,
-        userData.ragioneSociale!
-      );
-    } else if (userData.cf) {
-      userType = new Fisica(
-        userData.nome!,
-        userData.cognome!,
-        userData.cf,
-        userData.sesso!,
-        userData.genere!,
-        userData.comuneDiN!,
-        userData.dataDiN!,
-        userData.indirizzoFisicaId!
-      );
-    } else if (userData.partitaIva) {
-      userType = new Giuridica(
-        userData.partitaIva,
-        userData.tipo!,
-        userData.ragioneSociale!
-      );
-    } else {
-      return {
-        success: false,
-        error: "Dati insufficienti per determinare il tipo di utente",
-      };
-    }
+    const userType = determineUserType(userData);
 
-    // Invia una richiesta POST al server con i dati dell'utente
     const response = await fetch(`${SERVER}/specificUser/createUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userType), //! CAMBIARE CAZZOOOOOOOOOOOOOO
+      body: JSON.stringify(userType),
     });
 
-    // Se la risposta non è ok, ritorna un errore
     if (!response.ok) {
       const errorData = await response.json();
       return {
@@ -111,14 +118,13 @@ const createUser = async (
       };
     }
 
-    // Estrae i dati dalla risposta
     const data = await response.json();
-
-    // Ritorna i dati dell'utente creato
     return { success: true, user: data };
   } catch (error) {
-    // In caso di errore durante la richiesta, ritorna un errore di connessione
-    return { success: false, error: "Errore di connessione al server" };
+    return {
+      success: false,
+      error: (error as Error).message || "Errore di connessione al server",
+    };
   }
 };
 
