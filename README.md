@@ -19,6 +19,8 @@ Il sito web è una piattaforma che connette lavoratori e aziende, fornendo inter
 
 ### **Architettura Generale**
 
+- **Tecnologie richieste**: JDK 23, Maven, Node.js
+
 - **Frontend**: Next con TypeScript.
 - **Backend**: Java con H2 database.
 - **Database**: H2 Database per la gestione dei dati.
@@ -65,8 +67,8 @@ Il flusso dei dati segue questi passaggi:
 ### **Schema del Database**
 
 - **Persone Fisiche**:
-  - `id_fisica`: PK identificativo univoco `INT AUTO_INCREMENT`
-  - `generale_id`: FK utente generale `INT NOT NULL`
+  - `fisica_id`: PK identificativo univoco `INT AUTO_INCREMENT`
+  - `utenteGeneraleId`: FK utente generale `INT NOT NULL`
   - `nome`: Nome della persona fisica `VARCHAR(20) NOT NULL`
   - `cognome`: Cognome della persona fisica `VARCHAR(20) NOT NULL`
   - `cf`: Codice Fiscale `VARCHAR(16) NOT NULL`
@@ -74,20 +76,19 @@ Il flusso dei dati segue questi passaggi:
   - `genere`: Genere della persona fisica `ENUM NOT NULL`
   - `comnuneDiN`: Comune di nascita (sigla) `VARCHAR(2) NOT NULL`
   - `dataDiN`: Data di nascita `DATE NOT NULL`
-  - `indirizzo_id`: FK indirizzo di domicilio e residenza `VARCHAR(2) NOT NULL`
+  - `indirizzoFisicaId`: FK indirizzo di domicilio e residenza `INT NOT NULL`
 - **Persone Giuridiche**:
 
-  - `id_giuridica`: PK identificativo univoco `INT AUTO_INCREMENT`
-  - `generale_id`: FK utente Generale `INT NOT NULL`
+  - `giuridica_id`: PK identificativo univoco `INT AUTO_INCREMENT`
+  - `utenteGeneraleId`: FK utente Generale `INT NOT NULL`
   - `partitaIva`: Partita Iva `VARCHAR(11) NOT NULL`
   - `tipo`: Tipo di persona giuridica `ENUM NOT NULL`
-  - `ragione_sociale`: Ragione sociale `VARCHAR(25) NOT NULL`
-  - `sede_id`: FK indirizzo della sede `INT NOT NULL`
+  - `ragioneSociale`: Ragione sociale `VARCHAR(25) NOT NULL`
 
 - **Entità individuali**:
 
-  - `id_entita`: PK identificativo univoco `INT AUTO_INCREMENT`
-  - `generale_id`: FK utente generale `INT NOT NULL`
+  - `entita_id`: PK identificativo univoco `INT AUTO_INCREMENT`
+  - `utenteGeneraleId`: FK utente generale `INT NOT NULL`
   - `nome`: Nome del libero professionista `VARCHAR(20) NOT NULL`
   - `cognome`: Cognome del libero professionista `VARCHAR(20) NOT NULL`
   - `cf`: Codice Fiscale `VARCHAR(16) NOT NULL`
@@ -96,60 +97,64 @@ Il flusso dei dati segue questi passaggi:
   - `comnuneDiN`: Comune di nascita (sigla) `VARCHAR(2) NOT NULL`
   - `dataDiN`: Data di nascita `DATE NOT NULL`
   - `partitaIva`: Partita Iva `VARCHAR(11) NOT NULL`
-  - `ragione_sociale`: Ragione sociale `VARCHAR(25)`
-  - `indirizzoFisica_id`: FK domicilio e residenza `VARCHAR(2) NOT NULL`
-  - `indirizzoSede_id`: FK indirizzo della sede `INT NOT NULL`
+  - `ragioneSociale`: Ragione sociale `VARCHAR(25)`
+  - `indirizzoFisicaId`: FK domicilio e residenza `VARCHAR(2) NOT NULL`
 
 - **Documenti**:
 
-  - `id_documento`: PK identificativo univoco `INT AUTO_INCREMENT`
+  - `documento_id`: PK identificativo univoco `INT AUTO_INCREMENT`
   - `tipo`: tipo di documento `ENUM NOT NULL`
   - `numero`: Numero di documento `INT`
   - `scadenza`: Scadenza del documento `DATE`
   - `enteEmissivo`: Ente emissivo del documento `VARCHAR(25)`
   - `dataEmissione`: Data di emissione del documento `DATE`
-  - `soggetto_id`: FK soggetto che ha caricato il documento `INT NOT NULL`
+  - `soggettoId`: FK soggetto che ha caricato il documento `INT NOT NULL`
 
 - **Hobby**:
 
-  - `id_hobby`: PK identificativo univoco `INT AUTO_INCREMENT`
+  - `hobby_id`: PK identificativo univoco `INT AUTO_INCREMENT`
   - `descrizione`: Breve descrizione dell'hobby `VARCHAR(50) NOT NULL`
 
 - **Indice Hobby**:
 
-  - `id_hobby`: PK identificativo hobby `INT`
-  - `id_soggetto`: PK identificativo soggetto `INT`
+  - `hobbyId`: PK identificativo hobby `INT`
+  - `utenteId`: PK identificativo soggetto `INT`
 
 - **Indirizzi Fisica**:
 
-  - `id_indirizzo`: PK identificativo univoco `INT AUTO_INCREMENT`
+  - `indirizzo_id`: PK identificativo univoco `INT AUTO_INCREMENT`
+  - `soggettoId`: FK utenteGenerale `INT UNIQUE NOT NULL`
   - `indiDomicilio`: Indirizzo di domicilio `VARCHAR(50) NOT NULL`
   - `indiResidenza`: Indirizzo di residenza `VARCHAR(50) NOT NULL`
 
 - **Sedi**:
 
-  - `id_sede`: PK identificativo univoco `INT AUTO_INCREMENT`
+  - `sede_id`: PK identificativo univoco `INT AUTO_INCREMENT`
   - `indirizzo`: Indirizzo della sede `VARCHAR(50) NOT NULL`
   - `principale`: Identificativo sede principale `BOOLEAN NOT NULL`
+  - `personaGiuridicaId`: FK personaGiuridica `INT`
+  - `entitaIndividualeId`: FK entitaIndividuale `INT`
 
 - **Numeri di Telefono**:
 
-  - `id_numTel`: PK identificativo univoco `INT AUTO_INCREMENT`
-  - `numero`: Numero di telefono `INT NOT NULL`
-  - `soggetto_id`: FK soggetto a cui appartiene il numero `INT NOT NULL`
+  - `numTel_id`: PK identificativo univoco `INT AUTO_INCREMENT`
+  - `numeroUno`: Numero di telefono `INT UNIQUE NOT NULL`
+  - `numeroDue`: Numero di telefono `INT UNIQUE`
+  - `numeroTre`: Numero di telefono `INT UNIQUE`
+  - `soggettoId`: FK utenteGenerale a cui appartiene il numero `INT NOT NULL`
 
 - **Ambiti**:
 
-  - `id_ambito`: PK identificativo hobby `INT AUTO_INCREMENT`
+  - `ambito_id`: PK identificativo hobby `INT AUTO_INCREMENT`
   - `nome`: PK identificativo soggetto `INT`
 
 - **Indice Ambiti**:
 
-  - `id_ambito`: PK identificativo ambito `INT`
-  - `id_soggetto`: PK identificativo soggetto `INT`
+  - `ambitoId`: PK identificativo ambito `INT`
+  - `utenteId`: PK identificativo soggetto `INT`
 
 - **Utenti Generali**:
-  - `id_generale`: PK identificativo univoco `INT AUTO_INCREMENT`
+  - `soggetto_id`: PK identificativo univoco `INT AUTO_INCREMENT`
   - `username`: Nome di registrazione `VARCHAR(20) UNIQUE NOT NULL`
   - `email`: Email di registrazione `VARCHAR(30) UNIQUE NOT NULL`
   - `password`: Password di registrazione `VARCHAR(60) NOT NULL`
