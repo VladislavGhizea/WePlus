@@ -1,6 +1,5 @@
 package com.weplus.app.controller;
 
-import com.weplus.app.entita.Ambito;
 import com.weplus.app.entita.PersonaGiuridica;
 import com.weplus.app.entita.Sede;
 import com.weplus.app.entita.UtenteGenerale;
@@ -48,7 +47,7 @@ public class PersoneGiuridicheController implements IController<PersonaGiuridica
                 new IllegalArgumentException("PersonaGiuridica con id " + id + " non trovata"));
         existingPersonaGiuridica.setTipo(entity.getTipo());
         existingPersonaGiuridica.setPartitaIva(entity.getPartitaIva());
-        existingPersonaGiuridica.setRagione_sociale(entity.getRagione_sociale());
+        existingPersonaGiuridica.setRagioneSociale(entity.getRagioneSociale());
          personaGiuridicaRepository.save(existingPersonaGiuridica); // Salva l'oggetto aggiornato
     }
 

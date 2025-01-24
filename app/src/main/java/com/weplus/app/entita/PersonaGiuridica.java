@@ -28,7 +28,7 @@ public class PersonaGiuridica {
     private TipoPersGiur tipo;
 
     @Column(nullable = true, length = 25) // Campo opzionale
-    private String ragione_sociale;
+    private String ragioneSociale;
 
     @OneToMany
     @JoinColumn(name = "sede_id", nullable = false, insertable = false, updatable = false)
@@ -45,11 +45,11 @@ public class PersonaGiuridica {
     public PersonaGiuridica(Integer utenteGeneraleId,
                             String partitaIva,
                             TipoPersGiur tipo,
-                            String ragione_sociale) {
+                            String ragioneSociale) {
         this.utenteGeneraleId = utenteGeneraleId;
         this.partitaIva = partitaIva;
         this.tipo = tipo;
-        this.ragione_sociale = ragione_sociale;
+        this.ragioneSociale = ragioneSociale;
     }
 
     public Integer getGiuridica_id() {
@@ -64,8 +64,8 @@ public class PersonaGiuridica {
         return tipo;
     }
 
-    public String getRagione_sociale() {
-        return ragione_sociale;
+    public String getRagioneSociale() {
+        return ragioneSociale;
     }
 
     public void setPartitaIva(String partitaIva) {
@@ -76,8 +76,8 @@ public class PersonaGiuridica {
         this.tipo = tipo;
     }
 
-    public void setRagione_sociale(String ragione_sociale) {
-        this.ragione_sociale = ragione_sociale;
+    public void setRagioneSociale(String ragioneSociale) {
+        this.ragioneSociale = ragioneSociale;
     }
 
     public UtenteGenerale getUtenteGenerale() {

@@ -23,7 +23,7 @@ public class Sede {
     @JsonIgnore
     private EntitaIndividuale entitaIndividuale;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length = 50) // Campo obbligatorio
     private String indirizzo;
 
     @Column(nullable = false) // Campo obbligatorio
