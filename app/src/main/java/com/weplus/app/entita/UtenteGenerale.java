@@ -51,10 +51,10 @@ public class UtenteGenerale {
     @JsonIgnore
     private EntitaIndividuale entitaIndividuale;
 
-    @Column(nullable = false, unique = true) // Campo obbligatorio
+    @Column(nullable = false, unique = true, length = 20) // Campo obbligatorio
     private String username;
 
-    @Column(nullable = false, unique = true) // Campo obbligatorio e univoco
+    @Column(nullable = false, unique = true, length = 30) // Campo obbligatorio e univoco
     private String email;
 
     @Column(nullable = false, length = 60) // Campo obbligatorio

@@ -13,13 +13,13 @@ public class NumeroTelefono {
     @Column(name = "numTel_id")
     private Integer numTel_id;
 
-    @Column(nullable = false, length = 10) // Campo obbligatorio
+    @Column(nullable = false, length = 10, unique = true) // Campo obbligatorio
     private Integer numeroUno;
 
-    @Column(length = 10)
+    @Column(length = 10, unique = true)
     private Integer numeroDue;
 
-    @Column(length = 10)
+    @Column(length = 10, unique = true)
     private Integer numeroTre;
 
     @ManyToOne

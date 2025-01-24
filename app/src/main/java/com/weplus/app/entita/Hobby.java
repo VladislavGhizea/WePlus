@@ -18,7 +18,7 @@ public class Hobby {
     @JsonIgnore
     private List<UtenteGenerale> soggetti;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length = 50) // Campo obbligatorio
     private String descrizione;
 
     public Hobby() {
