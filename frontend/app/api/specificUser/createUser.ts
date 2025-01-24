@@ -21,7 +21,7 @@ interface CreateUserResponse {
   error?: string;
   user?: any;
 }
-
+//post generalUser, post indriziFisica?, post specificUser
 const createUser = async (
   userData: CreateUserInput
 ): Promise<CreateUserResponse> => {
