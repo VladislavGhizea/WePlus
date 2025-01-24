@@ -18,10 +18,10 @@ public class IndirizzoFisica {
     @JsonIgnore
     private UtenteGenerale utenteGenerale;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length = 50) // Campo obbligatorio
     private String indiDomicilio;
 
-    @Column(nullable = false) // Campo obbligatorio
+    @Column(nullable = false, length = 50) // Campo obbligatorio
     private String indiResidenza;
 
     @Column(name = "soggetto_id", insertable = true, updatable = true, nullable = false, unique = true)
