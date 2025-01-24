@@ -1,15 +1,13 @@
 <br>
 
-# **TODO swagger, docusaurus, normalizzare API, normalizzare e controllare campi frontend, LISTA ENUM, Chat MongoDB, Foto, Recensioni, AUTENTICAZIONE E SICUREZZA, Documenti, Controllo e modifica documentazione, per riferimenti a utente generale passare l'id generale assegnato, MODULO DI PSW DIMENTICATA, CONTROLLO CAMPI E NORMALIZZAZIONE frontend, SCROLLBAR LATERALE filtri, Cambio tipo entità giuridica**
+# **WorkHub**
 
 backend--> run AppApplication
+<br>
 frontend--> cd frontend --> npm install --> npm run dev
-
-<br><br><br>
+<br>
 
 ---
-
-# **WorkHub**
 
 ## **Introduzione**
 
@@ -115,7 +113,7 @@ Il flusso dei dati segue questi passaggi:
 - **Hobby**:
 
   - `id_hobby`: PK identificativo univoco `INT AUTO_INCREMENT`
-  - `descrizione`: Breve descrizione dell'hobby `VARCHAR(50)`
+  - `descrizione`: Breve descrizione dell'hobby `VARCHAR(50) NOT NULL`
 
 - **Indice Hobby**:
 
@@ -152,9 +150,9 @@ Il flusso dei dati segue questi passaggi:
 
 - **Utenti Generali**:
   - `id_generale`: PK identificativo univoco `INT AUTO_INCREMENT`
-  - `username`: Nome di registrazione `VARCHAR(20) NOT NULL`
-  - `email`: Email di registrazione `VARCHAR(30) UNIQUE`
-  - `password`: Password di registrazione `VARCHAR(20) NOT NULL`
+  - `username`: Nome di registrazione `VARCHAR(20) UNIQUE NOT NULL`
+  - `email`: Email di registrazione `VARCHAR(30) UNIQUE NOT NULL`
+  - `password`: Password di registrazione `VARCHAR(60) NOT NULL`
   - `tipo`: Tipo di account `ENUM NOT NULL`
   - `cancellato`: Stato account `BOOLEAN NOT NULL`
 
@@ -164,25 +162,9 @@ I dati sono salvati nel database tramite API backend, che gestiscono operazioni 
 
 ---
 
-## **API** TODO
+## **API** 
 
-http://localhost:8080/swagger-ui/index.html#/
-
-### **Descrizione delle API Principali**
-
-- **Endpoint**: `/api/jobs`
-
-  - **Metodo**: `GET`
-  - **Descrizione**: Recupera le offerte di lavoro disponibili.
-
-- **Endpoint**: `/api/users`
-
-  - **Metodo**: `POST`
-  - **Descrizione**: Registra un nuovo utente.
-
-- **Endpoint**: `/api/applications`
-  - **Metodo**: `POST`
-  - **Descrizione**: Permette a un utente di candidarsi per un'offerta di lavoro.
+ [Swagger](http://localhost:8080/swagger-ui/index.html#/) (funziona in run)
 
 ### **Autenticazione e Sicurezza** TODO
 
@@ -201,14 +183,17 @@ http://localhost:8080/swagger-ui/index.html#/
 
 ---
 
-## **Testing e Debugging** TODO
+## **Testing e Debugging**
 
-- **Testing**:
-  - Unit test per API e logica backend.
-  - Test di integrazione per il flusso dati completo.
-- **Strumenti**:
-  - Postman per il testing delle API.
-  - Debugger integrati in Java e browser per il frontend.
+- **JUnit5**:
+   Abbiamo utilizzato JUnit5 per creare e gestire i test unitari verificando che ogni componente del sistema funzionasse correttamente in modo isolato.
+- **Mockito**:
+   Abbiamo utilizzato Mockito in combinazione con JUnit5 per eseguire il mocking delle dipendenze durante i test unitari. 
+- **Postman**:
+    Nel progetto abbiamo utilizzato Postman per testare manualmente le API e verificare il corretto funzionamento delle comunicazioni tra frontend e backend. 
+
+  I primi test con JUnit5 e Mockito sono stati eseguiti prima dell'implementazione del database H2 e sono stati successivamente commentati.
+  Una volta implementato il database abbiamo utilizzato Postman.
 
 ---
 
