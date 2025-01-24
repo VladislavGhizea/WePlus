@@ -82,6 +82,7 @@ const MainSnippet: React.FC<Props> = ({
                     text="Procedi"
                     bgColor="bg-white"
                     width="18rem"
+                    linkTo="/home"
                   />
                 }
               >

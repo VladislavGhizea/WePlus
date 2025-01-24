@@ -21,7 +21,7 @@ const Header = () => {
     router.push("/home");
   };
   const handleLogoutClick = () => {
-    //TODO
+    router.push("/");
   };
   const handleUserClick = () => {
     //TODO

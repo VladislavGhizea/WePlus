@@ -1,5 +1,5 @@
 import { SERVER } from "../../variables";
-import bcrypt from "bcryptjs";
+//import bcrypt from "bcryptjs";
 import { setCookie } from "nookies";
 
 interface User {

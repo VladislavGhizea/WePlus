@@ -37,7 +37,7 @@ const Page = () => {
         <Sidebar />
         <div className="flex flex-col h-full w-full">
           <Filters filters={filters} />
-          <ContainerCreator />
+          <ContainerCreator /*tipo="FISICA" TODO RENDERLA DINAMICA!!*//>
         </div>
       </div>
     </div>

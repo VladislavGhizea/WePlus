@@ -158,6 +158,7 @@ class IndirizzoFisica implements TypeIndirizzoFisica {
 
 // Interfaccia per le persone fisiche
 interface TypeFisica {
+  utenteGeneraleId: number;
   nome: string;
   cognome: string;
   cf: string;
@@ -170,6 +171,7 @@ interface TypeFisica {
 
 // Classe per le persone fisiche
 class Fisica implements TypeFisica {
+  utenteGeneraleId: number;
   nome: string;
   cognome: string;
   cf: string;
@@ -180,6 +182,7 @@ class Fisica implements TypeFisica {
   indirizzoFisicaId: number;
 
   constructor(
+    utenteGeneraleId: number,
     nome: string,
     cognome: string,
     cf: string,
@@ -189,6 +192,7 @@ class Fisica implements TypeFisica {
     dataDiN: string,
     indirizzoFisicaId: number
   ) {
+    this.utenteGeneraleId = utenteGeneraleId;
     this.nome = nome;
     this.cognome = cognome;
     this.cf = cf;
@@ -202,6 +206,7 @@ class Fisica implements TypeFisica {
 
 // Interfaccia per le persone giuridiche
 interface TypeGiuridica {
+  utenteGeneraleId: number;
   partitaIva: string;
   tipo: "SRL" | "SPA" | "SNC";
   ragioneSociale: string;
@@ -210,17 +215,20 @@ interface TypeGiuridica {
 
 // Classe per le persone giuridiche
 class Giuridica implements TypeGiuridica {
+  utenteGeneraleId: number;
   partitaIva: string;
   tipo: "SRL" | "SPA" | "SNC";
   ragioneSociale: string;
   sede?: number;
 
   constructor(
+    utenteGeneraleId: number,
     partitaIva: string,
     tipo: "SRL" | "SPA" | "SNC",
     ragioneSociale: string,
     sede?: number
   ) {
+    this.utenteGeneraleId = utenteGeneraleId;
     this.partitaIva = partitaIva;
     this.tipo = tipo;
     this.ragioneSociale = ragioneSociale;

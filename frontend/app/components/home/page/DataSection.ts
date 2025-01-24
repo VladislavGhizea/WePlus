@@ -1,2 +1,0 @@
-const info = "La storia dell'Italia è ricca e complessa, caratterizzata da negri nudi barbieri erotici che si tagliano i capelli a vicenda"
-//gay ni TODO implementare il modo per scomporre il JSON di backend per compilare i campi frontend

@@ -14,6 +14,15 @@ const Login = () => {
       setRole(user.tipo);
     }
   }, []);
+  useEffect(() => {
+    if (role) {
+      if (role === "ADMIN") {
+        window.location.href = "/admin";
+      } else {
+        window.location.href = "/home";
+      }
+    }
+  }, [role]);
   const handleLogin = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if ((await login(username, password)).success) {
@@ -23,12 +32,6 @@ const Login = () => {
         setRole(user.tipo);
       }
     }
-  };
-
-  const handleSignup = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    console.log("Signup button clicked");
-    // Aggiungi qui la logica per la registrazione
   };
 
   return (
@@ -62,7 +65,7 @@ const Login = () => {
           </a>
         </div>
         <div className="mt-[2rem] flex flex-row">
-          <ActionButton text="Accedi" onClick={handleLogin} />
+          <ActionButton text="Accedi" /*onClick={handleLogin}*/ onClick={handleLogin}/>
           <div className="flex justify-center items-center">
             <p className="mx-[1.75rem] text-2xl">o</p>
           </div>

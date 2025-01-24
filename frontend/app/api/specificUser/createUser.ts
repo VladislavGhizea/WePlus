@@ -67,6 +67,7 @@ const determineUserType = (
     );
   } else if (userData.cf) {
     return new Fisica(
+      userData.utenteGeneraleId!,
       userData.nome!,
       userData.cognome!,
       userData.cf,
@@ -78,6 +79,7 @@ const determineUserType = (
     );
   } else if (userData.partitaIva) {
     return new Giuridica(
+      userData.utenteGeneraleId!,
       userData.partitaIva,
       userData.tipo!,
       userData.ragioneSociale!
