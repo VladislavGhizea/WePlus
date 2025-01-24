@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ActionButton, TextInput } from "./buttons";
 import { login } from "../../api/user";
+import { parseCookies } from "nookies";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const handleLogin = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const [role, setRole] = useState("");
+   useEffect(() => {
+    const cookies = parseCookies();
+    if (cookies.user) {
+      const user = JSON.parse(cookies.user);
+      setRole(user.tipo);
+    }
+  }, []);
+  const handleLogin = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    login(username, password);
+    if ((await login(username, password)).success) {
+      const cookies = parseCookies();
+      if (cookies.user) {
+        const user = JSON.parse(cookies.user);
+        setRole(user.tipo);
+      }
+    }
   };
 
   const handleSignup = (event: React.MouseEvent<HTMLButtonElement>) => {
