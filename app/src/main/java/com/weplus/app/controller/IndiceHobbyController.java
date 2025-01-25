@@ -42,12 +42,12 @@ public class IndiceHobbyController{
             @ApiResponse(
                     responseCode = "400",
                     description = "Utente o Hobby non trovato",
-                    content = @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class))
+                    content = @Content(mediaType = "text/plain")
             ),
             @ApiResponse(
                     responseCode = "409",
                     description = "Associazione già esistente",
-                    content = @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class))
+                    content = @Content(mediaType = "text/plain")
             )
     })
     @PostMapping
