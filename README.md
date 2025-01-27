@@ -230,7 +230,7 @@ Il sito rappresenta una soluzione innovativa per connettere lavoratori e aziende
 
 - **Flusso Logico**:
   Diagramma che mostra il percorso delle richieste tra frontend, backend e database.<br>
-  [Visualizza]([https://www.canva.com/design/DAGcEvyNOpo/PYrwOZD7B4iOlc29qmhWNw/view](https://www.canva.com/design/DAGcEvyNOpo/PYrwOZD7B4iOlc29qmhWNw/view?utm_content=DAGcEvyNOpo&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h829a50d5b5))
+  [Visualizza](https://www.canva.com/design/DAGcEvyNOpo/PYrwOZD7B4iOlc29qmhWNw/view?utm_content=DAGcEvyNOpo&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h829a50d5b5)
 
 ### **Link Utili**
 
